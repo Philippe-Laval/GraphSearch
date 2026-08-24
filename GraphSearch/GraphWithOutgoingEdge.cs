@@ -1,6 +1,6 @@
 namespace GraphSearch;
 
-public sealed class Graph
+public sealed class GraphWithOutgoingEdge
 {
     private readonly Dictionary<long, GraphNode> _nodes = [];
     private readonly List<GraphEdge> _edges = [];

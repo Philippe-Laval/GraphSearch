@@ -8,6 +8,58 @@ using Lucene.Net.QueryParsers.Classic;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 
+/*
+One caveat: because StandardAnalyzer tokenizes fields, exact matching of things like .NET 10 needs some care. In production I'd use two fields:
+   
+   name
+   name_exact
+   
+   where:
+   name       → TextField
+   name_exact → StringField
+   
+   Then:
+   .NET 10
+   
+   can be matched exactly while still allowing normal lexical search.
+ */
+
+/*
+Add fuzzy matching
+   
+   This is particularly useful for entity resolution.
+   
+   For example:
+   
+   Microsoft
+   Microsft
+   Microsof
+   
+   Lucene.NET has FuzzyQuery, based on edit distance.
+   
+   We can add:
+   
+   boolean.Add(
+       new FuzzyQuery(
+           new Term(
+               "name",
+               text.ToLowerInvariant()),
+           maxEdits: 2),
+       Occur.SHOULD);
+   
+   However, don't use fuzzy matching indiscriminately.
+   
+   For short names, versions, acronyms, etc., it can produce bad candidates. The Lucene documentation itself notes limitations around very short terms.
+   
+   I'd use it only as a fallback:
+   
+   1. Exact
+   2. Alias
+   3. BM25
+   4. Fuzzy
+ */
+
+
 /// <summary>
 /// Lucene search
 /// </summary>

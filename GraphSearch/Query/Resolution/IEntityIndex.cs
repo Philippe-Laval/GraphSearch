@@ -43,3 +43,39 @@ public interface IEntityIndex
         int topK,
         CancellationToken cancellationToken = default);
 }
+
+// Possible improvements
+
+public interface IEntityIndex2
+{
+    Task<IReadOnlyList<EntityCandidate>> SearchAsync(
+        EntitySearchRequest request,
+        CancellationToken cancellationToken = default);
+}
+
+public sealed record EntitySearchRequest(
+    string Text,
+    string? EntityType = null,
+    ReadOnlyMemory<float>? Embedding = null,
+    int TopK = 10,
+    EntitySearchMode Mode = EntitySearchMode.Auto);
+ 
+public enum EntitySearchMode
+{
+    Exact,
+    Lexical,
+    Semantic,
+    Fuzzy,
+    Auto
+}
+  
+/*
+    SQL
+       → Exact / lexical
+   
+    Lucene
+       → Lexical / fuzzy
+   
+    Chroma
+       → Semantic
+ */  

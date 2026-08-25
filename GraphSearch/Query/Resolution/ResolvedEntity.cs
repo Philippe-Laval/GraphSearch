@@ -16,3 +16,12 @@ public sealed record ResolvedEntity(
     ExtractedEntity Extracted,
     long GraphNodeId,
     double Confidence);
+    
+public sealed record ResolvedEntity2(
+    ExtractedEntity Extracted,
+    long GraphNodeId,
+    string CanonicalName,
+    string EntityType,
+    double EntityConfidence,
+    double RetrievalScore,
+    double FinalScore);    

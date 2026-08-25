@@ -144,7 +144,7 @@ We should therefore normalize it once and use that normalized distribution.
 
             var outgoing = _graph
                 .GetOutgoingEdges(nodeId)
-                .Where(e => nodes.Contains(e.TargetId))
+                .Where(e => nodes.Contains(e.TargetNodeId))
                 .ToArray();
 
             if (outgoing.Length == 0)
@@ -170,7 +170,7 @@ We should therefore normalize it once and use that normalized distribution.
                     Math.Max(0, edge.Weight) /
                     totalWeight;
 
-                next[edge.TargetId] +=
+                next[edge.TargetNodeId] +=
                     dampingFactor *
                     currentRank *
                     weight;

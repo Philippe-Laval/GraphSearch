@@ -88,7 +88,7 @@ public sealed class PersonalizedPageRank
 
                 var outgoing = _graph
                     .GetOutgoingEdges(nodeId)
-                    .Where(e => nodes.Contains(e.TargetId))
+                    .Where(e => nodes.Contains(e.TargetNodeId))
                     .Where(e => e.Weight > 0)
                     .ToArray();
 
@@ -106,7 +106,7 @@ public sealed class PersonalizedPageRank
                     var transitionProbability =
                         edge.Weight / totalWeight;
 
-                    next[edge.TargetId] +=
+                    next[edge.TargetNodeId] +=
                         dampingFactor *
                         currentRank *
                         transitionProbability;

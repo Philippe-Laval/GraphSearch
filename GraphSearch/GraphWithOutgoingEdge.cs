@@ -19,10 +19,10 @@ public sealed class GraphWithOutgoingEdge
     {
         _edges.Add(edge);
 
-        if (!_outgoing.TryGetValue(edge.SourceId, out var edges))
+        if (!_outgoing.TryGetValue(edge.SourceNodeId, out var edges))
         {
             edges = [];
-            _outgoing[edge.SourceId] = edges;
+            _outgoing[edge.SourceNodeId] = edges;
         }
 
         edges.Add(edge);

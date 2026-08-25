@@ -51,7 +51,7 @@ public sealed class GraphNeighborhoodExpander
                         visited,
                         nextFrontier,
                         selectedEdges,
-                        edge => edge.TargetId);
+                        edge => edge.TargetNodeId);
                 }
 
                 if (direction is
@@ -63,7 +63,7 @@ public sealed class GraphNeighborhoodExpander
                         visited,
                         nextFrontier,
                         selectedEdges,
-                        edge => edge.SourceId);
+                        edge => edge.SourceNodeId);
                 }
             }
 

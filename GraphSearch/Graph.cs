@@ -32,18 +32,18 @@ public sealed class Graph
     {
         _edges.Add(edge);
 
-        if (!_outgoing.TryGetValue(edge.SourceId, out var outgoing))
+        if (!_outgoing.TryGetValue(edge.SourceNodeId, out var outgoing))
         {
             outgoing = [];
-            _outgoing[edge.SourceId] = outgoing;
+            _outgoing[edge.SourceNodeId] = outgoing;
         }
 
         outgoing.Add(edge);
 
-        if (!_incoming.TryGetValue(edge.TargetId, out var incoming))
+        if (!_incoming.TryGetValue(edge.TargetNodeId, out var incoming))
         {
             incoming = [];
-            _incoming[edge.TargetId] = incoming;
+            _incoming[edge.TargetNodeId] = incoming;
         }
 
         incoming.Add(edge);

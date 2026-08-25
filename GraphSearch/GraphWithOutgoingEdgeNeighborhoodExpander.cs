@@ -36,9 +36,9 @@ public sealed class GraphWithOutgoingEdgeNeighborhoodExpander
                 {
                     selectedEdges.Add(edge);
 
-                    if (visited.Add(edge.TargetId))
+                    if (visited.Add(edge.TargetNodeId))
                     {
-                        nextFrontier.Add(edge.TargetId);
+                        nextFrontier.Add(edge.TargetNodeId);
                     }
                 }
             }

@@ -128,6 +128,11 @@ public static class WhWordLexicon
         return null;
     }
 
+    /// <summary>
+    /// Expression régulière compilée qui correspond à une ou plusieurs lettres Unicode.
+    /// </summary>
+    /// <remarks>Utilise une culture invariante pour garantir un comportement cohérent quel que soit
+    /// l’environnement.</remarks>
     private static readonly Regex TokenRegex = new(
         @"[\p{L}]+",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);

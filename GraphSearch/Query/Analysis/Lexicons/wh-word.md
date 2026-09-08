@@ -16,10 +16,11 @@ what, who, which + entity	EntityLookup
 
 That's why the code has:
 
+```csharp
 private static readonly HashSet<string> AggregationWh = { "how many", "how much", "count" };
 private static readonly HashSet<string> ExplanationWh = { "why", "how", "how does", "how do" };
 private static readonly HashSet<string> LookupWh      = { "what", "who", "which" };
-
+```
 
 The InterrogativeLemma field on NerAnalysis is where a real NER pipeline (spaCy, Azure Language, HuggingFace) 
 would report the detected wh-word after lemmatization (so "what's" → "what", "how many" → "how many").

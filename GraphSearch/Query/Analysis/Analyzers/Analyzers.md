@@ -17,6 +17,8 @@ The 8 analyzers
 
 Wiring examples
 
+```csharp
+
 // Cheap-first → LLM fallback, cached, rewrites enabled.
 IQueryAnalyzer analyzer = new CachingQueryAnalyzer(
     new QueryRewritingAnalyzer(
@@ -43,3 +45,5 @@ IQueryAnalyzer planner = new GraphPatternQueryAnalyzer(
     entityExtractor: myEntityExtractor,
     vocabulary: myRelationshipVocabulary,
     relationshipCandidates: ["develops", "runs-on", "owns", "located-in"]);
+
+```

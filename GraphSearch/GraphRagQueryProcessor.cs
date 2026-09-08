@@ -88,6 +88,9 @@ ou now have:
              
  */
 
+/// <summary>
+/// Graph Rag Query Processor
+/// </summary>
 public sealed class GraphRagQueryProcessor
 {
     private readonly IQueryAnalyzer _analyzer;
@@ -95,6 +98,14 @@ public sealed class GraphRagQueryProcessor
     private readonly IEntityResolver _resolver;
     private readonly IEmbeddingService _embeddingService;
 
+    /// <summary>
+    /// Initialise une nouvelle instance de la classe <c>GraphRagQueryProcessor</c> avec les dépendances requises pour
+    /// analyser les requêtes, extraire et résoudre les entités, et générer des embeddings.
+    /// </summary>
+    /// <param name="analyzer">Analyseur utilisé pour interpréter la requête entrante.</param>
+    /// <param name="extractor">Extracteur utilisé pour identifier les entités dans la requête.</param>
+    /// <param name="resolver">Résolveur utilisé pour faire correspondre les entités extraites aux entités du graphe.</param>
+    /// <param name="embeddingService">Service utilisé pour produire les embeddings nécessaires au traitement sémantique.</param>
     public GraphRagQueryProcessor(
         IQueryAnalyzer analyzer,
         IEntityExtractor extractor,
@@ -107,6 +118,12 @@ public sealed class GraphRagQueryProcessor
         _embeddingService = embeddingService;
     }
 
+    /// <summary>
+    /// Processes a query and returns a detailed analysis.
+    /// </summary>
+    /// <param name="query">The query to process</param>
+    /// <param name="cancellationToken">A cancellation token</param>
+    /// <returns>A <see cref="QueryAnalysis"/> containing the analysis results</returns>
     public async Task<QueryAnalysis> ProcessAsync(
         string query,
         CancellationToken cancellationToken = default)

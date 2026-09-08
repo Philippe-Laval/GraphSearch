@@ -91,6 +91,12 @@ We should therefore normalize it once and use that normalized distribution.
             .ToArray();
     }
 
+    /// <summary>
+    /// Creates the initial rank distribution based on the provided personalization vector.
+    /// </summary>
+    /// <param name="nodes">Set of node IDs to include in the result.</param>
+    /// <param name="personalization">Personalization vector mapping node IDs to their initial probabilities.</param>
+    /// <returns>Dictionary containing all nodes with non-negative weights summing to 1.</returns>
     private static Dictionary<long, double> CreateInitialRank(
         HashSet<long> nodes,
         IReadOnlyDictionary<long, double> personalization)
@@ -128,6 +134,14 @@ We should therefore normalize it once and use that normalized distribution.
         return result;
     }
 
+    /// <summary>
+    /// Effectue une itération de l'algorithme de Personalized PageRank.
+    /// </summary>
+    /// <param name="nodes">Ensemble des identifiants de nœuds à inclure dans le calcul.</param>
+    /// <param name="rank">Dictionnaire contenant les scores de PageRank actuels par identifiant de nœud.</param>
+    /// <param name="personalization">Vecteur de personnalisation mapping des identifiants de nœuds à leurs probabilités initiales.</param>
+    /// <param name="dampingFactor">Facteur d'amortissement pour l'algorithme de PageRank.</param>
+    /// <returns>Dictionnaire contenant les scores de PageRank mis à jour après l'itération.</returns>
     private Dictionary<long, double> Iterate(
         HashSet<long> nodes,
         Dictionary<long, double> rank,
@@ -192,6 +206,12 @@ We should therefore normalize it once and use that normalized distribution.
         return next;
     }
 
+    /// <summary>
+    /// Distributes the rank of dangling nodes evenly across all nodes in the graph.
+    /// </summary>
+    /// <param name="nodes">Set of node IDs to distribute the rank to.</param>
+    /// <param name="next">Dictionary containing the next rank values for each node.</param>
+    /// <param name="value">The rank value to be distributed.</param>
     private static void DistributeDanglingRank(
         HashSet<long> nodes,
         Dictionary<long, double> next,

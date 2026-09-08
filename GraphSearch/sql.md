@@ -1,15 +1,15 @@
 CREATE TABLE GraphEntity
 (
-Id          INTEGER PRIMARY KEY,
-Name        TEXT NOT NULL,
-Type        TEXT NOT NULL,
-Description TEXT
+    Id          INTEGER PRIMARY KEY,
+    Name        TEXT NOT NULL,
+    Type        TEXT NOT NULL,
+    Description TEXT
 );
 
 CREATE TABLE GraphEntityAlias
 (
-EntityId    INTEGER NOT NULL,
-Alias       TEXT NOT NULL,
+    EntityId    INTEGER NOT NULL,
+    Alias       TEXT NOT NULL,
 
     PRIMARY KEY (EntityId, Alias),
 
@@ -51,16 +51,15 @@ EntityId    Alias
 
 --------------
 
-SQL + FTS5
+SQL + FTS5 (sqlite) is a good combination for entity resolution.
 
 For a large graph, create:
 
-CREATE VIRTUAL TABLE GraphEntitySearch
-USING fts5(
-Name,
-Type,
-Description,
-EntityId UNINDEXED
+CREATE VIRTUAL TABLE GraphEntitySearch USING fts5(
+    Name,
+    Type,
+    Description,
+    EntityId UNINDEXED
 );
 
 Then index:

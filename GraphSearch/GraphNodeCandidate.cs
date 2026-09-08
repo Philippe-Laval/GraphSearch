@@ -4,7 +4,8 @@ namespace GraphSearch;
 /*
 One more thing I'd change for your architecture
    
-   Since you're building a real GraphRAG engine rather than just a demo, I would make the neighborhood expansion return distance from the seed as well:
+   Since you're building a real GraphRAG engine rather than just a demo, 
+   I would make the neighborhood expansion return distance from the seed as well:
    
    public sealed record GraphNodeCandidate(
        long NodeId,
@@ -28,7 +29,9 @@ One more thing I'd change for your architecture
      + edge relevance
      + distance relevance
    
-   That would be the version I'd recommend integrating into the retrieval layer of the GraphRAG engine you've been designing, especially before the final subgraph projection sent to the LLM.
+    That would be the version I'd recommend integrating into the retrieval layer 
+    of the GraphRAG engine you've been designing, especially before the 
+    final subgraph projection sent to the LLM.
  */
 
 public sealed record GraphNodeCandidate(

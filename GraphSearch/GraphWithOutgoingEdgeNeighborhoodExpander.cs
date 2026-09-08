@@ -1,5 +1,8 @@
 namespace GraphSearch;
 
+/// <summary>
+/// Graph Neighborhood Expander for Graphs with Outgoing Edges
+/// </summary>
 public sealed class GraphWithOutgoingEdgeNeighborhoodExpander
 {
     private readonly GraphWithOutgoingEdge _graphWithOutgoingEdge;
@@ -9,6 +12,13 @@ public sealed class GraphWithOutgoingEdgeNeighborhoodExpander
         _graphWithOutgoingEdge = graphWithOutgoingEdge;
     }
 
+    /// <summary>
+    /// Expand neighborhood of given seed nodes
+    /// </summary>
+    /// <param name="seedNodeIds">Seed node IDs</param>
+    /// <param name="maxDepth">Max depth of expansion</param>
+    /// <returns>The expanded graph neighborhood</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public GraphNeighborhood Expand(
         IEnumerable<long> seedNodeIds,
         int maxDepth = 2)

@@ -15,10 +15,10 @@ public sealed class GraphNeighborhoodExpander
     /// <summary>
     /// Expand neighborhood of given seed nodes
     /// </summary>
-    /// <param name="seedNodeIds"></param>
+    /// <param name="seedNodeIds">Seed node IDs</param>
     /// <param name="maxDepth">Max depth of expansion</param>
-    /// <param name="direction"></param>
-    /// <returns></returns>
+    /// <param name="direction">Direction of graph traversal</param>
+    /// <returns>The expanded graph neighborhood</returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public GraphNeighborhood Expand(
         IEnumerable<long> seedNodeIds,
@@ -80,6 +80,14 @@ public sealed class GraphNeighborhoodExpander
         };
     }
 
+    /// <summary>
+    /// Visit edges and update visited nodes and next frontier
+    /// </summary>
+    /// <param name="edges">The edges to visit</param>
+    /// <param name="visited">The set of visited node IDs</param>
+    /// <param name="nextFrontier">The next frontier of nodes to visit</param>
+    /// <param name="selectedEdges">The set of selected edges</param>
+    /// <param name="nextNode">A function to get the next node ID from an edge</param>
     private static void VisitEdges(
         IEnumerable<GraphEdge> edges,
         HashSet<long> visited,

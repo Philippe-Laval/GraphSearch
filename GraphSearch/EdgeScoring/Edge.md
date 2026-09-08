@@ -2,7 +2,8 @@ edgeRelevance is the score that answers:
 
 "Given what the user asked, how relevant are the relationships connecting this candidate node to the query's seed entities?"
 
-It is particularly important in GraphRAG because a node can be semantically similar to the query but connected to the wrong part of the graph.
+It is particularly important in GraphRAG because a node can be semantically similar to the query 
+but connected to the wrong part of the graph.
 
 For example:
 
@@ -85,7 +86,7 @@ This is why I suggested earlier that your QueryAnalysis should contain relations
 
 public sealed class QueryAnalysis
 {
-public required string OriginalQuery { get; init; }
+    public required string OriginalQuery { get; init; }
 
     public required string NormalizedQuery { get; init; }
 
@@ -106,6 +107,7 @@ public required string OriginalQuery { get; init; }
     public IReadOnlyList<string> NodeTypes
         { get; init; } = [];
 }
+
 3. Represent graph edges
 
 I'd use something like:

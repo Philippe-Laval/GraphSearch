@@ -16,6 +16,13 @@ For example:
    MultiHopRelationship
  */
 
+/// <summary>
+/// AnalyzedQuery represents the result of analyzing a user's query, 
+/// including the original query, its normalized form, and the inferred intent.
+/// </summary>
+/// <param name="OriginalQuery">The original query submitted by the user.</param>
+/// <param name="NormalizedQuery">The normalized form of the query.</param>
+/// <param name="Intent">The inferred intent of the query.</param>
 public sealed record AnalyzedQuery(
     string OriginalQuery,
     string NormalizedQuery,

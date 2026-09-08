@@ -5,7 +5,7 @@ namespace GraphSearch;
    
    The first step is:
    
-                       Seed
+                       Seed X
                         │
                 ┌───────┼───────┐
                 ▼       ▼       ▼
@@ -23,9 +23,18 @@ namespace GraphSearch;
  */
 
 
+/// <summary>
+/// Graph Neighborhood expansion
+/// </summary>
 public sealed class GraphNeighborhood
 {
+    /// <summary>
+    /// The nodes in the graph that are the seed for the neighborhood expansion.
+    /// </summary>
     public required IReadOnlySet<long> NodeIds { get; init; }
 
+    /// <summary>
+    /// The edges in the graph that connect the nodes in the neighborhood expansion.
+    /// </summary>
     public required IReadOnlyList<GraphEdge> Edges { get; init; }
 }

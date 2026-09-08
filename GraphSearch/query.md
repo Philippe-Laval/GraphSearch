@@ -37,7 +37,9 @@
 
 # why three different retrieval methods?
 
-That part is important, because Vector search, BM25, and Entity matching are three different ways of interpreting the same user query. They complement each other rather than doing the same thing.
+That part is important, because Vector search, BM25, and Entity matching are 
+three different ways of interpreting the same user query. 
+They complement each other rather than doing the same thing.
 
 For a GraphRAG system, I would think of them like this:
 
@@ -47,15 +49,15 @@ For a GraphRAG system, I would think of them like this:
           ▼                  ▼                  ▼
     Vector Search          BM25          Entity Matching
           │                  │                  │
-"What is semantically   "What words       "Which graph
-similar?"             occur?"          entities are named?"
-│                  │                  │
-└──────────────────┼──────────────────┘
-                   ▼
-                Result Fusion
-                    │                   
-                    ▼
-                Seed Nodes
+  "What is semantically   "What words       "Which graph
+     similar?"             occur?"          entities are named?"
+          │                  │                  │
+          └──────────────────┼──────────────────┘
+                             ▼
+                         Result Fusion
+                             │                   
+                             ▼
+                         Seed Nodes
 
 ## 1. Vector search
 
@@ -198,6 +200,7 @@ Microsoft
 ├── develops ──> .NET
 │
 └── develops ──> .NET 10
+
 The important part: they shouldn't necessarily return the same type of result
 
 This is where I would slightly modify my previous architecture.
@@ -247,17 +250,17 @@ Microsoft
 This is one of the places where GraphRAG differs fundamentally from ordinary RAG.
 
 I would therefore use two kinds of seeds
-Explicit seeds
+
+1. Explicit seeds
 
 Entities explicitly identified in the query:
-
 Microsoft
 .NET 10
 GitHub
-Semantic seeds
+
+2. Semantic seeds
 
 Nodes found through retrieval:
-
 .NET
 C#
 Visual Studio
@@ -265,21 +268,21 @@ Visual Studio
 
 Then combine them:
 
-                   Query
-                     │
-       ┌─────────────┴─────────────┐
-       │                           │
-Explicit entities          Semantic retrieval
-│                           │
-▼                           ▼
-High-confidence seeds       Candidate seeds
-│                           │
-└─────────────┬─────────────┘
-▼
-Seed ranking
-│
-▼
-Graph expansion
+                    Query
+                      │
+        ┌─────────────┴─────────────┐
+        │                           │
+    Explicit entities          Semantic retrieval
+        │                           │
+        ▼                           ▼
+    High-confidence seeds       Candidate seeds
+        │                           │
+        └─────────────┬─────────────┘
+                      ▼
+                  Seed ranking
+                      │
+                      ▼
+               Graph expansion
 
 This is particularly powerful for your use case.
 
@@ -287,21 +290,18 @@ There is another important distinction
 
 Entity matching can be used before retrieval and after retrieval.
 
-Before retrieval
+1. Before retrieval
 
 Extract:
-
 "Microsoft"
 ".NET 10"
 
 Then resolve them to graph nodes.
-
 This gives you anchors.
 
-After retrieval
+2. After retrieval
 
 Suppose vector search gives you:
-
 .NET 10
 .NET
 .NET Runtime
@@ -379,68 +379,10 @@ runs-on
 ▼
 Linux
 
-So I'd consider Entity Matching not merely another retrieval method, but the bridge between natural-language query understanding and your graph query engine.
+So I'd consider Entity Matching not merely another retrieval method, 
+but the bridge between natural-language query understanding and your graph query engine.
 
 And this connects very nicely to the 
 Cypher → AST → Binder → Logical Plan → Physical Plan architecture 
 you've been building: eventually, the entity matcher can provide 
 the bound graph entities that your logical plan operates on.
-
-
-# Can you help me code in C# these steps : Query Processing │ ├── Query Parser / Analyzer │ ├── Entity Extractor │ ├── Entity Resolver │ └── Query Embedding
-
-Absolutely. For your GraphRAG architecture, I would make these four components independent, because later you can replace the LLM-based entity extractor, the embedding provider, or the entity resolver without changing the rest of the pipeline.
-
-I would structure it like this:
-
-GraphRag/
-└── Query/
-├── Analysis/
-│   ├── QueryAnalyzer.cs
-│   ├── QueryAnalysis.cs
-│   ├── EntityExtractor.cs
-│   └── ExtractedEntity.cs
-│
-├── Resolution/
-│   ├── EntityResolver.cs
-│   ├── ResolvedEntity.cs
-│   └── IEntityIndex.cs
-│
-├── Embeddings/
-│   ├── QueryEmbeddingService.cs
-│   └── IEmbeddingService.cs
-│
-└── GraphRagQueryProcessor.cs
-
-
-Natural language
-│
-▼
-┌──────────────────┐
-│ Query Analyzer   │
-└────────┬─────────┘
-│
-├───────────────┐
-▼               ▼
-Entity extraction    Query normalization
-│
-▼
-┌──────────────────┐
-│ Entity Resolver  │
-└────────┬─────────┘
-│
-▼
-Graph entity IDs
-│
-└───────────────┐
-▼
-┌─────────────────┐
-│ Query Embedding │
-└────────┬────────┘
-│
-▼
-QueryAnalysisResult
-
-
-
-

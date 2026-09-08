@@ -28,6 +28,13 @@ Suppose your graph contains:
    Edges can also have embeddings, but I would not make them your primary retrieval mechanism initially.
  */
 
+/// <summary>
+/// A graph node
+/// </summary>
+/// <param name="Id">The unique identifier of the node</param>
+/// <param name="Type">The type of the node</param>
+/// <param name="Name">The name of the node</param>
+/// <param name="Description">The description of the node</param>
 public sealed record GraphNode(
     long Id,
     string Type,

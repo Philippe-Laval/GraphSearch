@@ -24,7 +24,7 @@ For:
 /// <param name="Type">The type of the extracted entity (e.g., Organization, Technology).</param>
 /// <param name="Start">The starting position of the entity in the query.</param>
 /// <param name="Length">The length of the entity text.</param>
-/// <param name="Confidence">The confidence score of the entity extraction.</param>
+/// <param name="Confidence">The confidence score of the entity extraction (in interval [0.0 - 1.0]).</param>
 public sealed record ExtractedEntity(
     string Text,
     string? Type,

@@ -50,15 +50,31 @@ One architectural change I'd strongly recommend
 
 public sealed class QueryAnalysisImproved
 {
+    /// <summary>
+    /// Original query submitted by the user
+    /// </summary>
     public required string OriginalQuery { get; init; }
+
+    /// <summary>
+    /// Normalized query
+    /// </summary>
     public required string NormalizedQuery { get; init; }
    
     public QueryIntent Intent { get; init; }
-   
+
+    /// <summary>
+    /// Extracted entities from the query, including their text, type, position, length, and confidence score.
+    /// </summary>
     public required IReadOnlyList<ExtractedEntity> Entities { get; init; }
-   
+
+    /// <summary>
+    /// Resolved entities from the query
+    /// </summary>
     public required IReadOnlyList<ResolvedEntity> ResolvedEntities { get; init; }
-   
+
+    /// <summary>
+    /// Embedding of normalized query.
+    /// </summary>
     public required ReadOnlyMemory<float> Embedding { get; init; }
    
     public IReadOnlyList<string> RelationshipTypes { get; init; } = [];

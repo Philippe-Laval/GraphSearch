@@ -20,6 +20,12 @@ public sealed class DictionaryEntityExtractor : IEntityExtractor
             .ToArray();
     }
 
+    /// <summary>
+    /// Extracts entities from the given query string based on the predefined dictionary of entities.
+    /// </summary>
+    /// <param name="query">The query string to extract entities from.</param>
+    /// <param name="cancellationToken">A cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a read-only list of extracted entities.</returns>
     public Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)

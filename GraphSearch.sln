@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSearch.Library", "Grap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSearch.Tool", "GraphSearch.Tool\GraphSearch.Tool.csproj", "{DD24E443-7B76-491F-905F-44516557B14F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSearch.Library.Tests", "GraphSearch.Library.Tests\GraphSearch.Library.Tests.csproj", "{5D9E2121-2632-4A53-B099-409CE4B00D7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{DD24E443-7B76-491F-905F-44516557B14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD24E443-7B76-491F-905F-44516557B14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD24E443-7B76-491F-905F-44516557B14F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9E2121-2632-4A53-B099-409CE4B00D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9E2121-2632-4A53-B099-409CE4B00D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9E2121-2632-4A53-B099-409CE4B00D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9E2121-2632-4A53-B099-409CE4B00D7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BED50C6C-D88F-4C54-9BCC-BE97B5AE4B62}
 	EndGlobalSection
 EndGlobal

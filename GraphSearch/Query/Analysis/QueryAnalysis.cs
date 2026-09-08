@@ -36,5 +36,35 @@ public sealed class QueryAnalysis
     // because most embedding APIs return something compatible with it
     // and it avoids unnecessary allocations/copies.
     public required ReadOnlyMemory<float> Embedding { get; init; }
-}
 
+    /// <summary>
+    /// Inferred intent of the query. Defaults to <see cref="QueryIntent.Unknown"/>
+    /// so older analyzers that only produce normalized text still populate a
+    /// valid <see cref="QueryAnalysis"/>.
+    /// </summary>
+    public QueryIntent Intent { get; init; } = QueryIntent.Unknown;
+
+    /// <summary>
+    /// Confidence in the inferred <see cref="Intent"/>, in [0, 1].
+    /// </summary>
+    public double IntentConfidence { get; init; } = 1.0;
+
+    /// <summary>
+    /// Alternative phrasings of the query (produced by <see cref="QueryRewritingAnalyzer"/>
+    /// or LLM-based analyzers). Feed these into hybrid retrieval alongside
+    /// <see cref="NormalizedQuery"/>.
+    /// </summary>
+    public IReadOnlyList<string> Rewrites { get; init; } = [];
+
+    /// <summary>
+    /// Detected BCP-47 language code (e.g. "en", "fr"). Null when unknown.
+    /// </summary>
+    public string? DetectedLanguage { get; init; }
+
+    /// <summary>
+    /// Logical graph pattern (anchor entities, node/relationship types) suitable
+    /// for driving a graph query planner. Null when the analyzer did not
+    /// produce one.
+    /// </summary>
+    public GraphQueryPattern? GraphPattern { get; init; }
+}

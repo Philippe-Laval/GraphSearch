@@ -130,16 +130,16 @@ public sealed class GraphRagQueryProcessor
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
-        // 1. Normalize / analyze
-        var normalized =
-            await _analyzer.NormalizeAsync(
+        // 1. Analyze (normalize + intent + optional rewrites / language / graph pattern)
+        var analyzed =
+            await _analyzer.AnalyzeAsync(
                 query,
                 cancellationToken);
 
-        // 2. Extract entities
+        // 2. Extract entities from the normalized text
         var entities =
             await _extractor.ExtractAsync(
-                normalized,
+                analyzed.NormalizedQuery,
                 cancellationToken);
 
         // 3. Resolve entities to graph nodes
@@ -151,16 +151,21 @@ public sealed class GraphRagQueryProcessor
         // 4. Create query embedding
         var embedding =
             await _embeddingService.EmbedAsync(
-                normalized,
+                analyzed.NormalizedQuery,
                 cancellationToken);
 
         return new QueryAnalysis
         {
-            OriginalQuery = query,
-            NormalizedQuery = normalized,
+            OriginalQuery = analyzed.OriginalQuery,
+            NormalizedQuery = analyzed.NormalizedQuery,
             Entities = entities,
             ResolvedEntities = resolved,
-            Embedding = embedding
+            Embedding = embedding,
+            Intent = analyzed.Intent,
+            IntentConfidence = analyzed.IntentConfidence,
+            Rewrites = analyzed.Rewrites,
+            DetectedLanguage = analyzed.DetectedLanguage,
+            GraphPattern = analyzed.GraphPattern,
         };
     }
 }

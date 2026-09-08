@@ -1,6 +1,6 @@
-using GraphSearch.Query.Analysis;
+using GraphSearch.Library.Query.Analysis;
 
-namespace GraphSearch.Query.Resolution;
+namespace GraphSearch.Library.Query.Resolution;
 
 public interface IEntityResolver
 {

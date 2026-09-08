@@ -1,6 +1,6 @@
 using Lucene.Net.Util;
 
-namespace GraphSearch.Query.Resolution;
+namespace GraphSearch.Library.Query.Resolution;
 
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Index;

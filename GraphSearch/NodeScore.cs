@@ -1,4 +1,4 @@
-namespace GraphSearch;
+namespace GraphSearch.Library;
 
 /// <summary>
 /// Node score represents the scores of a node in a graph search.

@@ -1,4 +1,4 @@
-namespace GraphSearch.Query.Analysis;
+namespace GraphSearch.Library.Query.Analysis;
 
 /*
 For example:

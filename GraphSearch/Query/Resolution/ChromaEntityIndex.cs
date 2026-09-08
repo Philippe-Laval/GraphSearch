@@ -1,6 +1,6 @@
-using GraphSearch.Query.Embeddings;
+using GraphSearch.Library.Query.Embeddings;
 
-namespace GraphSearch.Query.Resolution;
+namespace GraphSearch.Library.Query.Resolution;
 
 /*
  What I would actually store in Chroma

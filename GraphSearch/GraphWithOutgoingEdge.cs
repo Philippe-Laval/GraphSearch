@@ -1,4 +1,4 @@
-namespace GraphSearch;
+namespace GraphSearch.Library;
 
 /// <summary>
 /// Graph with outgoing edges

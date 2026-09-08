@@ -1,4 +1,6 @@
-﻿namespace GraphSearch;
+using GraphSearch.Library;
+
+namespace GraphSearch.Tool;
 
 
 /*
@@ -34,32 +36,32 @@ For a GraphRAG system, I would not try to find the top-K graph nodes directly fr
               LLM
               
  */
-class Program
+public static class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         // Connecting both algorithms
         // Suppose your vector/BM25 retrieval gives:
- 
+
         var seeds = new Dictionary<long, double>
         {
             [100] = 0.94, // .NET
             [200] = 0.87, // C#
             [300] = 0.72  // Microsoft
         };
-        
+
         // First expand
-        
-        
+
+
         Graph graph = new Graph();
-        
+
         var expander = new GraphNeighborhoodExpander(graph);
 
         var neighborhood = expander.Expand(
             seeds.Keys,
             maxDepth: 2,
             direction: GraphTraversalDirection.Both);
-        
+
         // You now have:
         //
         //NodeIds
@@ -70,9 +72,9 @@ class Program
         //102
         //201
         //301
-        
+
         // Then PageRank:
-        
+
         var pageRank = new PersonalizedPageRank(graph);
 
         var ranked = pageRank.Rank(
@@ -80,7 +82,7 @@ class Program
             seeds,
             iterations: 30,
             dampingFactor: 0.85);
-        
+
         foreach (var result in ranked.Take(20))
         {
             var node = graph.Nodes[result.NodeId];
@@ -88,7 +90,7 @@ class Program
             Console.WriteLine(
                 $"{node.Name,-30} {result.Score:F6}");
         }
-        
+
         /*
          You might obtain:
            
@@ -102,7 +104,7 @@ class Program
            NuGet                        0.041223
            ...
          */
-        
+
         /*
          One important improvement for GraphRAG
            
@@ -122,7 +124,7 @@ class Program
              + 0.25 × PageRankScore
              + 0.10 × EdgeRelevance
          */
-        
-   
+
+
     }
 }

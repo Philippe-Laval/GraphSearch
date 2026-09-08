@@ -4,7 +4,7 @@ using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Store;
 
-namespace GraphSearch.Query.Resolution;
+namespace GraphSearch.Library.Query.Resolution;
 
 /*
     This is probably the best lexical implementation for your GraphRAG.

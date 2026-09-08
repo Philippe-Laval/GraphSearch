@@ -1,4 +1,4 @@
-namespace GraphSearch;
+namespace GraphSearch.Library;
 
 /// <summary>
 /// Graph Neighborhood Expander for Graphs with Outgoing Edges

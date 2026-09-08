@@ -1,4 +1,4 @@
-namespace GraphSearch.EdgeScoring;
+namespace GraphSearch.Library.EdgeScoring;
 
 public sealed record EdgeRelevanceResult(
     double Score,

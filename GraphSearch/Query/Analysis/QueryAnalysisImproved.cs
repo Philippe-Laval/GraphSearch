@@ -1,6 +1,6 @@
-using GraphSearch.Query.Resolution;
+using GraphSearch.Library.Query.Resolution;
 
-namespace GraphSearch.Query.Analysis;
+namespace GraphSearch.Library.Query.Analysis;
 
 /*
 One architectural change I'd strongly recommend

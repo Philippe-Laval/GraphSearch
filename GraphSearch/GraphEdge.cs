@@ -1,4 +1,4 @@
-namespace GraphSearch;
+namespace GraphSearch.Library;
 
 /// <summary>
 /// A graph edge represents a directed connection between two nodes in a graph.

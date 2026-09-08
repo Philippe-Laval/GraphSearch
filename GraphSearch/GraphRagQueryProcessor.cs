@@ -1,8 +1,8 @@
-using GraphSearch.Query.Analysis;
-using GraphSearch.Query.Embeddings;
-using GraphSearch.Query.Resolution;
+using GraphSearch.Library.Query.Analysis;
+using GraphSearch.Library.Query.Embeddings;
+using GraphSearch.Library.Query.Resolution;
 
-namespace GraphSearch;
+namespace GraphSearch.Library;
 
 /*
   Usage :

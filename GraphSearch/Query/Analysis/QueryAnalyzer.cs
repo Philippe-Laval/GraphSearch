@@ -1,4 +1,4 @@
-namespace GraphSearch.Query.Analysis;
+namespace GraphSearch.Library.Query.Analysis;
 
 /*
 This looks trivial, but I'd keep it as a separate component because later 

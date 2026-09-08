@@ -1,4 +1,4 @@
-namespace GraphSearch.Query.Resolution;
+namespace GraphSearch.Library.Query.Resolution;
 
 // This is deliberately independent of Lucene, ChromaDB, SQL, Neo4j, etc.
 // You can implement IEntityIndex using whatever backend you eventually choose.

@@ -1,4 +1,4 @@
-namespace GraphSearch;
+namespace GraphSearch.Library;
 
 /*
  * For a GraphRAG system, however, I recommend supporting both outgoing and incoming edges.

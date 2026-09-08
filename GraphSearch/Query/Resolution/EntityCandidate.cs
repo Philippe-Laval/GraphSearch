@@ -1,4 +1,4 @@
-namespace GraphSearch.Query.Resolution;
+namespace GraphSearch.Library.Query.Resolution;
 
 public sealed record EntityCandidate(
     long NodeId,

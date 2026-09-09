@@ -27,18 +27,25 @@ public sealed class EmbeddingQueryAnalyzer : IQueryAnalyzer
         _classifier = classifier;
         _normalizer = normalizer ?? new RulesBasedQueryAnalyzer(QueryAnalyzerOptions.Default with
         {
+            // Disable intent detection in the normalizer, since we will classify intent ourselves.
             DetectIntent = false,
         });
     }
 
+    /// <inheritdoc />
     public async Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Normalize the query.
         var baseAnalysis = await _normalizer.AnalyzeAsync(query, cancellationToken).ConfigureAwait(false);
+
+        // Embed the normalized query.
         var embedding = await _embeddingService.EmbedAsync(baseAnalysis.NormalizedQuery, cancellationToken).ConfigureAwait(false);
+
+        // Classify the query intent based on the embedding.
         var (intent, similarity) = _classifier.Classify(embedding.Span);
 
         return baseAnalysis with

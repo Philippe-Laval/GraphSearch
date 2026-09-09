@@ -148,6 +148,8 @@ public sealed partial class RulesBasedQueryAnalyzer : IQueryAnalyzer
 
     #endregion
 
+    #region Rules-based regexes for intent classification
+
     /// <summary>
     /// Detect <see cref="QueryIntent"/> for the given query string.
     /// </summary>
@@ -198,8 +200,6 @@ public sealed partial class RulesBasedQueryAnalyzer : IQueryAnalyzer
 
         return QueryIntent.General;
     }
-
-    #region Rules-based regexes for intent classification
 
     [GeneratedRegex(@"\s+", RegexOptions.CultureInvariant)]
     private static partial Regex WhitespaceRegex();

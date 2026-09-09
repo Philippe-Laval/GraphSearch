@@ -26,5 +26,9 @@ public sealed record QueryAnalyzerOptions
     /// <summary>Attempt to infer <see cref="QueryIntent"/> from lexical cues.</summary>
     public bool DetectIntent { get; init; } = true;
 
+
+    /// <summary>
+    /// Obtient les options d’analyse de requête par défaut.
+    /// </summary>
     public static QueryAnalyzerOptions Default { get; } = new();
 }

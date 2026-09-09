@@ -52,16 +52,30 @@ public sealed class LlmQueryAnalyzer : IQueryAnalyzer
         _promptTemplate = promptTemplate ?? DefaultPromptTemplate;
     }
 
+    /// <summary>
+    /// Analyse asynchroniquement une requête utilisateur pour produire une forme normalisée et un intent.
+    /// </summary>
+    /// <param name="query">Requête à analyser.</param>
+    /// <param name="cancellationToken">Jeton utilisé pour annuler l’opération asynchrone.</param>
+    /// <returns>Une instance de <c>AnalyzedQuery</c> contenant la requête d’origine, la requête normalisée, l’intent détecté,
+    /// les reformulations éventuelles et un score de confiance borné entre 0 et 1. Retourne un résultat avec
+    /// <c>QueryIntent.Unknown</c> et une confiance de 0 si l’analyse ne peut pas être interprétée.</returns>
     public async Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Remplacer le placeholder {{QUERY}} dans le prompt par la requête utilisateur.
         var prompt = _promptTemplate.Replace("{{QUERY}}", query, StringComparison.Ordinal);
+
+        // Envoyer le prompt à l’API LLM et récupérer la réponse brute.
         var raw = await _client.CompleteAsync(prompt, cancellationToken).ConfigureAwait(false);
 
+        // Extraire le bloc JSON de la réponse brute.
         var payload = ExtractJson(raw);
+        
+        // Tenter de désérialiser le JSON en objet LlmResponse.
         LlmResponse? parsed;
         try
         {
@@ -72,6 +86,7 @@ public sealed class LlmQueryAnalyzer : IQueryAnalyzer
             parsed = null;
         }
 
+        // Si la désérialisation échoue ou si la requête normalisée est vide, retourner un résultat par défaut.
         if (parsed is null || string.IsNullOrWhiteSpace(parsed.NormalizedQuery))
         {
             return new AnalyzedQuery(query, query.Trim(), QueryIntent.Unknown)
@@ -86,6 +101,7 @@ public sealed class LlmQueryAnalyzer : IQueryAnalyzer
             Intent: parsed.Intent)
         {
             Rewrites = (IReadOnlyList<string>?)parsed.Rewrites ?? Array.Empty<string>(),
+            // Clamp the confidence score to the range [0.0, 1.0].
             IntentConfidence = Math.Clamp(parsed.Confidence, 0.0, 1.0),
         };
     }

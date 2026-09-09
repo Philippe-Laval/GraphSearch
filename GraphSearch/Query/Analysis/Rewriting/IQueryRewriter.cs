@@ -9,6 +9,12 @@ namespace GraphSearch.Library.Query.Analysis.Rewriting;
 /// </summary>
 public interface IQueryRewriter
 {
+    /// <summary>
+    /// Produces alternative phrasings for a query to feed hybrid retrieval.
+    /// </summary>
+    /// <param name="normalizedQuery"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     Task<IReadOnlyList<string>> RewriteAsync(
         string normalizedQuery,
         CancellationToken cancellationToken = default);

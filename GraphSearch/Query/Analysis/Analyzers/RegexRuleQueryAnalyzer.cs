@@ -26,12 +26,21 @@ public sealed class RegexRuleQueryAnalyzer : IQueryAnalyzer
     private readonly IReadOnlyList<(Regex Regex, IntentRule Rule)> _compiled;
     private readonly IQueryAnalyzer _normalizer;
 
+    /// <summary>
+    /// Initialise une nouvelle instance de la classe <c>RegexRuleQueryAnalyzer</c> à partir d’un ensemble de règles
+    /// d’intention et d’un analyseur de normalisation optionnel.
+    /// </summary>
+    /// <param name="rules">Règles d’intention utilisées pour créer et ordonner les expressions régulières compilées par priorité
+    /// décroissante.</param>
+    /// <param name="normalizer">Analyseur utilisé pour normaliser la requête avant l’évaluation des règles. Si <see langword="null" />, un
+    /// <c>RulesBasedQueryAnalyzer</c> par défaut est utilisé avec la détection d’intention désactivée.</param>
     public RegexRuleQueryAnalyzer(
         IEnumerable<IntentRule> rules,
         IQueryAnalyzer? normalizer = null)
     {
         ArgumentNullException.ThrowIfNull(rules);
 
+        // Compile regexes once, ordered by priority descending (highest first).
         _compiled = rules
             .OrderByDescending(r => r.Priority)
             .Select(r => (
@@ -41,8 +50,10 @@ public sealed class RegexRuleQueryAnalyzer : IQueryAnalyzer
                 r))
             .ToList();
 
+        // Use a default normalizer if none is provided.
         _normalizer = normalizer ?? new RulesBasedQueryAnalyzer(QueryAnalyzerOptions.Default with
         {
+            // Disable intent detection in the normalizer, since we will classify intent ourselves.
             DetectIntent = false,
         });
     }
@@ -50,9 +61,13 @@ public sealed class RegexRuleQueryAnalyzer : IQueryAnalyzer
     /// <summary>
     /// Loads rules from a JSON document (see class summary for schema).
     /// </summary>
+    /// <param name="json"></param>
+    /// <param name="normalizer"></param>
+    /// <returns></returns>
     public static RegexRuleQueryAnalyzer FromJson(string json, IQueryAnalyzer? normalizer = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(json);
+
         var rules = JsonSerializer.Deserialize<List<IntentRule>>(
             json,
             new JsonSerializerOptions
@@ -63,17 +78,21 @@ public sealed class RegexRuleQueryAnalyzer : IQueryAnalyzer
 
         return new RegexRuleQueryAnalyzer(rules, normalizer);
     }
-
+    
+    /// <inheritdoc/>
     public async Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Normalize the query first.
         var baseAnalysis = await _normalizer.AnalyzeAsync(query, cancellationToken).ConfigureAwait(false);
-
+        
+        // Apply regex rules in order of priority.
         foreach (var (regex, rule) in _compiled)
         {
+            // If the regex matches, return a new AnalyzedQuery with the matched intent and confidence.
             if (regex.IsMatch(baseAnalysis.NormalizedQuery))
             {
                 return baseAnalysis with
@@ -84,6 +103,7 @@ public sealed class RegexRuleQueryAnalyzer : IQueryAnalyzer
             }
         }
 
+        // If no regex matches, return a new AnalyzedQuery with a general intent and lower confidence.
         return baseAnalysis with
         {
             Intent = QueryIntent.General,

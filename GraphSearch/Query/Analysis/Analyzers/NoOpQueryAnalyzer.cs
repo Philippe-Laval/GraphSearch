@@ -7,6 +7,7 @@ namespace GraphSearch.Library.Query.Analysis.Analyzers;
 /// </summary>
 public sealed class NoOpQueryAnalyzer : IQueryAnalyzer
 {
+    /// <inheritdoc/>
     public Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)
@@ -15,6 +16,7 @@ public sealed class NoOpQueryAnalyzer : IQueryAnalyzer
 
         cancellationToken.ThrowIfCancellationRequested();
 
+        // No-op: return the original query as both the original and normalized query, with unknown intent.
         return Task.FromResult(new AnalyzedQuery(
             OriginalQuery: query,
             NormalizedQuery: query,

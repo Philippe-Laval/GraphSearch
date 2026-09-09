@@ -25,6 +25,14 @@ public sealed class SynonymQueryRewriter : IQueryRewriter
         _maxRewrites = maxRewrites;
     }
 
+    /// <summary>
+    /// Ajoute une règle de réécriture qui remplace une expression par une valeur de substitution.
+    /// </summary>
+    /// <remarks>La correspondance utilise une expression régulière avec bornes de mot, sans distinction de
+    /// casse, avec options invariantes de culture.</remarks>
+    /// <param name="phrase">Expression à rechercher dans la requête.</param>
+    /// <param name="replacement">Valeur utilisée pour remplacer l’expression correspondante.</param>
+    /// <returns>L’instance actuelle de <see cref="SynonymQueryRewriter"/> pour permettre le chaînage d’appels.</returns>
     public SynonymQueryRewriter Add(string phrase, string replacement)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(phrase);
@@ -35,9 +43,11 @@ public sealed class SynonymQueryRewriter : IQueryRewriter
             RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
 
         _rules.Add((pattern, replacement));
+
         return this;
     }
 
+    /// <inheritdoc/>
     public Task<IReadOnlyList<string>> RewriteAsync(
         string normalizedQuery,
         CancellationToken cancellationToken = default)

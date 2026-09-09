@@ -20,13 +20,17 @@ public sealed class QueryRewritingAnalyzer : IQueryAnalyzer
         _rewriter = rewriter;
     }
 
+    /// <inheritdoc/>
     public async Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Run the inner analyzer first to get the normalized query and any rewrites it may have produced.
         var analysis = await _inner.AnalyzeAsync(query, cancellationToken).ConfigureAwait(false);
+
+        // Then run the rewriter to get additional rewrites.
         var rewrites = await _rewriter.RewriteAsync(analysis.NormalizedQuery, cancellationToken).ConfigureAwait(false);
 
         if (rewrites.Count == 0)

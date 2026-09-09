@@ -57,7 +57,7 @@ public sealed class CompositeQueryAnalyzer : IQueryAnalyzer
     {
     }
 
-    // <inheritdoc/>
+    /// <inheritdoc/>
     public async Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)

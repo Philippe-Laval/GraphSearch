@@ -34,6 +34,7 @@ public static class HybridNerAnalyzers
         return new CompositeQueryAnalyzer(
             analyzers: new IQueryAnalyzer[]
             {
+                // Azure first, spaCy second
                 new NerQueryAnalyzer(azure, normalizer),
                 new NerQueryAnalyzer(spacy, normalizer),
             },
@@ -61,6 +62,7 @@ public static class HybridNerAnalyzers
         return new CompositeQueryAnalyzer(
             analyzers: new IQueryAnalyzer[]
             {
+                // spaCy first, Azure second
                 new NerQueryAnalyzer(spacy, normalizer),
                 new NerQueryAnalyzer(azure, normalizer),
             },

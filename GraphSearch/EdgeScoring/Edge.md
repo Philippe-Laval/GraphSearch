@@ -1,3 +1,5 @@
+# Edge relevance
+
 edgeRelevance is the score that answers:
 
 "Given what the user asked, how relevant are the relationships connecting this candidate node to the query's seed entities?"
@@ -35,7 +37,7 @@ Microsoft
 
 might be semantically related to Microsoft, but the edges don't satisfy the query's intended relationship pattern.
 
-1. What should edgeRelevance measure?
+## 1. What should edgeRelevance measure?
 
 I recommend decomposing it:
 
@@ -58,7 +60,7 @@ EdgeRelevance =
 
 Then you can make it more sophisticated later.
 
-2. Start with the query's relationship intent
+## 2. Start with the query's relationship intent
 
 The first thing we need is to know what relationships the query is asking about.
 
@@ -108,7 +110,7 @@ public sealed class QueryAnalysis
         { get; init; } = [];
 }
 
-3. Represent graph edges
+## 3. Represent graph edges
 
 I'd use something like:
 
@@ -145,7 +147,8 @@ SourceNodeId: 2,
 TargetNodeId: 10,
 Type: "runs-on",
 Confidence: 0.94);
-4. Relationship type relevance
+
+## 4. Relationship type relevance
 
 This is the most important component.
 
@@ -364,7 +367,8 @@ EdgeDirection.Outgoing);
         _ => 0.0
    };
    }
-8. Edge confidence
+
+## 8. Edge confidence
 
 Your graph edges should ideally have a confidence.
 
@@ -391,7 +395,8 @@ The simplest score is:
 
 double confidenceScore =
 Math.Clamp(edge.Confidence, 0.0, 1.0);
-9. Path relevance
+
+## 9. Path relevance
 
 This becomes especially important for your GraphRAG because you're doing depth 1–2 expansion and Personalized PageRank.
 
@@ -448,7 +453,8 @@ distance 0 → 1.00
 distance 1 → 0.70
 distance 2 → 0.49
 distance 3 → 0.34
-10. Complete edge relevance for one edge
+
+## 10. Complete edge relevance for one edge
 
 Now we can combine the components.
 
@@ -532,7 +538,8 @@ private readonly RelationshipVocabulary _vocabulary;
             Math.Max(distance, 0));
     }
 }
-11. But candidates can have multiple edges
+
+## 11. But candidates can have multiple edges
 
 This is where we need to be careful.
 
@@ -582,7 +589,7 @@ This means:
 
 If there is at least one highly relevant connection, the candidate gets credit for it.
 
-12. Multiple required relationships
+## 12. Multiple required relationships
 
 Now consider:
 
@@ -717,7 +724,7 @@ How much of the requested graph pattern does the candidate satisfy?
 
 This is considerably more useful than simply looking at the nearest edge.
 
-14. The EdgeContext
+## 14. The EdgeContext
 
 I'd create a small structure for the calculation:
 
@@ -741,7 +748,8 @@ microsoftId,
             productId,
             1)
     };
-15. Putting it into your final ranking
+
+## 15. Putting it into your final ranking
 
 Now we can return to your original formula:
 
@@ -777,7 +785,8 @@ return
 0.25 * features.PageRankScore +
 0.10 * features.EdgeRelevance;
 }
-16. Example
+
+## 16. Example
 
 Suppose:
 
@@ -807,7 +816,8 @@ So:
 
 Visual Studio Code
 Final score = 0.856
-17. Where edge relevance becomes really powerful
+
+## 17. Where edge relevance becomes really powerful
 
 Consider two candidates:
 
@@ -848,7 +858,7 @@ The graph structure is telling you:
 
 "This node isn't just semantically related to the question. It is connected to the entities and relationships the question is actually asking about."
 
-18. One improvement I'd strongly recommend
+## 18. One improvement I'd strongly recommend
 
 For your particular architecture, I would eventually not keep edgeRelevance as one single score.
 

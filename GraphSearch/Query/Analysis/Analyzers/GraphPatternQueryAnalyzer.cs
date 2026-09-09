@@ -60,12 +60,15 @@ public sealed class GraphPatternQueryAnalyzer : IQueryAnalyzer
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Run the inner analyzer first to get the normalized query and any intent it may have produced.
         var analysis = await _inner.AnalyzeAsync(query, cancellationToken).ConfigureAwait(false);
 
+        // Extract entities from the normalized query.
         var entities = await _entityExtractor
             .ExtractAsync(analysis.NormalizedQuery, cancellationToken)
             .ConfigureAwait(false);
 
+        // Deduplicate and normalize anchor entities.
         var anchors = entities
             .Select(e => e.Text)
             .Where(t => !string.IsNullOrWhiteSpace(t))

@@ -70,4 +70,6 @@ Reasons: HyDE variants should probably only feed the vector retriever (not BM25)
 -	Language drift. Log detected language of each rewrite and reject mismatches unless cross-lingual is opted in.
 -	Cache leakage. Cache key must include language, options, and (if applicable) the rewriter version — otherwise a config change silently serves stale variants.
 
-If you'd like, I can implement a few of these next — a CompositeQueryRewriter, a CachingQueryRewriter, and either an LlmQueryRewriter or a HydeQueryRewriter are the highest-leverage additions to complement your existing SynonymQueryRewriter.
+If you'd like, I can implement a few of these next — a CompositeQueryRewriter, a CachingQueryRewriter, 
+and either an LlmQueryRewriter or a HydeQueryRewriter are the highest-leverage additions to complement 
+your existing SynonymQueryRewriter.

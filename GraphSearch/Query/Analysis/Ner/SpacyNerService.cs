@@ -43,11 +43,21 @@ public sealed class SpacyNerService : INerService
         _defaultLanguage = defaultLanguage;
     }
 
+    /// <summary>
+    /// Analyse le texte pour en extraire les entités nommées en détectant automatiquement la langue et en utilisant la
+    /// langue par défaut en cas d’échec.
+    /// </summary>
+    /// <param name="text">Texte à analyser.</param>
+    /// <param name="cancellationToken">Jeton permettant d’annuler l’opération asynchrone.</param>
+    /// <returns>Tâche qui représente l’opération asynchrone et dont le résultat contient l’analyse d’entités nommées.</returns>
     public Task<NerAnalysis> AnalyzeAsync(
         string text,
         CancellationToken cancellationToken = default)
     {
+        // Detect language of the text. If detection fails, fallback to the default language.
         var language = _languageDetector?.Detect(text) ?? _defaultLanguage;
+
+        // Call the overload that accepts an explicit language.
         return AnalyzeAsync(text, language, cancellationToken);
     }
 

@@ -45,6 +45,12 @@ public sealed class AzureLanguageNerService : INerService
         _defaultLanguage = defaultLanguage;
     }
 
+    /// <summary>
+    /// Analyzes the text, using the detector to detect the text language.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public Task<NerAnalysis> AnalyzeAsync(
         string text,
         CancellationToken cancellationToken = default)
@@ -88,7 +94,15 @@ public sealed class AzureLanguageNerService : INerService
             InterrogativeLemma: WhWordLexicon.Detect(text, azureLanguage));
     }
 
-    // Azure expects the base code ("en", "fr"), not a regional variant.
+    /// <summary>
+    /// Normalise un identifiant de langue en conservant uniquement la sous-étiquette principale en minuscules
+    /// invariantes.
+    /// Azure expects the base code("en", "fr"), not a regional variant.
+    /// </summary>
+    /// <remarks>Si '-' ou '_' est présent après le premier caractère, la partie située avant ce séparateur
+    /// est utilisée.</remarks>
+    /// <param name="language">Identifiant de langue à normaliser, éventuellement avec un séparateur '-' ou '_'.</param>
+    /// <returns>Sous-étiquette de langue principale en minuscules invariantes.</returns>
     private static string NormalizeLanguage(string language)
     {
         var idx = language.IndexOfAny(['-', '_']);

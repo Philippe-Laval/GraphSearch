@@ -43,17 +43,22 @@ public sealed class SynonymQueryRewriter : IQueryRewriter
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(normalizedQuery);
+
         cancellationToken.ThrowIfCancellationRequested();
 
         var result = new List<string>(capacity: _maxRewrites);
         foreach (var (pattern, replacement) in _rules)
         {
+            // Skip if the pattern doesn't match the query
             if (!pattern.IsMatch(normalizedQuery))
             {
                 continue;
             }
 
+            // Perform the replacement
             var rewritten = pattern.Replace(normalizedQuery, replacement);
+
+            // Only add if it's different from the original and not already in the result
             if (!string.Equals(rewritten, normalizedQuery, StringComparison.Ordinal)
                 && !result.Contains(rewritten, StringComparer.OrdinalIgnoreCase))
             {

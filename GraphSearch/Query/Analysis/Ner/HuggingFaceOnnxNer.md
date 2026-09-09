@@ -8,16 +8,16 @@ This one's substantially more involved — HuggingFace token classification mode
 5.	Reuse WhWordLexicon + RelationalVerbLexicon (same trick as Azure) since HF NER models don't emit lemmas or POS.
 
 New pieces
-•	NuGet: Microsoft.ML.OnnxRuntime 1.19.2 added.
-•	IHuggingFaceTokenizer + HuggingFaceEncoding + CharSpan — small abstraction over the tokenizer so the code is stable regardless of which C# tokenizer package (or version) you plug in.
-•	HuggingFaceOnnxNerService : INerService, IDisposable — one instance per language/model:
-•	Auto-detects model input names (input_ids, attention_mask, and optional token_type_ids for BERT-style vs CamemBERT-style).
-•	Runs ONNX inference, does per-token argmax + softmax for confidence.
-•	BIO span aggregation with char-offset back-mapping to the original text. Handles orphan I-XXX tags and no-prefix labels (PER treated as begin).
-•	Skips padding (attention_mask == 0) and special tokens (marked via CharSpan.None by the tokenizer adapter).
-•	Reuses WhWordLexicon + RelationalVerbLexicon for wh-word and root-verb detection (same normalization to canonical English as Azure).
-•	HuggingFaceOnnxNerServicePool : INerService, IDisposable — language-routing dispatcher (EN model / FR model) driven by ILanguageDetector. Regional variants (en-US, fr-CA) collapse to base codes.
-•	HuggingFaceOnnxNer.md — setup guide: model choice, optimum-cli export commands, a working Microsoft.ML.Tokenizers adapter sketch, and wire-up snippets (standalone + inside your existing hybrid composite).
+-	NuGet: Microsoft.ML.OnnxRuntime 1.19.2 added.
+-	IHuggingFaceTokenizer + HuggingFaceEncoding + CharSpan — small abstraction over the tokenizer so the code is stable regardless of which C# tokenizer package (or version) you plug in.
+-	HuggingFaceOnnxNerService : INerService, IDisposable — one instance per language/model:
+-	Auto-detects model input names (input_ids, attention_mask, and optional token_type_ids for BERT-style vs CamemBERT-style).
+-	Runs ONNX inference, does per-token argmax + softmax for confidence.
+-	BIO span aggregation with char-offset back-mapping to the original text. Handles orphan I-XXX tags and no-prefix labels (PER treated as begin).
+-	Skips padding (attention_mask == 0) and special tokens (marked via CharSpan.None by the tokenizer adapter).
+-	Reuses WhWordLexicon + RelationalVerbLexicon for wh-word and root-verb detection (same normalization to canonical English as Azure).
+-	HuggingFaceOnnxNerServicePool : INerService, IDisposable — language-routing dispatcher (EN model / FR model) driven by ILanguageDetector. Regional variants (en-US, fr-CA) collapse to base codes.
+-	HuggingFaceOnnxNer.md — setup guide: model choice, optimum-cli export commands, a working Microsoft.ML.Tokenizers adapter sketch, and wire-up snippets (standalone + inside your existing hybrid composite).
 
 Recommended models
 Language	Model	Labels

@@ -1,18 +1,22 @@
-﻿A wh-word (also called an interrogative or question word) is one of the English words 
+﻿# wh-word
+
+A wh-word (also called an interrogative or question word) is one of the English words 
 that typically start a question and that most begin with the letters "wh":
-•	who / whom / whose — asks about a person
-•	what — asks about a thing or definition
-•	which — asks to pick from options
-•	when — asks about time
-•	where — asks about a place
-•	why — asks about a reason
-•	how (and phrases like how many, how much, how does) — asks about manner / quantity / mechanism
+-	who / whom / whose — asks about a person
+-	what — asks about a thing or definition
+-	which — asks to pick from options
+-	when — asks about time
+-	where — asks about a place
+-	why — asks about a reason
+-	how (and phrases like how many, how much, how does) — asks about manner / quantity / mechanism
 
 In NerQueryAnalyzer I use it as a strong intent signal, because the wh-word usually tells you what the user wants:
-Wh-word / phrase			Likely QueryIntent
-how many, how much, count	Aggregation
-why, how does, how do		Explanation
-what, who, which + entity	EntityLookup
+
+| Wh-word / phrase		 | Likely QueryIntent |
+| :--------------------- | :---------------- |
+| how many, how much, count | Aggregation |
+| why, how does, how do | Explanation |
+| what, who, which + entity | EntityLookup |
 
 That's why the code has:
 

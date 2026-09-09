@@ -8,7 +8,7 @@ namespace GraphSearch.Library.Query.Analysis.Analyzers;
 /// Classic use case: cheap rules first, LLM fallback for hard queries.
 ///
 ///   new CompositeQueryAnalyzer(
-///       new QueryAnalyzer(),                                 // rules
+///       new RulesBasedQueryAnalyzer(),                       // rules
 ///       new EmbeddingQueryAnalyzer(embed, classifier),       // paraphrase
 ///       new LlmQueryAnalyzer(chat));                         // last resort
 ///
@@ -23,6 +23,18 @@ public sealed class CompositeQueryAnalyzer : IQueryAnalyzer
     private readonly bool _continueOnException;
     private readonly Action<Exception, IQueryAnalyzer>? _onException;
 
+    /// <summary>
+    /// Initialise une nouvelle instance de la classe en configurant une chaîne d’analyseurs de requête et la stratégie
+    /// d’acceptation des résultats.
+    /// </summary>
+    /// <remarks>La collection <paramref name="analyzers"/> ne peut pas être null et doit contenir au moins un
+    /// élément.</remarks>
+    /// <param name="analyzers">Collection des analyseurs à exécuter.</param>
+    /// <param name="shouldAccept">Fonction qui détermine si un résultat d’analyse est accepté. Si la valeur est null, la stratégie par défaut est
+    /// utilisée.</param>
+    /// <param name="continueOnException">Indique s’il faut poursuivre l’exécution des analyseurs restants lorsqu’une exception est levée.</param>
+    /// <param name="onException">Action appelée lorsqu’un analyseur lève une exception.</param>
+    /// <exception cref="ArgumentException">Levée lorsque la collection <paramref name="analyzers"/> est vide.</exception>
     public CompositeQueryAnalyzer(
         IEnumerable<IQueryAnalyzer> analyzers,
         Func<AnalyzedQuery, bool>? shouldAccept = null,
@@ -45,6 +57,7 @@ public sealed class CompositeQueryAnalyzer : IQueryAnalyzer
     {
     }
 
+    // <inheritdoc/>
     public async Task<AnalyzedQuery> AnalyzeAsync(
         string query,
         CancellationToken cancellationToken = default)
@@ -90,6 +103,11 @@ public sealed class CompositeQueryAnalyzer : IQueryAnalyzer
             lastException);
     }
 
+    /// <summary>
+    /// Détermine si une requête analysée doit être acceptée en fonction de son intention.
+    /// </summary>
+    /// <param name="q">Requête analysée à évaluer.</param>
+    /// <returns>true si l’intention n’est ni Unknown ni General ; sinon, false.</returns>
     private static bool DefaultShouldAccept(AnalyzedQuery q) =>
         q.Intent is not (QueryIntent.Unknown or QueryIntent.General);
 }

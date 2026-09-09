@@ -30,19 +30,25 @@ public sealed class CachingEntityExtractor : IEntityExtractor
             comparer ?? StringComparer.Ordinal);
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Check the cache first. If the query has been seen before, return the cached result.
         if (_cache.TryGetValue(query, out var cached))
         {
             return cached;
         }
 
+        // Otherwise, delegate to the inner extractor.
         var extracted = await _inner.ExtractAsync(query, cancellationToken).ConfigureAwait(false);
+
+        // Store the result in the cache for future queries.
         _cache.TryAdd(query, extracted);
+
         return extracted;
     }
 }

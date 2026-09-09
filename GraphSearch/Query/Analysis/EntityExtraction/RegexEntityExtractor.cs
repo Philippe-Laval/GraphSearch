@@ -61,6 +61,7 @@ public sealed class RegexEntityExtractor : IEntityExtractor
         new("Email",   @"\b[\w.+-]+@[\w-]+(?:\.[\w-]+)+\b",          0.99),
     ]);
 
+    /// <inheritdoc/>
     public Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)
@@ -83,7 +84,8 @@ public sealed class RegexEntityExtractor : IEntityExtractor
                 {
                     continue;
                 }
-
+                
+                // Create a new extracted entity from the regex match.
                 var entity = new ExtractedEntity(
                     Text: group.Value,
                     Type: rule.Type,
@@ -91,10 +93,12 @@ public sealed class RegexEntityExtractor : IEntityExtractor
                     Length: group.Length,
                     Confidence: rule.Confidence);
 
+                // Priority is 0 for regex rules; higher numbers are reserved for other extractors (NER, LLM).
                 EntitySpanMerger.AddOrReplace(accumulator, entity, priority: 0);
             }
         }
 
+        // Finalize and return the merged list of entities.
         return Task.FromResult(EntitySpanMerger.Finalize(accumulator));
     }
 }

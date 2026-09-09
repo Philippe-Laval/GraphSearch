@@ -42,11 +42,13 @@ public sealed class NerEntityExtractor : IEntityExtractor
 
         var analysis = await _ner.AnalyzeAsync(query, cancellationToken).ConfigureAwait(false);
 
+        // If no allow list was provided, return all entities as-is.
         if (_typeAllowList is null)
         {
             return analysis.Entities;
         }
 
+        // Filter out any entities whose type is not in the allow list.
         return analysis.Entities
             .Where(e => e.Type is not null && _typeAllowList.Contains(e.Type))
             .ToList();

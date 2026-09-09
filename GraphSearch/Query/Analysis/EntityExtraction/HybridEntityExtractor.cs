@@ -28,6 +28,16 @@ public sealed class HybridEntityExtractor : IEntityExtractor
     private readonly bool _continueOnException;
     private readonly Action<Exception, IEntityExtractor>? _onException;
 
+    /// <summary>
+    /// Initialise une nouvelle instance de <c>HybridEntityExtractor</c> avec une collection d’extracteurs et une
+    /// stratégie de gestion des exceptions.
+    /// </summary>
+    /// <remarks>L’ordre des extracteurs détermine leur priorité ; en cas d’égalité de score, les extracteurs
+    /// placés en premier sont privilégiés.</remarks>
+    /// <param name="extractors">Collection d’extracteurs à utiliser pour l’extraction hybride.</param>
+    /// <param name="continueOnException">Indique s’il faut poursuivre le traitement avec les extracteurs restants lorsqu’une exception est levée.</param>
+    /// <param name="onException">Action appelée quand un extracteur lève une exception, avec l’exception et l’extracteur concernés.</param>
+    /// <exception cref="ArgumentException">Levée lorsque <paramref name="extractors"/> est vide.</exception>
     public HybridEntityExtractor(
         IEnumerable<IEntityExtractor> extractors,
         bool continueOnException = true,
@@ -54,6 +64,7 @@ public sealed class HybridEntityExtractor : IEntityExtractor
     {
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)
@@ -67,6 +78,7 @@ public sealed class HybridEntityExtractor : IEntityExtractor
             IReadOnlyList<ExtractedEntity> partial;
             try
             {
+                // Run the extractor.
                 partial = await extractor
                     .ExtractAsync(query, cancellationToken)
                     .ConfigureAwait(false);
@@ -81,12 +93,14 @@ public sealed class HybridEntityExtractor : IEntityExtractor
                 continue;
             }
 
+            // Merge the partial results into the accumulator, respecting priority.
             foreach (var entity in partial)
             {
                 EntitySpanMerger.AddOrReplace(accumulator, entity, priority);
             }
         }
 
+        // Finalize and return the merged results.
         return EntitySpanMerger.Finalize(accumulator);
     }
 }

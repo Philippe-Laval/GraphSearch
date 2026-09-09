@@ -16,9 +16,9 @@ public static class EntitySpanMerger
     /// it overlaps something with higher priority/confidence. If it dominates
     /// existing overlaps, they are removed.
     /// </summary>
-    /// <param name="accumulator"></param>
-    /// <param name="candidate"></param>
-    /// <param name="priority"></param>
+    /// <param name="accumulator">The list of accumulated entities with their priorities.</param>
+    /// <param name="candidate">The candidate entity to add or replace.</param>
+    /// <param name="priority">The priority of the candidate entity.</param>
     public static void AddOrReplace(
         List<(ExtractedEntity Entity, int Priority)> accumulator,
         ExtractedEntity candidate,

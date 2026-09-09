@@ -63,16 +63,21 @@ public sealed class LlmEntityExtractor : IEntityExtractor
             : new HashSet<string>(typeAllowList, StringComparer.OrdinalIgnoreCase);
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(query);
 
+        // Prompt the LLM to extract entities.
         var prompt = _promptTemplate.Replace("{{QUERY}}", query, StringComparison.Ordinal);
         var raw = await _client.CompleteAsync(prompt, cancellationToken).ConfigureAwait(false);
 
+        // Parse the JSON array, ignoring any prose or code fences that may have been added.
         var payload = ExtractJsonArray(raw);
+
+        // Deserialize into a list of LlmEntity objects.
         List<LlmEntity>? parsed;
         try
         {
@@ -87,7 +92,8 @@ public sealed class LlmEntityExtractor : IEntityExtractor
         {
             return Array.Empty<ExtractedEntity>();
         }
-
+        
+        // Accumulate the extracted entities with priority 0.
         var accumulator = new List<(ExtractedEntity Entity, int Priority)>();
 
         foreach (var e in parsed)
@@ -97,6 +103,7 @@ public sealed class LlmEntityExtractor : IEntityExtractor
                 continue;
             }
 
+            // Filter by type allow list if provided.
             if (_typeAllowList is not null
                 && (e.Type is null || !_typeAllowList.Contains(e.Type)))
             {
@@ -110,6 +117,7 @@ public sealed class LlmEntityExtractor : IEntityExtractor
                 continue;
             }
 
+            // Create an ExtractedEntity with the re-located span and clamped confidence.
             var entity = new ExtractedEntity(
                 Text: query.Substring(idx, e.Text.Length),
                 Type: e.Type,
@@ -117,25 +125,37 @@ public sealed class LlmEntityExtractor : IEntityExtractor
                 Length: e.Text.Length,
                 Confidence: Math.Clamp(e.Confidence, 0.0, 1.0));
 
+            // Merge the entity into the accumulator with priority 0.
             EntitySpanMerger.AddOrReplace(accumulator, entity, priority: 0);
         }
 
+        // Finalize and return the merged list of entities.
         return EntitySpanMerger.Finalize(accumulator);
     }
 
-    // LLMs may wrap the array in prose or ```json ... ```. Trim to the first [...]
+    /// <summary>
+    /// Extrait une représentation de tableau JSON à partir d’un texte en conservant le contenu entre le premier
+    /// caractère '[' et le dernier caractère ']'.
+    /// </summary>
+    /// <param name="raw">Texte source pouvant contenir un tableau JSON, éventuellement entouré d’autres contenus.</param>
+    /// <returns>La sous-chaîne correspondant au tableau JSON extrait, ou "[]" si l’entrée est vide, blanche ou ne contient pas
+    /// de bornes de tableau valides.</returns>
     private static string ExtractJsonArray(string raw)
     {
+        // LLMs may wrap the array in prose or ```json ... ```. Trim to the first [...]
+
         if (string.IsNullOrWhiteSpace(raw))
         {
             return "[]";
         }
+
         var start = raw.IndexOf('[');
         var end = raw.LastIndexOf(']');
         if (start < 0 || end < 0 || end <= start)
         {
             return "[]";
         }
+        
         return raw.Substring(start, end - start + 1);
     }
 

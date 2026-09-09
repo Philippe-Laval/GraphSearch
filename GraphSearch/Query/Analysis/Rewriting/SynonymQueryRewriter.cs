@@ -48,7 +48,7 @@ public sealed class SynonymQueryRewriter : IQueryRewriter
     }
 
     /// <inheritdoc/>
-    public Task<IReadOnlyList<string>> RewriteAsync(
+    public Task<IReadOnlyList<QueryRewrite>> RewriteAsync(
         string normalizedQuery,
         CancellationToken cancellationToken = default)
     {
@@ -56,7 +56,8 @@ public sealed class SynonymQueryRewriter : IQueryRewriter
 
         cancellationToken.ThrowIfCancellationRequested();
 
-        var result = new List<string>(capacity: _maxRewrites);
+        var result = new List<QueryRewrite>(capacity: _maxRewrites);
+
         foreach (var (pattern, replacement) in _rules)
         {
             // Skip if the pattern doesn't match the query
@@ -68,18 +69,29 @@ public sealed class SynonymQueryRewriter : IQueryRewriter
             // Perform the replacement
             var rewritten = pattern.Replace(normalizedQuery, replacement);
 
-            // Only add if it's different from the original and not already in the result
-            if (!string.Equals(rewritten, normalizedQuery, StringComparison.Ordinal)
-                && !result.Contains(rewritten, StringComparer.OrdinalIgnoreCase))
+            // Skip no-op rewrites
+            if (string.Equals(rewritten, normalizedQuery, StringComparison.Ordinal))
             {
-                result.Add(rewritten);
-                if (result.Count >= _maxRewrites)
-                {
-                    break;
-                }
+                continue;
+            }
+
+            // Deduplicate by rewrite text (case-insensitive)
+            if (result.Any(r => string.Equals(r.Text, rewritten, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            result.Add(new QueryRewrite(
+                Text: rewritten,
+                Kind: RewriteKind.Synonym,
+                Weight: 1.0));
+
+            if (result.Count >= _maxRewrites)
+            {
+                break;
             }
         }
 
-        return Task.FromResult<IReadOnlyList<string>>(result);
+        return Task.FromResult<IReadOnlyList<QueryRewrite>>(result);
     }
 }

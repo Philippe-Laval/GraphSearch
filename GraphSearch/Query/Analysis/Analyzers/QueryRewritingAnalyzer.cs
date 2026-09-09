@@ -39,13 +39,14 @@ public sealed class QueryRewritingAnalyzer : IQueryAnalyzer
         }
 
         // Merge with any rewrites the inner analyzer already produced.
+        // AnalyzedQuery.Rewrites is currently IReadOnlyList<string>; project QueryRewrite.Text.
         var merged = new List<string>(analysis.Rewrites.Count + rewrites.Count);
         merged.AddRange(analysis.Rewrites);
         foreach (var r in rewrites)
         {
-            if (!merged.Contains(r, StringComparer.OrdinalIgnoreCase))
+            if (!merged.Contains(r.Text, StringComparer.OrdinalIgnoreCase))
             {
-                merged.Add(r);
+                merged.Add(r.Text);
             }
         }
 

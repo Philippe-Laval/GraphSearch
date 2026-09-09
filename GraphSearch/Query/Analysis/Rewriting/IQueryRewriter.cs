@@ -1,5 +1,11 @@
 namespace GraphSearch.Library.Query.Analysis.Rewriting;
 
+public sealed record QueryRewrite(
+    string Text,
+    RewriteKind Kind,      // Synonym, Template, LlmParaphrase, HyDE, EntityAlias, ...
+    double Weight = 1.0,   // downstream fusion weight
+    string? Language = null);
+
 /// <summary>
 /// Produces alternative phrasings for a query to feed hybrid retrieval.
 ///
@@ -15,7 +21,7 @@ public interface IQueryRewriter
     /// <param name="normalizedQuery"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IReadOnlyList<string>> RewriteAsync(
+    Task<IReadOnlyList<QueryRewrite>> RewriteAsync(
         string normalizedQuery,
         CancellationToken cancellationToken = default);
 }

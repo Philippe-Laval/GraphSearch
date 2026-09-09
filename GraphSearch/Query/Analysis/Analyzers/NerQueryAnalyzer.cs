@@ -30,7 +30,7 @@ public sealed class NerQueryAnalyzer : IQueryAnalyzer
     {
         ArgumentNullException.ThrowIfNull(ner);
         _ner = ner;
-        _normalizer = normalizer ?? new QueryAnalyzer(QueryAnalyzerOptions.Default with
+        _normalizer = normalizer ?? new RulesBasedQueryAnalyzer(QueryAnalyzerOptions.Default with
         {
             DetectIntent = false,
         });

@@ -29,16 +29,16 @@ via the IQueryAnalyzer interface.
 /// Rules-based, deterministic <see cref="IQueryAnalyzer"/> implementation.
 /// Performs Unicode-safe normalization and heuristic intent classification.
 /// </summary>
-public sealed partial class QueryAnalyzer : IQueryAnalyzer
+public sealed partial class RulesBasedQueryAnalyzer : IQueryAnalyzer
 {
     private readonly QueryAnalyzerOptions _options;
 
-    public QueryAnalyzer()
+    public RulesBasedQueryAnalyzer()
         : this(QueryAnalyzerOptions.Default)
     {
     }
 
-    public QueryAnalyzer(QueryAnalyzerOptions options)
+    public RulesBasedQueryAnalyzer(QueryAnalyzerOptions options)
     {
         ArgumentNullException.ThrowIfNull(options);
         _options = options;
@@ -64,6 +64,8 @@ public sealed partial class QueryAnalyzer : IQueryAnalyzer
             NormalizedQuery: normalized,
             Intent: intent));
     }
+
+    #region Normalization
 
     private string Normalize(string query)
     {
@@ -144,56 +146,60 @@ public sealed partial class QueryAnalyzer : IQueryAnalyzer
         return sb.ToString().Normalize(NormalizationForm.FormC);
     }
 
+    #endregion
+
     /// <summary>
     /// Detect <see cref="QueryIntent"/> for the given query string.
     /// </summary>
-    /// <param name="q">The query string to analyze.</param>
+    /// <param name="query">The query string to analyze.</param>
     /// <returns>The detected <see cref="QueryIntent"/>.</returns>
-    private static QueryIntent DetectIntent(string q)
+    private static QueryIntent DetectIntent(string query)
     {
         // Order matters: check more specific intents first, then fall through to General.
 
-        if (string.IsNullOrWhiteSpace(q))
+        if (string.IsNullOrWhiteSpace(query))
         {
             return QueryIntent.Unknown;
         }
 
-        if (AggregationRegex().IsMatch(q))
+        if (AggregationRegex().IsMatch(query))
         {
             return QueryIntent.Aggregation;
         }
 
-        if (ComparisonRegex().IsMatch(q))
+        if (ComparisonRegex().IsMatch(query))
         {
             return QueryIntent.Comparison;
         }
 
-        var relationshipVerbs = RelationshipVerbRegex().Matches(q).Count;
+        var relationshipVerbs = RelationshipVerbRegex().Matches(query).Count;
 
         // Multi-hop cue: 2+ relationship verbs, OR chained pattern like
         // "products developed by X and running on Y".
-        if (relationshipVerbs >= 2 || MultiHopRegex().IsMatch(q))
+        if (relationshipVerbs >= 2 || MultiHopRegex().IsMatch(query))
         {
             return QueryIntent.MultiHopRelationship;
         }
 
-        if (relationshipVerbs == 1 || RelationshipRegex().IsMatch(q))
+        if (relationshipVerbs == 1 || RelationshipRegex().IsMatch(query))
         {
             return QueryIntent.Relationship;
         }
 
-        if (ExplanationRegex().IsMatch(q))
+        if (ExplanationRegex().IsMatch(query))
         {
             return QueryIntent.Explanation;
         }
 
-        if (EntityLookupRegex().IsMatch(q))
+        if (EntityLookupRegex().IsMatch(query))
         {
             return QueryIntent.EntityLookup;
         }
 
         return QueryIntent.General;
     }
+
+    #region Rules-based regexes for intent classification
 
     [GeneratedRegex(@"\s+", RegexOptions.CultureInvariant)]
     private static partial Regex WhitespaceRegex();
@@ -234,4 +240,6 @@ public sealed partial class QueryAnalyzer : IQueryAnalyzer
         @"\b(which|what)\b.+\b(and|that|which)\b.+\b(by|on|in|with|for)\b",
         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex MultiHopRegex();
+
+    #endregion
 }

@@ -5,7 +5,7 @@ namespace GraphSearch.Library.Query.Analysis.Analyzers;
 /// <summary>
 /// Analyzer that embeds the normalized query and uses cosine similarity against
 /// intent prototypes to classify intent. Delegates normalization to an inner
-/// analyzer (default: <see cref="QueryAnalyzer"/> with intent detection disabled).
+/// analyzer (default: <see cref="RulesBasedQueryAnalyzer"/> with intent detection disabled).
 ///
 /// Handles paraphrase well, no LLM cost.
 /// </summary>
@@ -25,7 +25,7 @@ public sealed class EmbeddingQueryAnalyzer : IQueryAnalyzer
 
         _embeddingService = embeddingService;
         _classifier = classifier;
-        _normalizer = normalizer ?? new QueryAnalyzer(QueryAnalyzerOptions.Default with
+        _normalizer = normalizer ?? new RulesBasedQueryAnalyzer(QueryAnalyzerOptions.Default with
         {
             DetectIntent = false,
         });

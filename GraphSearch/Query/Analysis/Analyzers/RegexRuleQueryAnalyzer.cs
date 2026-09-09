@@ -41,7 +41,7 @@ public sealed class RegexRuleQueryAnalyzer : IQueryAnalyzer
                 r))
             .ToList();
 
-        _normalizer = normalizer ?? new QueryAnalyzer(QueryAnalyzerOptions.Default with
+        _normalizer = normalizer ?? new RulesBasedQueryAnalyzer(QueryAnalyzerOptions.Default with
         {
             DetectIntent = false,
         });

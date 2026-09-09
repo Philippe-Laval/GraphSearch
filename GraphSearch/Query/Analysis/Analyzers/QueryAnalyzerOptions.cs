@@ -1,7 +1,7 @@
 namespace GraphSearch.Library.Query.Analysis.Analyzers;
 
 /// <summary>
-/// Options controlling how <see cref="QueryAnalyzer"/> normalizes and analyzes queries.
+/// Options controlling how <see cref="RulesBasedQueryAnalyzer"/> normalizes and analyzes queries.
 /// </summary>
 public sealed record QueryAnalyzerOptions
 {

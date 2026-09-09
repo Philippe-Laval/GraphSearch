@@ -1,5 +1,8 @@
 namespace GraphSearch.Library.Query.Analysis.EntityExtraction;
 
+/// <summary>
+/// Extracts entities from the given query string based on the predefined dictionary of entities.
+/// </summary>
 public sealed class DictionaryEntityExtractor : IEntityExtractor
 {
     private readonly IReadOnlyList<EntityDefinition> _entities;

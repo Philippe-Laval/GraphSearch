@@ -1,7 +1,7 @@
 namespace GraphSearch.Library.Query.Analysis.Model;
 
 /// <summary>
-/// Entity definition represents a named entity extracted from a query, 
+/// Entity definition represents a named entity extracted from a query (NER), 
 /// along with its type (e.g., person, location, organization).
 /// </summary>
 /// <param name="Name">The name of the entity.</param>

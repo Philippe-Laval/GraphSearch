@@ -61,6 +61,7 @@ public sealed class GraphResolvableEntityFilter : IEntityExtractor
         _vocabulary = vocabulary;
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)

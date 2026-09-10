@@ -46,6 +46,7 @@ public sealed class PhraseChunkEntityExtractor : IEntityExtractor
         _minLength = minLength;
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)

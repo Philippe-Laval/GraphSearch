@@ -79,6 +79,7 @@ public sealed class EmbeddingCandidateEntityExtractor : IEntityExtractor
         return list;
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)

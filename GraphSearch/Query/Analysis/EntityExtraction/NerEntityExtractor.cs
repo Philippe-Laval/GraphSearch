@@ -34,6 +34,7 @@ public sealed class NerEntityExtractor : IEntityExtractor
             : new HashSet<string>(typeAllowList, StringComparer.OrdinalIgnoreCase);
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)

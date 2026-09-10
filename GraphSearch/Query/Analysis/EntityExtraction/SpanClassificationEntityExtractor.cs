@@ -56,6 +56,7 @@ public sealed class SpanClassificationEntityExtractor : IEntityExtractor
         _minConfidence = minConfidence;
     }
 
+    /// <inheritdoc/>
     public async Task<IReadOnlyList<ExtractedEntity>> ExtractAsync(
         string query,
         CancellationToken cancellationToken = default)

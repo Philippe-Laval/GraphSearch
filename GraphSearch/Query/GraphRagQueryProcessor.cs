@@ -12,7 +12,7 @@ var analysis =
        "What is Microsoft's relationship with .NET 10?",
        cancellationToken);
        
-ou now have:
+ We now have:
    
    QueryAnalysis
    │

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GraphSearch.Library.Query
 {
-    internal class GraphRagQuery
+    public class GraphRagQuery
     {
     }
 }

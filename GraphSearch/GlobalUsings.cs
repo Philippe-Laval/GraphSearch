@@ -11,4 +11,5 @@ global using GraphSearch.Library.Query.Analysis.Lexicons;
 global using GraphSearch.Library.Query.Analysis.Llm;
 global using GraphSearch.Library.Query.Analysis.Model;
 global using GraphSearch.Library.Query.Analysis.Ner;
+global using GraphSearch.Library.Query.Analysis.PhraseChunkService;
 global using GraphSearch.Library.Query.Analysis.Rewriting;

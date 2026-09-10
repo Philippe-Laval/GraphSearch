@@ -1,19 +1,6 @@
 ﻿using GraphRag.EFCore.Context;
 using Microsoft.EntityFrameworkCore;
 
-/*
- * This code was transleted from sql found in SqlEntityIndex.cs
- *
-•	LEFT JOIN via from a in ... .DefaultIfEmpty() (LINQ pattern EF translates to LEFT JOIN).
-•	AsNoTracking() since results are read-only projections (best practice for query-only paths — avoids change-tracker overhead).
-•	Case-insensitive matching with .ToLower() (translated to SQL LOWER(...)) and EF.Functions.Like for %prefix% / %contains% patterns (parameterized, safe from injection).
-•	Optional type filter short-circuits when entityType == null.
-•	CASE-based scoring expressed as chained C# ternaries; EF translates this to a SQL CASE WHEN.
-•	Server-side ordering + Take(topK) (OrderByDescending + ThenBy + Take), so paging happens in SQL, not in memory.
-•	Anonymous-type projection first, then materialize to EntityCandidate after the query — keeps the SQL projection minimal and lets EF use the record constructor cleanly in memory.
-•	Preserved original semantics: because of the LEFT JOIN, an entity can appear multiple times (one row per alias match), matching the raw-SQL behavior. 
- */
-
 namespace GraphSearch.Library.Query.Resolution
 {
     public sealed class EFCoreEntityIndex : IEntityIndex
@@ -39,6 +26,19 @@ namespace GraphSearch.Library.Query.Resolution
             var lowered = text.ToLower();
             var prefix = $"{lowered}%";
             var contains = $"%{lowered}%";
+
+            /*
+             * This code was transleted from sql found in SqlEntityIndex.cs
+             *
+            - LEFT JOIN via from a in ... .DefaultIfEmpty() (LINQ pattern EF translates to LEFT JOIN).
+            - AsNoTracking() since results are read-only projections (best practice for query-only paths — avoids change-tracker overhead).
+            - Case-insensitive matching with .ToLower() (translated to SQL LOWER(...)) and EF.Functions.Like for %prefix% / %contains% patterns (parameterized, safe from injection).
+            - Optional type filter short-circuits when entityType == null.
+            - CASE-based scoring expressed as chained C# ternaries; EF translates this to a SQL CASE WHEN.
+            - Server-side ordering + Take(topK) (OrderByDescending + ThenBy + Take), so paging happens in SQL, not in memory.
+            - Anonymous-type projection first, then materialize to EntityCandidate after the query — keeps the SQL projection minimal and lets EF use the record constructor cleanly in memory.
+            - Preserved original semantics: because of the LEFT JOIN, an entity can appear multiple times (one row per alias match), matching the raw-SQL behavior. 
+             */
 
             // LEFT JOIN GraphEntity -> GraphEntityAlias, mirroring the raw SQL.
             // AsNoTracking: read-only projection, no change tracking needed.

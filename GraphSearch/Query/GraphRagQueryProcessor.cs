@@ -2,7 +2,7 @@ using GraphSearch.Library.Embeddings;
 using GraphSearch.Library.Query.Analysis;
 using GraphSearch.Library.Query.Resolution;
 
-namespace GraphSearch.Library;
+namespace GraphSearch.Library.Query;
 
 /*
   Usage :

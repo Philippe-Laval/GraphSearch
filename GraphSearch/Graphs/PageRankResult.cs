@@ -1,4 +1,4 @@
-namespace GraphSearch.Library;
+namespace GraphSearch.Library.Graphs;
 
 /// <summary>
 /// Page rank result represents the result of a page rank algorithm applied to a graph.

@@ -1,9 +1,7 @@
 namespace GraphSearch.Library;
 
 
-/*
-One more thing I'd change for your architecture
-   
+/*  
    Since you're building a real GraphRAG engine rather than just a demo, 
    I would make the neighborhood expansion return distance from the seed as well:
    

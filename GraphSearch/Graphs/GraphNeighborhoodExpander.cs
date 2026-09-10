@@ -1,6 +1,4 @@
-using GraphSearch.Library.Graphs;
-
-namespace GraphSearch.Library;
+namespace GraphSearch.Library.Graphs;
 
 /// <summary>
 /// Bidirectional Graph Neighborhood Expander

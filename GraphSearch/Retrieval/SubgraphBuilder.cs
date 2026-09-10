@@ -1,12 +1,13 @@
-﻿using System;
+﻿using GraphSearch.Library.Query;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GraphSearch.Library.Retrieval
 {
-    public class VectorRetriever : IVectorRetriever
+    public class SubgraphBuilder : ISubgraphBuilder
     {
-        public Task<object> SearchAsync(string query, int v, CancellationToken cancellationToken)
+        public GraphRagResult Build(IEnumerable<object> enumerable)
         {
             throw new NotImplementedException();
         }

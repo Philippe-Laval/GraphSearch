@@ -1,4 +1,4 @@
-namespace GraphSearch.Library;
+namespace GraphSearch.Library.Graphs;
 
 /// <summary>
 /// Graph traversal direction for neighborhood expansion. 

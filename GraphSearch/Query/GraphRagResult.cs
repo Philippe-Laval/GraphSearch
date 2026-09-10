@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GraphSearch.Library.Graphs;
 
 namespace GraphSearch.Library.Query
 {
-    internal class GraphRagResult
+    // The edges are part of the retrieved context.
+
+    public sealed class GraphRagResult
     {
+        public IReadOnlyList<GraphNode> Nodes { get; init; } = [];
+        public IReadOnlyList<GraphEdge> Edges { get; init; } = [];
     }
 }

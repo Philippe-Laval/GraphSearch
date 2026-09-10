@@ -20,4 +20,8 @@
       <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.19.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\GraphRag.EFCore\GraphRag.EFCore.csproj" />
+    </ItemGroup>
+
 </Project>

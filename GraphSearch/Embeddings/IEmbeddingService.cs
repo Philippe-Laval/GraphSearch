@@ -1,4 +1,4 @@
-namespace GraphSearch.Library.Query.Embeddings;
+namespace GraphSearch.Library.Embeddings;
 
 public interface IEmbeddingService
 {

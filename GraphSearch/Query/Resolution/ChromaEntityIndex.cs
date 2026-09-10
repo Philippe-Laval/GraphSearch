@@ -1,4 +1,4 @@
-using GraphSearch.Library.Query.Embeddings;
+using GraphSearch.Library.Embeddings;
 
 namespace GraphSearch.Library.Query.Resolution;
 

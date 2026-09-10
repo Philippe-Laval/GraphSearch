@@ -1,4 +1,4 @@
-namespace GraphSearch.Library;
+namespace GraphSearch.Library.Graphs;
 
 /*
 Suppose your graph contains:

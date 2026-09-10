@@ -964,3 +964,265 @@ Cette séparation présente un avantage majeur : le planificateur logique et l'o
 
 # can you write the SymbolTable class in C#
 
+Absolutely. Since you're building a **database query compiler** rather than a general-purpose language compiler, I would not implement `SymbolTable` as just a `Dictionary<string, Symbol>`. It should support:
+
+* nested scopes
+* fast lookup
+* symbol shadowing (`WITH` in Cypher)
+* multiple symbol kinds
+* unique IDs
+* efficient enumeration
+* future optimizer support
+
+This is the design I would use.
+
+## Interfaces
+
+```csharp
+namespace GraphRAG.Query.Binding;
+
+public interface ISymbol
+{
+    int Id { get; }
+
+    string Name { get; }
+}
+```
+
+---
+
+## Base Symbol
+
+```csharp
+namespace GraphRAG.Query.Binding;
+
+public abstract class Symbol : ISymbol
+{
+    protected Symbol(
+        int id,
+        string name)
+    {
+        Id = id;
+        Name = name;
+    }
+
+    public int Id { get; }
+
+    public string Name { get; }
+
+    public override string ToString()
+        => $"{GetType().Name}({Name})";
+}
+```
+
+---
+
+## SymbolTable
+
+```csharp
+using System.Collections;
+
+namespace GraphRAG.Query.Binding;
+
+public sealed class SymbolTable : IEnumerable<Symbol>
+{
+    private readonly Dictionary<string, Symbol> _symbols =
+        new(StringComparer.OrdinalIgnoreCase);
+
+    private int _nextId = 1;
+
+    public int Count => _symbols.Count;
+
+    public int NextId()
+        => _nextId++;
+
+    public bool Contains(string name)
+        => _symbols.ContainsKey(name);
+
+    public bool TryLookup(
+        string name,
+        out Symbol symbol)
+    {
+        return _symbols.TryGetValue(name, out symbol!);
+    }
+
+    public T? Lookup<T>(string name)
+        where T : Symbol
+    {
+        if (!_symbols.TryGetValue(name, out var symbol))
+            return null;
+
+        return symbol as T;
+    }
+
+    public Symbol Lookup(string name)
+    {
+        if (!_symbols.TryGetValue(name, out var symbol))
+            throw new KeyNotFoundException(name);
+
+        return symbol;
+    }
+
+    public void Declare(Symbol symbol)
+    {
+        if (_symbols.ContainsKey(symbol.Name))
+            throw new InvalidOperationException(
+                $"Symbol '{symbol.Name}' already declared.");
+
+        _symbols.Add(symbol.Name, symbol);
+    }
+
+    public bool Remove(string name)
+    {
+        return _symbols.Remove(name);
+    }
+
+    public void Clear()
+    {
+        _symbols.Clear();
+        _nextId = 1;
+    }
+
+    public IEnumerator<Symbol> GetEnumerator()
+        => _symbols.Values.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+        => GetEnumerator();
+}
+```
+
+---
+
+# VariableSymbol example
+
+```csharp
+namespace GraphRAG.Query.Binding;
+
+public sealed class VariableSymbol : Symbol
+{
+    public VariableSymbol(
+        int id,
+        string name,
+        GraphType type)
+        : base(id, name)
+    {
+        Type = type;
+    }
+
+    public GraphType Type { get; }
+}
+```
+
+---
+
+# Usage
+
+```csharp
+var table = new SymbolTable();
+
+var person = new VariableSymbol(
+    table.NextId(),
+    "p",
+    GraphTypes.Node);
+
+table.Declare(person);
+
+if (table.TryLookup("p", out var symbol))
+{
+    Console.WriteLine(symbol.Id);
+}
+```
+
+---
+
+# But there is one problem...
+
+This implementation is **not enough** for Cypher.
+
+Consider
+
+```cypher
+MATCH (p:Person)
+
+CALL
+{
+    MATCH (p:Movie)
+    RETURN p
+}
+
+RETURN p
+```
+
+The inner `p` hides the outer `p`.
+
+A single dictionary cannot represent this.
+
+Instead, I would use this hierarchy:
+
+```
+BinderContext
+        │
+        ▼
+Scope
+        │
+        ├── Dictionary<string, Symbol>
+        │
+        └── Parent Scope
+```
+
+The `SymbolTable` then becomes responsible only for **ID generation and global symbol storage**, while each `Scope` handles name resolution.
+
+```
+SymbolTable
+│
+├── Symbol #1
+├── Symbol #2
+├── Symbol #3
+├── Symbol #4
+└── ...
+```
+
+```
+Scope #1
+    p -> Symbol #1
+
+        │
+
+Scope #2
+    p -> Symbol #4
+```
+
+Lookup walks upward through the scope chain:
+
+```
+Current Scope
+
+↓
+
+Dictionary
+
+↓
+
+Parent Scope
+
+↓
+
+Parent Scope
+
+↓
+
+...
+```
+
+This is exactly how Roslyn, C# compilers, SQL Server, and Neo4j organize symbol resolution.
+
+## The architecture I recommend
+
+For a production-quality GraphRAG engine, I would actually split responsibilities further:
+
+* **`SymbolTable`**: owns every symbol created during binding, assigns unique IDs, and allows lookup by ID (useful for later optimizer and execution phases).
+* **`Scope`**: maps names to symbols and implements lexical scoping and shadowing.
+* **`ScopeManager`**: manages entering and leaving scopes (`MATCH`, `WITH`, `CALL`, subqueries, etc.).
+* **`BinderContext`**: ties everything together and exposes the current scope.
+
+This separation scales much better than trying to make a single `SymbolTable` responsible for both symbol ownership and scope resolution. It also makes later stages like the logical planner and optimizer much simpler because every variable reference already points to a unique symbol ID instead of requiring repeated name lookups.

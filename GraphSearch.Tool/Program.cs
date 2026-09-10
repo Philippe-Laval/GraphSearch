@@ -1,4 +1,5 @@
 using GraphSearch.Library;
+using GraphSearch.Library.Graphs;
 
 namespace GraphSearch.Tool;
 

@@ -1,3 +1,5 @@
+using GraphSearch.Library.Embeddings;
+
 namespace GraphSearch.Library.Query.Analysis.Analyzers;
 
 /// <summary>
@@ -31,7 +33,7 @@ public sealed class EmbeddingIntentClassifier
     /// <param name="examples">Dictionnaire des intentions et de leurs exemples de requêtes.</param>
     /// <param name="cancellationToken">Jeton d’annulation.</param>
     public async Task TrainAsync(
-        Query.Embeddings.IEmbeddingService embeddingService,
+        IEmbeddingService embeddingService,
         IReadOnlyDictionary<QueryIntent, IReadOnlyList<string>> examples,
         CancellationToken cancellationToken = default)
     {

@@ -1,5 +1,5 @@
+using GraphSearch.Library.Embeddings;
 using GraphSearch.Library.Query.Analysis;
-using GraphSearch.Library.Query.Embeddings;
 using GraphSearch.Library.Query.Resolution;
 
 namespace GraphSearch.Library;

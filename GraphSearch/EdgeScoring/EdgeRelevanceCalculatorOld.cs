@@ -1,3 +1,5 @@
+using GraphSearch.Library.Graphs;
+
 namespace GraphSearch.Library.EdgeScoring;
 
 public class EdgeRelevanceCalculatorOld

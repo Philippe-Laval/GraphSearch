@@ -1,4 +1,4 @@
-namespace GraphSearch.Library.Query.Embeddings;
+namespace GraphSearch.Library.Embeddings;
 
 // The important point is that your GraphRAG code doesn't know whether
 // you're using OpenAI, Azure OpenAI, Ollama, a local model, etc.

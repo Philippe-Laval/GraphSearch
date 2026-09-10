@@ -2004,4 +2004,5 @@ A roadmap could look like this:
 9. **GraphRAG extensions** (vector search, BM25, hybrid retrieval, communities).
 10. **LLM context builder and prompt generation**.
 
-The result would be a clean, extensible codebase that could realistically serve as the foundation of a production-quality GraphRAG engine in C#.
+The result would be a clean, extensible codebase that could realistically serve 
+as the foundation of a production-quality GraphRAG engine in C#.

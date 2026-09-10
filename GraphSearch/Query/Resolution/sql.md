@@ -1,3 +1,4 @@
+```
 CREATE TABLE GraphEntity
 (
     Id          INTEGER PRIMARY KEY,
@@ -25,6 +26,7 @@ ON GraphEntity(Type);
 
 CREATE INDEX IX_GraphEntityAlias_Alias
 ON GraphEntityAlias(Alias);
+```
 
 For example:
 
@@ -55,12 +57,14 @@ SQL + FTS5 (sqlite) is a good combination for entity resolution.
 
 For a large graph, create:
 
+```
 CREATE VIRTUAL TABLE GraphEntitySearch USING fts5(
     Name,
     Type,
     Description,
     EntityId UNINDEXED
 );
+```
 
 Then index:
 
@@ -75,6 +79,7 @@ Then your search becomes much more suitable for entity resolution.
 
 For example:
 
+```
 SELECT
 EntityId,
 Name,
@@ -84,5 +89,6 @@ FROM GraphEntitySearch
 WHERE GraphEntitySearch MATCH $query
 ORDER BY Score
 LIMIT $limit;
+```
 
 Because SQLite's BM25 score is lower-is-better, you'd normalize it before returning it from IEntityIndex.

@@ -71,8 +71,8 @@ public sealed class ChromaEntityIndex : IEntityIndex
                     Include.Uris };
 
         IList<IList<ChromaDbDocument>> result =
-            await _client.CollectionQueryAsync(_collectionId, embeddings, include, null, topK, null, null, null, null,
-            _database, _tenant, cancellationToken);
+            await _client.CollectionQueryAsync(_tenant, _database, _collectionId, embeddings, include, null, topK, null, null,
+            null, null, cancellationToken);
 
         return ConvertResults(result);
     }

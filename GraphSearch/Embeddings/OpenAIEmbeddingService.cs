@@ -10,7 +10,7 @@ using System.Text;
 
 namespace GraphSearch.Library.Embeddings
 {
-    public class OpenAIEmbeddingService : IEmbeddingService
+    public class OpenAIEmbeddingService : IEmbeddingService, IDisposable
     {
         private readonly IEmbeddingGenerator<string, Embedding<float>> _generator;
 

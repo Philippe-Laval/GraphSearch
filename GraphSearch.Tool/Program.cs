@@ -1,4 +1,6 @@
+using ChromaDB.Library;
 using GraphSearch.Library;
+using GraphSearch.Library.Embeddings;
 using GraphSearch.Library.Graphs;
 
 namespace GraphSearch.Tool;
@@ -39,8 +41,24 @@ For a GraphRAG system, I would not try to find the top-K graph nodes directly fr
  */
 public static class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
+        CancellationTokenSource tokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken = tokenSource.Token;
+
+        IEmbeddingService embeddingService = new OpenAIEmbeddingService(
+            apiKey: Environment.GetEnvironmentVariable("OPENAI_API"));
+
+        ChromaDBClient chromaDBClient = new ChromaDBClient(host: "localhost", port: 8000);
+
+        ChromaDBService chromaService = new ChromaDBService(chromaDBClient,
+            tenant: "Metaline MDL",
+            database: "GraphRAG",
+            collectionName: "Entities",
+            embeddingService: embeddingService);
+        await chromaService.InitializeDatabaseAsync(cancellationToken);
+
+
         // Connecting both algorithms
         // Suppose your vector/BM25 retrieval gives:
 

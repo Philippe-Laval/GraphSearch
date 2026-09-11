@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.AI.OpenAI" Version="2.1.0" />
+		<PackageReference Include="Microsoft.Extensions.AI" Version="10.9.0" />
+		<PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="10.9.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+		<PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.11" />
+		<PackageReference Include="OllamaSharp" Version="5.4.30" />
+		<PackageReference Include="OpenAI" Version="2.12.0" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\GraphRag.Core\GraphRag.Core.csproj" />
+	  <ProjectReference Include="..\GraphRag.Graph\GraphRag.Graph.csproj" />
+	  <ProjectReference Include="..\GraphRag.Indexing\GraphRag.Indexing.csproj" />
+	</ItemGroup>
+	
+</Project>

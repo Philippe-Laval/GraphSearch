@@ -46,8 +46,9 @@ public static class Program
         CancellationTokenSource tokenSource = new CancellationTokenSource();
         CancellationToken cancellationToken = tokenSource.Token;
 
+        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new InvalidOperationException("OPENAI_API_KEY environment variable is not set.");
         IEmbeddingService embeddingService = new OpenAIEmbeddingService(
-            apiKey: Environment.GetEnvironmentVariable("OPENAI_API"));
+            apiKey: apiKey);
 
         ChromaDBClient chromaDBClient = new ChromaDBClient(host: "localhost", port: 8000);
 

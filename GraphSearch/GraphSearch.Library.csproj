@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ChromaDBTest\ChromaDB.Library\ChromaDB.Library.csproj" />
       <ProjectReference Include="..\GraphRag.EFCore\GraphRag.EFCore.csproj" />
     </ItemGroup>
 

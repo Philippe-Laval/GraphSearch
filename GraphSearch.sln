@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSearch.Library.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.EFCore", "GraphRag.EFCore\GraphRag.EFCore.csproj", "{5477E7F3-7ECF-4D18-8CA7-6B09980E9B7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaDB.Library", "..\ChromaDBTest\ChromaDB.Library\ChromaDB.Library.csproj", "{4AC2AC38-EEBC-7399-0F35-B1D4839F44B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChromaDB", "ChromaDB", "{8F7C82BA-7C5E-453C-84C8-3EF0707E50C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaDB.Library.Tests", "..\ChromaDBTest\ChromaDB.Library.Tests\ChromaDB.Library.Tests.csproj", "{C3A1C266-F59C-8F29-3D6F-B796334B5882}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +39,21 @@ Global
 		{5477E7F3-7ECF-4D18-8CA7-6B09980E9B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5477E7F3-7ECF-4D18-8CA7-6B09980E9B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5477E7F3-7ECF-4D18-8CA7-6B09980E9B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC2AC38-EEBC-7399-0F35-B1D4839F44B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC2AC38-EEBC-7399-0F35-B1D4839F44B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC2AC38-EEBC-7399-0F35-B1D4839F44B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC2AC38-EEBC-7399-0F35-B1D4839F44B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A1C266-F59C-8F29-3D6F-B796334B5882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A1C266-F59C-8F29-3D6F-B796334B5882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A1C266-F59C-8F29-3D6F-B796334B5882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A1C266-F59C-8F29-3D6F-B796334B5882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4AC2AC38-EEBC-7399-0F35-B1D4839F44B7} = {8F7C82BA-7C5E-453C-84C8-3EF0707E50C6}
+		{C3A1C266-F59C-8F29-3D6F-B796334B5882} = {8F7C82BA-7C5E-453C-84C8-3EF0707E50C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BED50C6C-D88F-4C54-9BCC-BE97B5AE4B62}

@@ -1,15 +1,15 @@
 using Azure;
 using Azure.AI.OpenAI;
+using GraphRag.Core.Configuration;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OllamaSharp;
 using OpenAI;
-using GraphRag.Core.Configuration;
 using System.ClientModel;
 
-namespace GraphRag.AI.Extensions;
+namespace GraphSearch.Tool.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -76,8 +76,6 @@ public static class ServiceCollectionExtensions
             .AsIChatClient();
     }
 
-    private static IChatClient CreateOllamaClient(OllamaOptions options)
-    {
-        return new OllamaApiClient(options.Endpoint, options.ChatModel);
-    }
+    private static IChatClient CreateOllamaClient(OllamaOptions options) =>
+        new OllamaApiClient(options.Endpoint, options.ChatModel);
 }

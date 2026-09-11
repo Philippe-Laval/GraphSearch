@@ -12,7 +12,7 @@ public sealed class AiOptionsValidator : IValidateOptions<AiOptions>
         {
             case AiProviders.OpenAI:
                 Require(options.OpenAI.ApiKey, "AI:OpenAI:ApiKey is required.", errors);
-                Require(options.OpenAI.Model, "AI:OpenAI:Model is required.", errors);
+                Require(options.OpenAI.ChatModel, "AI:OpenAI:ChatModel is required.", errors);
                 break;
 
             case AiProviders.AzureOpenAI:
@@ -27,7 +27,7 @@ public sealed class AiOptionsValidator : IValidateOptions<AiOptions>
                 break;
 
             case AiProviders.Ollama:
-                Require(options.Ollama.Model, "AI:Ollama:Model is required.", errors);
+                Require(options.Ollama.ChatModel, "AI:Ollama:ChatModel is required.", errors);
                 break;
 
             default:

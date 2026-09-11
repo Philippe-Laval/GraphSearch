@@ -10,7 +10,7 @@ public sealed class OllamaOptions
     public Uri Endpoint { get; init; } = new("http://localhost:11434");
 
     [Required]
-    public string Model { get; init; } = "gemma4:e4b";
+    public string ChatModel { get; init; } = "gemma4:e4b";
     
     [Required]
     public string EmbeddingModel { get; init; } = "embeddinggemma";

@@ -10,7 +10,7 @@ public sealed class OpenAiOptions
     public string? ApiKey { get; init; }
 
     [Required]
-    public string Model { get; init; } = "gpt-4.1-mini";
+    public string ChatModel { get; init; } = "gpt-4.1-mini";
 
     [Required]
     public string EmbeddingModel { get; init; } = "text-embedding-3-small";

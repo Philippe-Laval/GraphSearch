@@ -9,7 +9,8 @@ using Lucene.Net.Search;
 using Lucene.Net.Store;
 
 /*
-One caveat: because StandardAnalyzer tokenizes fields, exact matching of things like .NET 10 needs some care. In production I'd use two fields:
+One caveat: because StandardAnalyzer tokenizes fields, exact matching of things like .NET 10 needs some care. 
+In production I'd use two fields:
    
    name
    name_exact

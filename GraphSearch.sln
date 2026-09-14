@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Ontology", "GraphR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.ITSM", "GraphRag.ITSM\GraphRag.ITSM.csproj", "{F06C5520-BCF5-48A7-8503-B4C84A09DE2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Conceptual", "GraphRag.Conceptual\GraphRag.Conceptual.csproj", "{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,18 @@ Global
 		{F06C5520-BCF5-48A7-8503-B4C84A09DE2C}.Release|x64.Build.0 = Release|Any CPU
 		{F06C5520-BCF5-48A7-8503-B4C84A09DE2C}.Release|x86.ActiveCfg = Release|Any CPU
 		{F06C5520-BCF5-48A7-8503-B4C84A09DE2C}.Release|x86.Build.0 = Release|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Debug|x64.Build.0 = Debug|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Debug|x86.Build.0 = Debug|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x64.Build.0 = Release|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Graph", "GraphRag.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Indexing", "GraphRag.Indexing\GraphRag.Indexing.csproj", "{DB8F0F12-FD7E-6705-17C0-05D09250E0D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Ontology", "GraphRag.Ontology\GraphRag.Ontology.csproj", "{33607464-0627-46A0-B69C-9C417F34E61D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{DB8F0F12-FD7E-6705-17C0-05D09250E0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB8F0F12-FD7E-6705-17C0-05D09250E0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB8F0F12-FD7E-6705-17C0-05D09250E0D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33607464-0627-46A0-B69C-9C417F34E61D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33607464-0627-46A0-B69C-9C417F34E61D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33607464-0627-46A0-B69C-9C417F34E61D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33607464-0627-46A0-B69C-9C417F34E61D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

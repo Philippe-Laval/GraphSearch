@@ -5,6 +5,7 @@ I'll design the C# classes for the ITSM Text-to-SQL ontology, structured around 
 Here's a summary of what was created:
 
 # ITSM Text-to-SQL Ontology — C# class model
+
 Created under GraphRag.Ontology\Itsm\, organized by the six layers described in the document:
 - Core — OntologyEntity, BusinessConcept, Provenance (identity, labels, provenance, versioning).
 - Business (conceptual layer, ITSM-specialized):
@@ -24,7 +25,7 @@ Created under GraphRag.Ontology\Itsm\, organized by the six layers described in 
 - SQL layer — SqlDialect, SqlExpression, SqlFunction, SqlQuery, MetricImplementation (bridges metric → dialect SQL).
 - Governance layer — DataClassification (PII/PHI/PCI), AccessPolicy, DataOwner, QualityConstraint.
 
-Key design decisions faithful to the document:
+## Key design decisions faithful to the document:
 -	Business concepts never are their physical tables — they're connected via ConceptRepresentation.
 -	Metrics are first-class with explicit grain / qualifying population / time basis / calendar.
 -	Priority ≠ Impact ≠ Urgency ≠ Severity.

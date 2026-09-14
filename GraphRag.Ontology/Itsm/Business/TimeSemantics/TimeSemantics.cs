@@ -19,25 +19,3 @@ public sealed class TicketTimestamps
     public DateTimeOffset? SlaResolutionDeadline { get; init; }
     public DateTimeOffset? LastModifiedAt { get; init; }
 }
-
-/// <summary>Named calendar period used for reporting (fiscal, calendar, custom).</summary>
-public sealed class TimePeriod
-{
-    public required string Name { get; init; }
-    public required DateTimeOffset Start { get; init; }
-    public required DateTimeOffset End { get; init; }
-    public PeriodBasis Basis { get; init; }
-}
-
-public enum PeriodBasis { Calendar, Fiscal, Custom }
-
-/// <summary>Represents working hours vs 24x7, holidays, etc., used to compute SLA elapsed time.</summary>
-public sealed class BusinessCalendar
-{
-    public required string Name { get; init; }
-    public string? TimeZoneId { get; init; }
-    public IReadOnlyList<DayOfWeek> WorkingDays { get; init; } = [];
-    public TimeOnly? WorkingHoursStart { get; init; }
-    public TimeOnly? WorkingHoursEnd { get; init; }
-    public IReadOnlyList<DateOnly> Holidays { get; init; } = [];
-}

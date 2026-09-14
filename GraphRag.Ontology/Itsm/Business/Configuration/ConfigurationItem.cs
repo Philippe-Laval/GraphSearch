@@ -15,37 +15,3 @@ public abstract class ConfigurationItem : BusinessConcept
     /// <summary>Other CIs this CI depends on (upstream).</summary>
     public IReadOnlyList<ConfigurationItem> DependsOn { get; init; } = [];
 }
-
-public sealed class Application : ConfigurationItem
-{
-    public string? Vendor { get; init; }
-    public string? VersionNumber { get; init; }
-}
-
-public sealed class Server : ConfigurationItem
-{
-    public string? Hostname { get; init; }
-    public string? OperatingSystem { get; init; }
-    public string? Environment { get; init; }
-}
-
-public sealed class DatabaseCI : ConfigurationItem
-{
-    public string? Engine { get; init; }
-    public string? InstanceName { get; init; }
-}
-
-public sealed class NetworkDevice : ConfigurationItem
-{
-    public string? DeviceType { get; init; }
-    public string? IpAddress { get; init; }
-}
-
-public sealed class CloudResource : ConfigurationItem
-{
-    public string? Provider { get; init; }
-    public string? Region { get; init; }
-    public string? ResourceType { get; init; }
-}
-
-public enum CIStatus { Planned, InStock, Deployed, InMaintenance, Retired }

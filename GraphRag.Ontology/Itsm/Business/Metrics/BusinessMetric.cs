@@ -31,10 +31,6 @@ public abstract class BusinessMetric : BusinessConcept
     public string? Unit { get; init; }
 }
 
-public enum AggregationFunction { Count, CountDistinct, Sum, Avg, Min, Max, Median, Percentile, Ratio, Custom }
-
-public enum TimeBasis { WallClock, BusinessHours }
-
 public sealed class TicketVolume : BusinessMetric;
 public sealed class OpenTicketCount : BusinessMetric;
 public sealed class Backlog : BusinessMetric;

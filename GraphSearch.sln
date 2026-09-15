@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.ITSM", "GraphRag.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Conceptual", "GraphRag.Conceptual\GraphRag.Conceptual.csproj", "{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.ITSM.Tool", "GraphRag.ITSM.Tool\GraphRag.ITSM.Tool.csproj", "{4906D3C5-693C-41D3-8F7A-C098546FB7EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,18 @@ Global
 		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x64.Build.0 = Release|Any CPU
 		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x86.ActiveCfg = Release|Any CPU
 		{5BAF35A5-A20A-42F1-9085-B0D98C5FBB8C}.Release|x86.Build.0 = Release|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Debug|x64.Build.0 = Debug|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Debug|x86.Build.0 = Debug|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Release|x64.ActiveCfg = Release|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Release|x64.Build.0 = Release|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Release|x86.ActiveCfg = Release|Any CPU
+		{4906D3C5-693C-41D3-8F7A-C098546FB7EE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

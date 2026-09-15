@@ -1,0 +1,19 @@
+﻿https://learn.microsoft.com/fr-fr/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+
+dotnet tool update --global dotnet-ef
+
+Ajout d'une migration avec la commande suivante :
+cd C:\CodeGithubPerso\GraphSearch\GraphRag.Conceptual 
+dotnet ef migrations add InitialCreate --context GraphRag.Conceptual.Context.OntologyDbContext --output-dir Migrations/SqlServerMigrations 
+
+Mise a jour de la base de données avec la commande suivante :
+dotnet ef database update --context GraphRag.Conceptual.Context.OntologyDbContext
+
+Liste des migrations disponibles avec la commande suivante :
+dotnet ef migrations list --context GraphRag.Conceptual.Context.OntologyDbContext
+
+Génération d'un script SQL "Create" pour toutes les migrations avec la commande suivante :
+dotnet ef migrations script --idempotent --context GraphRag.Conceptual.Context.OntologyDbContext --output Scripts/SqlServerScripts/CreationSqlServer.sql
+
+Génération d'un script SQL "Drop" la commande suivante :
+dotnet ef migrations script InitialCreate 0 --context GraphRag.Conceptual.Context.OntologyDbContext --output Scripts/SqlServerScripts/DropSqlServer.sql

@@ -12,11 +12,15 @@ public sealed class ConceptRepresentation : OntologyEntity
 {
     public required DataAsset Asset { get; init; }
 
-    /// <summary>Optional SQL-agnostic filter that narrows the asset down to the concept.</summary>
+    /// <summary>
+    /// Optional SQL-agnostic filter that narrows the asset down to the concept.
+    /// </summary>
     public string? FilterExpression { get; init; }
 
     public MappingKind Kind { get; init; }
 
-    /// <summary>Confidence score for the mapping. Useful for inferred mappings.</summary>
+    /// <summary>
+    /// Confidence score for the mapping. Useful for inferred mappings.
+    /// </summary>
     public double? Confidence { get; init; }
 }

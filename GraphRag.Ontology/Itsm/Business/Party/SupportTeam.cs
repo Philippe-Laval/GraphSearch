@@ -5,5 +5,8 @@ namespace GraphRag.Ontology.Itsm.Business.Party;
 /// </summary>
 public sealed class SupportTeam : AssignmentGroup
 {
+    /// <summary>
+    /// Niveau de support associé au support teams (L1/L2/L3).
+    /// </summary>
     public string? SupportTier { get; init; }
 }

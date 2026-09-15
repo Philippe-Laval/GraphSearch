@@ -2,7 +2,7 @@ using GraphRag.Ontology.Itsm.Core;
 
 namespace GraphRag.Ontology.Itsm.Business.Configuration;
 
-/// <summary>Any managed component tracked in the CMDB.</summary>
+/// <summary>Abstract class : Any managed component tracked in the CMDB.</summary>
 public abstract class ConfigurationItem : BusinessConcept
 {
     public string? AssetTag { get; init; }

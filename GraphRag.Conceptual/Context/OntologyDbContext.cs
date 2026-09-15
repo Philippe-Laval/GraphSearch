@@ -24,6 +24,10 @@ public class OntologyDbContext : DbContext
 
     public DbSet<Concept> Concepts => Set<Concept>();
     public DbSet<ConceptRelation> ConceptRelations => Set<ConceptRelation>();
+
+    /// <summary>
+    /// Linguistic layer: a natural-language surface form that maps to a concept.
+    /// </summary>
     public DbSet<Term> Terms => Set<Term>();
     public DbSet<DataAssetRef> DataAssets => Set<DataAssetRef>();
     public DbSet<ConceptRepresentation> ConceptRepresentations => Set<ConceptRepresentation>();
@@ -32,7 +36,15 @@ public class OntologyDbContext : DbContext
     public DbSet<MetricImplementation> MetricImplementations => Set<MetricImplementation>();
     public DbSet<CompetencyQuestion> CompetencyQuestions => Set<CompetencyQuestion>();
     public DbSet<SemanticQuerySample> SemanticQuerySamples => Set<SemanticQuerySample>();
+
+    /// <summary>
+    /// Sensitivity/compliance classification for a data asset.
+    /// </summary>
     public DbSet<DataClassificationRule> DataClassificationRules => Set<DataClassificationRule>();
+
+    /// <summary>
+    /// Access-control rules attached to an asset.
+    /// </summary>
     public DbSet<AccessPolicyRule> AccessPolicyRules => Set<AccessPolicyRule>();
     public DbSet<DataOwnerRecord> DataOwnerRecords => Set<DataOwnerRecord>();
     public DbSet<QualityConstraint> QualityConstraints => Set<QualityConstraint>();

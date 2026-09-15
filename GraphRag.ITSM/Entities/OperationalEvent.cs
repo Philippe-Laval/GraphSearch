@@ -1,6 +1,8 @@
 namespace GraphRag.ITSM.Entities;
 
-/// <summary>Base for anything that happens during a ticket's life. TPH.</summary>
+/// <summary>
+/// Base for anything that happens during a ticket's life. TPH.
+/// </summary>
 public abstract class OperationalEvent : EntityBase
 {
     public Guid TicketId { get; set; }

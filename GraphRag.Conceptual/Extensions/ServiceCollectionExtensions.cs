@@ -15,6 +15,21 @@ public static class ServiceCollectionExtensions
     /// </summary>
     public static IServiceCollection AddConceptualServices(this IServiceCollection services)
     {
+        services.AddScoped<AccessPolicyRuleService>();
+        services.AddScoped<BusinessMetricDefinitionService>();
+        services.AddScoped<CompetencyQuestionService>();
+        services.AddScoped<ConceptRelationService>();
+        services.AddScoped<ConceptRepresentationService>();
+        services.AddScoped<ConceptService>();
+        services.AddScoped<DataAssetRefService>();
+        services.AddScoped<DataClassificationRuleService>();
+        services.AddScoped<DataOwnerRecordService>();
+        services.AddScoped<JoinRelationshipService>();
+        services.AddScoped<MetricImplementationService>();
+        services.AddScoped<QualityConstraintService>();
+        services.AddScoped<SemanticQuerySampleService>();
+        services.AddScoped<TermService>();
+
         //var assembly = typeof(ServiceCollectionExtensions).Assembly;
         //var servicesNamespace = typeof(ConceptService).Namespace;
 
@@ -31,22 +46,6 @@ public static class ServiceCollectionExtensions
         //    services.AddScoped(implementationType);
         //    services.AddScoped(interfaceType, sp => sp.GetRequiredService(implementationType));
         //}
-
-        services.AddScoped<AccessPolicyRuleService>();
-        services.AddScoped<BusinessMetricDefinitionService>();
-        services.AddScoped<CompetencyQuestionService>();
-        services.AddScoped<ConceptRelationService>();
-        services.AddScoped<ConceptRepresentationService>();
-        services.AddScoped<ConceptService>();
-        services.AddScoped<DataAssetRefService>();
-        services.AddScoped<DataClassificationRuleService>();
-        services.AddScoped<DataOwnerRecordService>();
-        services.AddScoped<JoinRelationshipService>();
-        services.AddScoped<MetricImplementationService>();
-        services.AddScoped<QualityConstraintService>();
-        services.AddScoped<SemanticQuerySampleService>();
-        services.AddScoped<TermService>();
-
 
         return services;
     }

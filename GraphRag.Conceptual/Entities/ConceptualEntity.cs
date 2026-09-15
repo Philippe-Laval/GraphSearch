@@ -1,6 +1,8 @@
 namespace GraphRag.Conceptual.Entities;
 
-/// <summary>Common shape for every persisted ontology element: identity, provenance, audit, versioning.</summary>
+/// <summary>
+/// Abstract class : Common shape for every persisted ontology element: identity, provenance, audit, versioning.
+/// </summary>
 public abstract class ConceptualEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();

@@ -1,3 +1,12 @@
 namespace GraphRag.Ontology.Itsm.Business;
 
-public enum ChangeRiskLevel { Low, Medium, High, Critical }
+/// <summary>
+/// Represents the risk level of a change request
+/// </summary>
+public enum ChangeRiskLevel
+{ 
+    Low,
+    Medium,
+    High, 
+    Critical 
+}

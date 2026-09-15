@@ -2,7 +2,9 @@ using GraphRag.Ontology.Itsm.Data;
 
 namespace GraphRag.Ontology.Itsm.Governance;
 
-/// <summary>Access rule scoping who/what can query a given asset.</summary>
+/// <summary>
+/// Access rule scoping who/what can query a given asset.
+/// </summary>
 public sealed class AccessPolicy : GovernanceConcept
 {
     public required DataAsset Asset { get; init; }

@@ -2,7 +2,9 @@ using GraphRag.Ontology.Itsm.Data;
 
 namespace GraphRag.Ontology.Itsm.Governance;
 
-/// <summary>How sensitive is the data element from a compliance perspective.</summary>
+/// <summary>
+/// How sensitive is the data element from a compliance perspective.
+/// </summary>
 public sealed class DataClassification : GovernanceConcept
 {
     public required DataAsset Asset { get; init; }

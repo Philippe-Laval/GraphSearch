@@ -8,18 +8,36 @@ namespace GraphRag.Ontology.Itsm.Governance;
 /// conformité selon le niveau de sensibilité.</remarks>
 public enum Sensitivity
 { 
+    /// <summary>
+    /// Public
+    /// </summary>
     Public, 
+    
+    /// <summary>
+    /// Internal
+    /// </summary>
     Internal, 
+    
+    /// <summary>
+    /// Confidential
+    /// </summary>
     Confidential,
+    
+    /// <summary>
+    /// Restricted
+    /// </summary>
     Restricted,
+    
     /// <summary>
     /// PII (Personally Identifiable Information)
     /// </summary>
     Pii,
+    
     /// <summary>
     /// PHI (Protected Health Information)
     /// </summary>
     Phi,
+    
     /// <summary>
     /// PCI (Payment Card Industry)
     /// </summary>

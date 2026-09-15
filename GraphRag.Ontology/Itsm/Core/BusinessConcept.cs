@@ -1,7 +1,7 @@
 namespace GraphRag.Ontology.Itsm.Core;
 
 /// <summary>
-/// Root of the ITSM Text-to-SQL business ontology.
+/// Abstract class : Root of the ITSM Text-to-SQL business ontology.
 /// Everything a user might naturally refer to (Incident, User, Service, Priority, MTTR...)
 /// derives from <see cref="BusinessConcept"/>.
 /// </summary>

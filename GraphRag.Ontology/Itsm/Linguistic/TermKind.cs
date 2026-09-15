@@ -1,5 +1,8 @@
 namespace GraphRag.Ontology.Itsm.Linguistic;
 
+/// <summary>
+/// Kind of term (PreferredLabel | Synonym | Abbreviation | Acronym | Hyponym | Hypernym | Misspelling)
+/// </summary>
 public enum TermKind
 {
     /// <summary>

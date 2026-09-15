@@ -1,3 +1,10 @@
 namespace GraphRag.Ontology.Itsm.Business.Classification;
 
-public enum SeverityLevel { Critical, High, Medium, Low, Informational }
+public enum SeverityLevel
+{ 
+    Critical, 
+    High,
+    Medium,
+    Low, 
+    Informational
+}

@@ -2,7 +2,9 @@ using GraphRag.Ontology.Itsm.Governance;
 
 namespace GraphRag.Conceptual.Entities;
 
-/// <summary>Sensitivity/compliance classification for a data asset.</summary>
+/// <summary>
+/// Sensitivity/compliance classification for a data asset.
+/// </summary>
 public class DataClassificationRule : ConceptualEntity
 {
     public Guid AssetId { get; set; }
@@ -16,7 +18,10 @@ public class DataClassificationRule : ConceptualEntity
     public string? Justification { get; set; }
 }
 
-/// <summary>Access-control rules attached to an asset. Enables "should this user be allowed to ask that?".</summary>
+/// <summary>
+/// Access-control rules attached to an asset.
+/// Enables "should this user be allowed to ask that?".
+/// </summary>
 public class AccessPolicyRule : ConceptualEntity
 {
     public Guid AssetId { get; set; }
@@ -29,7 +34,9 @@ public class AccessPolicyRule : ConceptualEntity
     public string? PolicyNotes { get; set; }
 }
 
-/// <summary>Ownership record for an asset.</summary>
+/// <summary>
+/// Ownership record for an asset.
+/// </summary>
 public class DataOwnerRecord : ConceptualEntity
 {
     public Guid AssetId { get; set; }
@@ -40,7 +47,9 @@ public class DataOwnerRecord : ConceptualEntity
     public string? DataDomain { get; set; }
 }
 
-/// <summary>Freshness/quality expectations for the asset.</summary>
+/// <summary>
+/// Freshness/quality expectations for the asset.
+/// </summary>
 public class QualityConstraint : ConceptualEntity
 {
     public Guid AssetId { get; set; }

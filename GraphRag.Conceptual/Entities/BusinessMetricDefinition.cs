@@ -26,10 +26,12 @@ public class BusinessMetricDefinition : ConceptualEntity
     public Guid? BusinessCalendarConceptId { get; set; }
     public Concept? BusinessCalendarConcept { get; set; }
 
-    public ICollection<MetricImplementation> Implementations { get; set; } = [];
+    public ICollection<MetricImplementation> Implementations { get; set; } = new List<MetricImplementation>();
 }
 
-/// <summary>Dialect-specific SQL expression implementing a metric.</summary>
+/// <summary>
+/// Dialect-specific SQL expression implementing a metric.
+/// </summary>
 public class MetricImplementation : ConceptualEntity
 {
     public Guid MetricDefinitionId { get; set; }

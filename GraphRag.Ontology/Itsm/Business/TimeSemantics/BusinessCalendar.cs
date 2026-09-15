@@ -1,6 +1,8 @@
 namespace GraphRag.Ontology.Itsm.Business.TimeSemantics;
 
-/// <summary>Represents working hours vs 24x7, holidays, etc., used to compute SLA elapsed time.</summary>
+/// <summary>
+/// Represents working hours vs 24x7, holidays, etc., used to compute SLA elapsed time.
+/// </summary>
 public sealed class BusinessCalendar
 {
     public required string Name { get; init; }

@@ -5,6 +5,13 @@ namespace GraphRag.Ontology.Itsm.Business.Party;
 /// </summary>
 public class AssignmentGroup : Party
 {
+    /// <summary>
+    /// Department of the assignment group
+    /// </summary>
     public string? Department { get; init; }
+
+    /// <summary>
+    /// List of supported services
+    /// </summary>
     public IReadOnlyList<Service.Service> SupportedServices { get; init; } = [];
 }

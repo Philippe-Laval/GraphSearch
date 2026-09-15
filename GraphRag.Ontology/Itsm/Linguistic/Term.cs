@@ -10,10 +10,33 @@ namespace GraphRag.Ontology.Itsm.Linguistic;
 /// </summary>
 public sealed class Term : OntologyEntity
 {
+    /// <summary>
+    /// Visible name
+    /// </summary>
     public required string SurfaceForm { get; init; }
+
+    /// <summary>
+    /// The business concept mapped by the term
+    /// </summary>
     public required BusinessConcept MapsTo { get; init; }
+
+    /// <summary>
+    /// Confidence
+    /// </summary>
     public double Confidence { get; init; }
+
+    /// <summary>
+    /// Context of the term (like "ITSM")
+    /// </summary>
     public string? Context { get; init; }
+
+    /// <summary>
+    /// Kind of term
+    /// </summary>
     public TermKind Kind { get; init; }
+
+    /// <summary>
+    /// Langage of the term ("en", "fr")
+    /// </summary>
     public string? Language { get; init; }
 }

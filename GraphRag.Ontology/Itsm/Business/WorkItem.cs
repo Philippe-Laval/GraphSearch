@@ -3,7 +3,7 @@ using GraphRag.Ontology.Itsm.Core;
 namespace GraphRag.Ontology.Itsm.Business;
 
 /// <summary>
-/// Any tracked unit of work in the ITSM domain (tickets, tasks, knowledge cases).
+/// Abstract class: Any tracked unit of work in the ITSM domain (tickets, tasks, knowledge cases).
 /// </summary>
 public abstract class WorkItem : BusinessConcept
 {

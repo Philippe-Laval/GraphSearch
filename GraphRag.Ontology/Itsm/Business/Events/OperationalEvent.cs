@@ -3,7 +3,7 @@ using GraphRag.Ontology.Itsm.Core;
 namespace GraphRag.Ontology.Itsm.Business.Events;
 
 /// <summary>
-/// Any event happening during a ticket's lifecycle.
+/// Abstract class : Any event happening during a ticket's lifecycle.
 /// Modelling these explicitly enables queries such as
 /// "How many tickets were in Pending state during August?".
 /// </summary>

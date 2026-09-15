@@ -11,24 +11,36 @@ namespace GraphRag.ITSM.Services;
 public abstract class EntityService<TEntity> where TEntity : EntityBase
 {
     protected readonly ItsmDbContext DbContext;
+    protected readonly DbSet<TEntity> Set;
 
     protected EntityService(ItsmDbContext dbContext)
     {
         DbContext = dbContext;
+        Set = DbContext.Set<TEntity>();
     }
-
-    protected virtual DbSet<TEntity> Set => DbContext.Set<TEntity>();
 
     protected virtual IQueryable<TEntity> Query() => Set.AsNoTracking();
-
-    public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        return await Query().ToListAsync(cancellationToken);
-    }
 
     public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await Query().FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+    }
+
+    public virtual async Task<IReadOnlyList<TEntity>> ListAsync(int skip = 0, int take = 100, CancellationToken cancellationToken = default)
+    {
+        if (skip < 0) throw new ArgumentOutOfRangeException(nameof(skip));
+        if (take <= 0) throw new ArgumentOutOfRangeException(nameof(take));
+
+        return await Set.AsNoTracking()
+            .OrderBy(e => e.Id)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+    }
+
+    public virtual async Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await Query().ToListAsync(cancellationToken);
     }
 
     public virtual async Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
@@ -83,5 +95,10 @@ public abstract class EntityService<TEntity> where TEntity : EntityBase
         Set.Remove(existing);
         await DbContext.SaveChangesAsync(cancellationToken);
         return true;
+    }
+
+    public virtual Task<int> CountAsync(CancellationToken cancellationToken = default)
+    {
+         return Set.CountAsync(cancellationToken);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GraphRag.ITSM.Context;
+using GraphRag.ITSM.Entities;
 using GraphRag.ITSM.Services;
 using Microsoft.Extensions.Logging;
 using System;
@@ -33,6 +34,19 @@ namespace GraphRag.ITSM.Tool
                     IsActive = true,
                     Kind = Entities.StatusKind.New,
                     IsTerminal = false
+                }, token);
+            }
+
+            if (!_dbContext.Impacts.Any())
+            {
+                ImpactService impactService = new ImpactService(_dbContext);
+                await impactService.CreateAsync(new Entities.Impact
+                {
+                    Name = "Faible",
+                    Code = "Low",
+                    SortOrder = 1,
+                    IsActive = true,
+                    Level = Entities.ImpactLevel.Low
                 }, token);
             }
 

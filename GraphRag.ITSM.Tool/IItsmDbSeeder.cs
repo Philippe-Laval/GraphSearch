@@ -2,6 +2,6 @@
 {
     public interface IItsmDbSeeder
     {
-        Task Seed();
+        Task Seed(CancellationToken token = default);
     }
 }

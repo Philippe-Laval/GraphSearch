@@ -13,6 +13,9 @@ namespace GraphRag.ITSM.Tool
     {
         public static async Task<int> Main(string[] args)
         {
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            CancellationToken cancellationToken = tokenSource.Token;
+
             Log.Logger = new LoggerConfiguration()
                             .WriteTo.Console()
                             .CreateBootstrapLogger();
@@ -50,7 +53,7 @@ namespace GraphRag.ITSM.Tool
                 using (var scope = host.Services.CreateScope())
                 {
                     var seeder = scope.ServiceProvider.GetRequiredService<IItsmDbSeeder>();
-                    await seeder.Seed();
+                    await seeder.Seed(cancellationToken);
                 }
 
                 await host.RunAsync();

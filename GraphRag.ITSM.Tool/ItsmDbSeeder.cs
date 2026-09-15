@@ -1,4 +1,5 @@
 ﻿using GraphRag.ITSM.Context;
+using GraphRag.ITSM.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,24 @@ namespace GraphRag.ITSM.Tool
             _logger = logger;
         }
 
-        public async Task Seed()
+        public async Task Seed(CancellationToken token = default)
         {
             _logger.LogInformation("Seeding the database...");
+
+            if (!_dbContext.Statuses.Any())
+            {
+                StatusService statusService = new StatusService(_dbContext);
+                await statusService.CreateAsync(new Entities.Status
+                {
+                    Name = "Nouveau",
+                    Code = "New",
+                    SortOrder = 1,
+                    IsActive = true,
+                    Kind = Entities.StatusKind.New,
+                    IsTerminal = false
+                }, token);
+            }
+
             // Add your seeding logic here, for example:
             // if (!_dbContext.Categories.Any())
             // {

@@ -28,6 +28,7 @@ namespace GraphRag.AI.Tests.KnowledgeExtraction
                     path: "appsettings.json",
                     optional: false,
                     reloadOnChange: false)
+                .AddEnvironmentVariables()
                 .Build();
         }
 
@@ -85,8 +86,8 @@ namespace GraphRag.AI.Tests.KnowledgeExtraction
             // Assert
             Assert.IsNotNull(result);
 
-            Assert.HasCount(0, result.Nodes);
-            Assert.HasCount(0, result.Edges);
+            Assert.IsNotEmpty(result.Nodes);
+            Assert.IsEmpty(result.Edges);
         }
     }
 }

@@ -7,7 +7,8 @@ namespace GraphRag.AI.Generators;
 
 /*
 Éviter les hallucinations
-Je conseille de fixer une température très faible (voire nulle) pour ces générateurs. Ils ne doivent pas inventer des faits mais reformuler fidèlement les données du graphe.
+Je conseille de fixer une température très faible (voire nulle) pour ces générateurs. 
+Ils ne doivent pas inventer des faits mais reformuler fidèlement les données du graphe.
 
 Le prompt système peut rappeler explicitement :
 Tu n'inventes jamais d'information.

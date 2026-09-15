@@ -10,5 +10,9 @@
 		<PackageReference Include="Microsoft.Extensions.AI" Version="10.10.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.12" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GraphRag.NLP\GraphRag.NLP.csproj" />
+	</ItemGroup>
 	
 </Project>

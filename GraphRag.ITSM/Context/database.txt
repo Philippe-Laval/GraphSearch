@@ -1,0 +1,19 @@
+﻿https://learn.microsoft.com/fr-fr/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+
+dotnet tool update --global dotnet-ef
+
+Ajout d'une migration avec la commande suivante :
+cd C:\CodeGithubPerso\GraphSearch\GraphRag.ITSM 
+dotnet ef migrations add InitialCreate --context GraphRag.ITSM.Context.ItsmDbContext --output-dir Migrations/SqlServerMigrations 
+
+Mise a jour de la base de données avec la commande suivante :
+dotnet ef database update --context GraphRag.ITSM.Context.ItsmDbContext
+
+Liste des migrations disponibles avec la commande suivante :
+dotnet ef migrations list --context GraphRag.ITSM.Context.ItsmDbContext
+
+Génération d'un script SQL "Create" pour toutes les migrations avec la commande suivante :
+dotnet ef migrations script --idempotent --context GraphRag.ITSM.Context.ItsmDbContext --output Scripts/SqlServerScripts/CreationSqlServer.sql
+
+Génération d'un script SQL "Drop" la commande suivante :
+dotnet ef migrations script InitialCreate 0 --context GraphRag.ITSM.Context.ItsmDbContext --output Scripts/SqlServerScripts/DropSqlServer.sql

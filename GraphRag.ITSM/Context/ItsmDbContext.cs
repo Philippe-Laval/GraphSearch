@@ -206,9 +206,9 @@ public class ItsmDbContext : DbContext
         {
             b.HasKey(x => new { x.TechnicalServiceId, x.BusinessServiceId });
             b.HasOne(x => x.TechnicalService).WithMany(s => s.Enables)
-                .HasForeignKey(x => x.TechnicalServiceId).OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.TechnicalServiceId).OnDelete(DeleteBehavior.NoAction);
             b.HasOne(x => x.BusinessService).WithMany(s => s.EnabledBy)
-                .HasForeignKey(x => x.BusinessServiceId).OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(x => x.BusinessServiceId).OnDelete(DeleteBehavior.NoAction);
         });
 
         mb.Entity<BusinessServiceConsumer>(b =>

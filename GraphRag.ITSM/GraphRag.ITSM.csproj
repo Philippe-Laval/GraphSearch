@@ -25,4 +25,15 @@
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator></Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

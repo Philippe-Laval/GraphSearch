@@ -1,4 +1,4 @@
-﻿using GraphRag.AI.Algorithms;
+﻿using GraphRag.AI.KnowledgeExtraction;
 using GraphRag.Core.Models;
 using Microsoft.Extensions.AI;
 using System;

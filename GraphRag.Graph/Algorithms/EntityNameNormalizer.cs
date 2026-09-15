@@ -47,6 +47,11 @@ namespace GraphRag.Graph.Algorithms;
 /// </summary>
 public static partial class EntityNameNormalizer
 {
+    /// <summary>
+    /// Normalize casing, punctuation and whitespace.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static string Normalize(string value)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);

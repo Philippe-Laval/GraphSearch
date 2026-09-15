@@ -42,7 +42,16 @@ namespace GraphRag.ITSM.Tool
                 // Register all CRUD services to access ItsmDbContext
                 builder.Services.AddItsmServices();
 
+                builder.Services.AddScoped<IItsmDbSeeder, ItsmDbSeeder>();
+
                 using IHost host = builder.Build();
+
+                // Seed the database
+                using (var scope = host.Services.CreateScope())
+                {
+                    var seeder = scope.ServiceProvider.GetRequiredService<IItsmDbSeeder>();
+                    await seeder.Seed();
+                }
 
                 await host.RunAsync();
 

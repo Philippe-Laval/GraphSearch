@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.NLP.Algorithms;
+namespace GraphRag.NLP.Chunking;
 
 /// <summary>
 /// For a long document, split it into overlapping chunks

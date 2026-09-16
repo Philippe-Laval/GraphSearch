@@ -1,6 +1,6 @@
 ﻿using GraphRag.Core.KnowledgeExtraction;
 using GraphRag.Core.Models;
-using GraphRag.NLP.Algorithms;
+using GraphRag.NLP.Chunking;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using System;

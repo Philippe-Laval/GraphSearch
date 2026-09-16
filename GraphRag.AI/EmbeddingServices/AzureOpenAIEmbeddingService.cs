@@ -1,34 +1,27 @@
 ﻿using Azure;
+using Azure.AI.OpenAI;
 using GraphRag.Core.Configuration;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
-using OpenAI;
-using System;
-using System.ClientModel;
-using System.Collections.Generic;
-using System.Text;
 
-namespace GraphSearch.Library.Embeddings
+namespace GraphRag.AI.EmbeddingServices
 {
-    public class OpenAIEmbeddingService : IEmbeddingService, IDisposable
+    public class AzureOpenAIEmbeddingService : IEmbeddingService, IDisposable
     {
         private readonly IEmbeddingGenerator<string, Embedding<float>> _generator;
 
-        public OpenAIEmbeddingService(IOptions<OpenAiOptions> aiOptions)
+        public AzureOpenAIEmbeddingService(IOptions<AzureOpenAiOptions> aiOptions)
         {
-            OpenAiOptions options = aiOptions.Value;
+            AzureOpenAiOptions options = aiOptions.Value;
 
+            ArgumentNullException.ThrowIfNull(options.Endpoint);
             ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
-            ArgumentException.ThrowIfNullOrWhiteSpace(options.EmbeddingModel);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.EmbeddingDeploymentName);
 
-            OpenAIClient client = options.Endpoint is null
-                ? new OpenAIClient(options.ApiKey)
-                : new OpenAIClient(
-                    new ApiKeyCredential(options.ApiKey),
-                    new OpenAIClientOptions { Endpoint = options.Endpoint });
-
-            _generator = client
-                .GetEmbeddingClient(options.EmbeddingModel)
+            _generator = new AzureOpenAIClient(
+                    options.Endpoint,
+                    new AzureKeyCredential(options.ApiKey))
+                .GetEmbeddingClient(options.EmbeddingDeploymentName)
                 .AsIEmbeddingGenerator();
         }
 

@@ -3,7 +3,7 @@ using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using OllamaSharp;
 
-namespace GraphSearch.Library.Embeddings
+namespace GraphRag.AI.EmbeddingServices
 {
     public class OllamaEmbeddingService : IEmbeddingService, IDisposable
     {

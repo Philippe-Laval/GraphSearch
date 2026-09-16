@@ -1,4 +1,4 @@
-namespace GraphSearch.Library.Embeddings;
+namespace GraphRag.AI.EmbeddingServices;
 
 public interface IEmbeddingService
 {

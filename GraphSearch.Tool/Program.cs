@@ -1,6 +1,6 @@
 using ChromaDB.Library;
 using GraphSearch.Library;
-using GraphSearch.Library.Embeddings;
+using GraphRag.AI.EmbeddingServices;
 using GraphSearch.Library.Graphs;
 
 namespace GraphSearch.Tool;

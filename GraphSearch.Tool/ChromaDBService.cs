@@ -1,6 +1,6 @@
 ﻿using Chroma;
 using ChromaDB.Library;
-using GraphSearch.Library.Embeddings;
+using GraphRag.AI.EmbeddingServices;
 using GraphSearch.Library.Models;
 using Microsoft.Identity.Client;
 using System;

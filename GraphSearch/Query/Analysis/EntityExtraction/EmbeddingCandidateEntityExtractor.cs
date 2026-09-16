@@ -1,4 +1,4 @@
-using GraphSearch.Library.Embeddings;
+using GraphRag.AI.EmbeddingServices;
 
 namespace GraphSearch.Library.Query.Analysis.EntityExtraction;
 

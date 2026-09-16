@@ -1,5 +1,8 @@
 ﻿namespace GraphRag.NLP.Models
 {
+    // Don't start by asking “what information can I extract?” Start with a constrained ontology
+    // of ITAM terms and relations. Then ask “what information can I extract that fits into this ontology?”
+
     public class ItamCorpus
     {
         public static readonly string[] ItamTerms = new string[]

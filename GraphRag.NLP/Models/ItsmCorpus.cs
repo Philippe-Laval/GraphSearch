@@ -4,6 +4,8 @@ using System.Text;
 
 namespace GraphRag.NLP.Models
 {
+    // Don't start by asking “what information can I extract?” Start with a constrained ontology
+    // of ITSM terms and relations. Then ask “what information can I extract that fits into this ontology?”
     public class ItsmCorpus
     {
         public static readonly string[] ItsmTerms = new string[]

@@ -83,6 +83,9 @@ namespace GraphRag.AI.Tests.KnowledgeExtraction
             KnowledgeGraph result = await extractor.ExtractAsync(
                 text);
 
+            string json = KnowledgeGraphSerialization.Serialize(result);
+            Console.WriteLine(json);
+
             // Assert
             Assert.IsNotNull(result);
 

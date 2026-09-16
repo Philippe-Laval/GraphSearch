@@ -5,6 +5,8 @@ namespace GraphRag.NLP.EntityExtraction
 {
     /// <summary>
     /// Typo-tolerant extractor that reports fuzzy matches against a gazetteer.
+    /// Skips exact matches and only returns matches with a normalized Levenshtein distance below a specified threshold.
+    /// Prefers best overlapping fuzzy match (text with maximum length similarity).
     /// </summary>
     public sealed class FuzzyEntityExtractor : IEntityExtractor
     {
@@ -16,6 +18,9 @@ namespace GraphRag.NLP.EntityExtraction
         private readonly int _maxWindowTokens;
         private readonly double _maxNormalizedDistance;
         private readonly int _minTokenLength;
+
+        public static FuzzyEntityExtractor CreateExtractor(params EntityDefinition[] entities)
+            => new FuzzyEntityExtractor(entities);
 
         public FuzzyEntityExtractor(
             IEnumerable<EntityDefinition> entities,
@@ -95,6 +100,16 @@ namespace GraphRag.NLP.EntityExtraction
             return Task.FromResult(EntitySpanMerger.Finalize(accumulator));
         }
 
+        /// <summary>
+        /// Recherche la définition d’entité la plus proche du texte fourni 
+        /// en minimisant la distance de Levenshtein bornée.
+        /// </summary>
+        /// <remarks>La distance maximale autorisée par entité est calculée à partir de la longueur la
+        /// plus grande entre l’entrée et le nom d’entité, puis multipliée par un seuil de distance
+        /// normalisée.</remarks>
+        /// <param name="candidate">Texte à comparer aux noms d’entités.</param>
+        /// <returns>Un tuple contenant la définition correspondante et sa distance minimale lorsque qu’une correspondance valide
+        /// est trouvée ; sinon, <see langword="null"/>.</returns>
         private (EntityDefinition Definition, int Distance)? FindBest(string candidate)
         {
             EntityDefinition? bestDef = null;
@@ -104,6 +119,7 @@ namespace GraphRag.NLP.EntityExtraction
             {
                 var maxAllowed = (int)Math.Ceiling(
                     Math.Max(candidate.Length, def.Name.Length) * _maxNormalizedDistance);
+
                 var distance = BoundedLevenshtein(
                     candidate,
                     def.Name,
@@ -123,6 +139,17 @@ namespace GraphRag.NLP.EntityExtraction
             return bestDef is null ? null : (bestDef, bestDistance);
         }
 
+        /// <summary>
+        /// Calcule la distance de Levenshtein entre deux chaînes sans tenir compte de la casse, avec une limite
+        /// maximale.
+        /// </summary>
+        /// <remarks>Retourne également <c>-1</c> si l'écart de longueur initial entre les deux chaînes
+        /// dépasse <paramref name="maxDistance" />.</remarks>
+        /// <param name="a">Première chaîne à comparer.</param>
+        /// <param name="b">Deuxième chaîne à comparer.</param>
+        /// <param name="maxDistance">Distance maximale acceptée avant arrêt anticipé du calcul.</param>
+        /// <returns>Distance de Levenshtein calculée si elle est inférieure ou égale à <paramref name="maxDistance" /> ; sinon
+        /// <c>-1</c>.</returns>
         private static int BoundedLevenshtein(string a, string b, int maxDistance)
         {
             var lenDelta = Math.Abs(a.Length - b.Length);

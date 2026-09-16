@@ -7,7 +7,7 @@ using System.Text;
 namespace GraphRag.NLP.Tests.EntityExtraction
 {
     [TestClass]
-    public sealed class DictionaryEntityExtractorTest
+    public sealed class DictionaryEntityExtractorTests
     {
         [TestMethod]
         public async Task TestExtractAsync()

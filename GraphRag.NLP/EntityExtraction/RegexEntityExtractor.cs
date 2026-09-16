@@ -19,10 +19,16 @@ namespace GraphRag.NLP.EntityExtraction
     /// <summary>
     /// Pattern-based extractor for structured surface forms such as versions, dates,
     /// URLs, emails, SKUs, or custom identifiers.
+    /// The extractor applies a set of regex rules to the input text and returns matches as 
+    /// entities with associated types and confidence scores.
+    /// The extractor prefers the match with the higher confidence score.
     /// </summary>
     public sealed class RegexEntityExtractor : IEntityExtractor
     {
         private readonly IReadOnlyList<(Regex Regex, RegexEntityRule Rule)> _compiled;
+
+        public static RegexEntityExtractor CreateExtractor(params RegexEntityRule[] rules)
+          => new RegexEntityExtractor(rules);
 
         public RegexEntityExtractor(IEnumerable<RegexEntityRule> rules)
         {
@@ -40,7 +46,7 @@ namespace GraphRag.NLP.EntityExtraction
         /// <summary>
         /// Convenience factory populated with a small default rule set.
         /// </summary>
-        public static RegexEntityExtractor CreateDefault() => new(
+        public static RegexEntityExtractor CreateDefault() => new RegexEntityExtractor(
         [
             new("Version", @"\b\d+(?:\.\d+){1,3}(?:-[A-Za-z0-9.]+)?\b", 0.85),
             new("Date",    @"\b\d{4}-\d{2}-\d{2}\b",                    0.95),

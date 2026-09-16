@@ -5,7 +5,6 @@ Model\				Records/enums: AnalyzedQuery, QueryIntent, QueryAnalysis, QueryAnalysi
 Analyzers\			IQueryAnalyzer + all 12 implementations + Analyzers.md
 EntityExtraction\	IEntityExtractor, EntityExtractor, DictionaryEntityExtractor(Factory)
 Ner\				INerService, IHuggingFaceTokenizer, Spacy/Azure/HF services + related .md files
-Language\			ILanguageDetector, HeuristicLanguageDetector
 Rewriting\			IQueryRewriter, SynonymQueryRewriter, LlmQueryRewriter, HydeQueryRewriter, CompositeQueryRewriter, CachingQueryRewriter
 
 Namespaces will match folder paths (per the convention set earlier). 

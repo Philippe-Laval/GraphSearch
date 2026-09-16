@@ -8,4 +8,8 @@
     <UseVSTest>true</UseVSTest>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GraphRag.NLP\GraphRag.NLP.csproj" />
+  </ItemGroup>
+
 </Project>

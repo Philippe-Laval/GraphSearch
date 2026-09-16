@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace GraphSearch.Library.Query.Analysis.Language;
+namespace GraphRag.NLP.Language;
 
 /// <summary>
 /// Tiny stopword-based language detector.

@@ -1,8 +1,9 @@
+using GraphRag.NLP.Models;
 using Microsoft.Extensions.AI;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace GraphSearch.Library.Query.Analysis.EntityExtraction;
+namespace GraphRag.NLP.EntityExtraction;
 
 /// <summary>
 /// LLM-backed entity extractor. Prompts an <see cref="IChatClient"/>

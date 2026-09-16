@@ -1,9 +1,10 @@
-﻿using GraphSearch.Library.Query.Analysis;
+﻿using GraphRag.NLP.EntityExtraction;
+using GraphRag.NLP.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphSearch.Library.Tests.Query.Analysis
+namespace GraphRag.NLP.Tests.EntityExtraction
 {
     [TestClass]
     public sealed class DictionaryEntityExtractorTest

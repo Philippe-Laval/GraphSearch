@@ -24,4 +24,8 @@
     <PackageReference Update="MSTest.TestFramework" Version="4.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Query\Analysis\" />
+  </ItemGroup>
+
 </Project>

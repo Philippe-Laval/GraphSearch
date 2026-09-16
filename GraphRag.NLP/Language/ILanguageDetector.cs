@@ -1,4 +1,4 @@
-namespace GraphSearch.Library.Query.Analysis.Language;
+namespace GraphRag.NLP.Language;
 
 /// <summary>
 /// Detects the (BCP-47) language of a query.

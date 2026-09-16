@@ -1,4 +1,7 @@
-namespace GraphSearch.Library.Query.Analysis.EntityExtraction;
+using GraphRag.NLP.Models;
+using GraphRag.NLP.Ner;
+
+namespace GraphRag.NLP.EntityExtraction;
 
 /// <summary>
 /// Adapter that surfaces a <b>zero-shot / universal</b> NER model (e.g.

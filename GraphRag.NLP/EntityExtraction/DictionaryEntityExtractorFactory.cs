@@ -1,4 +1,6 @@
-namespace GraphSearch.Library.Query.Analysis.EntityExtraction;
+using GraphRag.NLP.Models;
+
+namespace GraphRag.NLP.EntityExtraction;
 
 /// <summary>
 /// Factory class for creating instances of <see cref="DictionaryEntityExtractor"/>.

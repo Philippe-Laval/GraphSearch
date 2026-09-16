@@ -6,9 +6,7 @@ Analyzers\			IQueryAnalyzer + all 12 implementations + Analyzers.md
 EntityExtraction\	IEntityExtractor, EntityExtractor, DictionaryEntityExtractor(Factory)
 Ner\				INerService, IHuggingFaceTokenizer, Spacy/Azure/HF services + related .md files
 Language\			ILanguageDetector, HeuristicLanguageDetector
-Rewriting\			IQueryRewriter, SynonymQueryRewriter
-Lexicons\			WhWordLexicon, RelationalVerbLexicon, wh-word.md
-Llm\				IChatCompletionClient
+Rewriting\			IQueryRewriter, SynonymQueryRewriter, LlmQueryRewriter, HydeQueryRewriter, CompositeQueryRewriter, CachingQueryRewriter
 
 Namespaces will match folder paths (per the convention set earlier). 
 A single GlobalUsings.cs re-exports the 8 sub-namespaces so cross-cutting references 

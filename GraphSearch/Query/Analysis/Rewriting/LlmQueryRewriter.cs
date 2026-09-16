@@ -1,10 +1,11 @@
+using Microsoft.Extensions.AI;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace GraphSearch.Library.Query.Analysis.Rewriting;
 
 /// <summary>
-/// LLM-backed paraphraser. Asks an <see cref="IChatCompletionClient"/> to
+/// LLM-backed paraphraser. Asks an <see cref="IChatClient"/> to
 /// produce N diverse rewordings of the input while preserving intent and
 /// entities.
 ///
@@ -38,13 +39,13 @@ public sealed class LlmQueryRewriter : IQueryRewriter
         PropertyNameCaseInsensitive = true,
     };
 
-    private readonly IChatCompletionClient _client;
+    private readonly IChatClient _client;
     private readonly string _promptTemplate;
     private readonly int _maxRewrites;
     private readonly double _weight;
 
     public LlmQueryRewriter(
-        IChatCompletionClient client,
+        IChatClient client,
         int maxRewrites = 4,
         double weight = 1.0,
         string? promptTemplate = null)
@@ -74,7 +75,8 @@ public sealed class LlmQueryRewriter : IQueryRewriter
         try
         {
             // Call the LLM client to get the raw completion
-            raw = await _client.CompleteAsync(prompt, cancellationToken).ConfigureAwait(false);
+            var response = await _client.GetResponseAsync(prompt, cancellationToken: cancellationToken).ConfigureAwait(false);
+            raw = response.Text ?? string.Empty;
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {

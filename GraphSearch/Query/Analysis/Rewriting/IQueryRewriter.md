@@ -79,7 +79,7 @@ your existing SynonymQueryRewriter.
 | :------ | :------ |
 | CompositeQueryRewriter.cs  | Fans out to N inner rewriters in parallel, unions + dedupes, caps total to maxRewrites (default 8), fail-open on exceptions with optional onException hook.  |
 | CachingQueryRewriter.cs  | ConcurrentDictionary decorator keyed by normalized query. Safe because QueryRewrite is an immutable record.  |
-| LlmQueryRewriter.cs  | Prompts IChatCompletionClient for N paraphrases → JSON array of strings → tagged RewriteKind.LlmParaphrase. Tolerant JSON extractor (handles fences/prose), fails open, dedupes against the original.  |
+| LlmQueryRewriter.cs  | Prompts IChatClient for N paraphrases → JSON array of strings → tagged RewriteKind.LlmParaphrase. Tolerant JSON extractor (handles fences/prose), fails open, dedupes against the original.  |
 | HydeQueryRewriter.cs  | Generates 1–N hypothetical answer paragraphs in parallel, tagged RewriteKind.HyDE. Docstring warns consumers to route these to the vector retriever only and never to BM25.  |
 
 
@@ -97,7 +97,7 @@ IQueryRewriter rewriter = new CachingQueryRewriter(
 
 ## Design notes worth flagging:
 -	CompositeQueryRewriter runs children with Task.WhenAll; slowest child dominates latency. If you later need a hard budget, add a timeout parameter and wrap each child in Task.WhenAny(child, Task.Delay(timeout, ct)).
--	LlmQueryRewriter relies on the model returning a JSON array. For providers that support structured output / function-calling, swap IChatCompletionClient for a typed client and skip the tolerant parser.
+-	LlmQueryRewriter relies on the model returning a JSON array. For providers that support structured output / function-calling, prefer typed `GetResponseAsync<T>` patterns on top of IChatClient and skip the tolerant parser.
 -	HydeQueryRewriter intentionally does not dedupe against LlmQueryRewriter output at the rewriter level — the RewriteKind tag matters for downstream routing, so a hypothetical paragraph must not be collapsed into a paraphrase even if they happened to share tokens. CompositeQueryRewriter's text-based dedupe is safe because HyDE paragraphs are much longer than paraphrases and won't collide in practice.
 -	Fusion weight: all three currently emit Weight = 1.0. Once you wire retrieval fusion (RRF/weighted-sum), tune per-RewriteKind weights in your composition root rather than hardcoding them here.
 

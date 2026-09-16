@@ -1,10 +1,11 @@
+using Microsoft.Extensions.AI;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace GraphSearch.Library.Query.Analysis.EntityExtraction;
 
 /// <summary>
-/// LLM-backed entity extractor. Prompts an <see cref="IChatCompletionClient"/>
+/// LLM-backed entity extractor. Prompts an <see cref="IChatClient"/>
 /// to return a JSON array of the shape:
 ///
 ///   [
@@ -46,12 +47,12 @@ public sealed class LlmEntityExtractor : IEntityExtractor
         PropertyNameCaseInsensitive = true,
     };
 
-    private readonly IChatCompletionClient _client;
+    private readonly IChatClient _client;
     private readonly string _promptTemplate;
     private readonly IReadOnlyCollection<string>? _typeAllowList;
 
     public LlmEntityExtractor(
-        IChatCompletionClient client,
+        IChatClient client,
         string? promptTemplate = null,
         IEnumerable<string>? typeAllowList = null)
     {
@@ -72,7 +73,8 @@ public sealed class LlmEntityExtractor : IEntityExtractor
 
         // Prompt the LLM to extract entities.
         var prompt = _promptTemplate.Replace("{{QUERY}}", query, StringComparison.Ordinal);
-        var raw = await _client.CompleteAsync(prompt, cancellationToken).ConfigureAwait(false);
+        var response = await _client.GetResponseAsync(prompt, cancellationToken: cancellationToken).ConfigureAwait(false);
+        var raw = response.Text ?? string.Empty;
 
         // Parse the JSON array, ignoring any prose or code fences that may have been added.
         var payload = ExtractJsonArray(raw);

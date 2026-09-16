@@ -1,3 +1,5 @@
+using Microsoft.Extensions.AI;
+
 namespace GraphSearch.Library.Query.Analysis.Rewriting;
 
 /// <summary>
@@ -38,7 +40,7 @@ public sealed class HydeQueryRewriter : IQueryRewriter
         {{QUERY}}
         """;
 
-    private readonly IChatCompletionClient _client;
+    private readonly IChatClient _client;
     private readonly string _promptTemplate;
     private readonly int _numHypotheses;
     private readonly double _weight;
@@ -52,7 +54,7 @@ public sealed class HydeQueryRewriter : IQueryRewriter
     /// <param name="weight">Fusion weight applied to HyDE rewrites (default 1.0).</param>
     /// <param name="promptTemplate">Optional custom prompt template.</param>
     public HydeQueryRewriter(
-        IChatCompletionClient client,
+        IChatClient client,
         int numHypotheses = 1,
         double weight = 1.0,
         string? promptTemplate = null)
@@ -126,7 +128,8 @@ public sealed class HydeQueryRewriter : IQueryRewriter
         try
         {
             // Call the LLM client to get the raw completion
-            return await _client.CompleteAsync(prompt, cancellationToken).ConfigureAwait(false);
+            var response = await _client.GetResponseAsync(prompt, cancellationToken: cancellationToken).ConfigureAwait(false);
+            return response.Text;
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {

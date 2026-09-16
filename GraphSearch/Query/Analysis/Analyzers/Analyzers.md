@@ -1,7 +1,7 @@
 ﻿# Analysis of analyzers
 
 Service abstractions (implement to plug into your infra)
--	IChatCompletionClient — LLM (OpenAI / Azure OpenAI / Ollama / …).
+-	IChatClient — LLM (OpenAI / Azure OpenAI / Ollama / …) via Microsoft.Extensions.AI.
 -	INerService + NerAnalysis — external NER (spaCy / HF / Azure Language).
 -	ILanguageDetector + HeuristicLanguageDetector (stopword-based EN/FR baseline).
 -	IQueryRewriter + SynonymQueryRewriter (regex-driven baseline).
@@ -10,7 +10,7 @@ The 8 analyzers
 
 | #  | Class                                                | Notes  |
 | :--| :--------------------------------------------------- | :------ |
-| 1  | 	LlmQueryAnalyzer                                    | Prompts an IChatCompletionClient, parses {normalizedQuery, intent, rewrites, confidence}; robust to  json   fences. Wrap with CachingQueryAnalyzer. |
+| 1  | 	LlmQueryAnalyzer                                    | Prompts an IChatClient, parses {normalizedQuery, intent, rewrites, confidence}; robust to json fences. Wrap with CachingQueryAnalyzer. |
 | 2  | 	EmbeddingIntentClassifier + EmbeddingQueryAnalyzer  | Trainable prototypes (mean-of-examples, L2-normalized). Analyzer normalizes → embeds → cosine-classifies; stackalloc for small vectors. |
 | 3  | 	NerQueryAnalyzer                                    | Uses wh-word / root-verb / entity counts from NerAnalysis to classify intent; substitutes lemma if provided. |
 | 4  | 	RegexRuleQueryAnalyzer + IntentRule                 | Prioritized regex rules; JSON loader (FromJson) for hot-reload without recompiling. |

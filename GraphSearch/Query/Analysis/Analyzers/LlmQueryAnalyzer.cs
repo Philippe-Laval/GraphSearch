@@ -1,10 +1,11 @@
+using Microsoft.Extensions.AI;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace GraphSearch.Library.Query.Analysis.Analyzers;
 
 /// <summary>
-/// LLM-backed analyzer. Sends the raw query to an <see cref="IChatCompletionClient"/>
+/// LLM-backed analyzer. Sends the raw query to an <see cref="IChatClient"/>
 /// and expects a JSON object of shape:
 ///
 ///   {
@@ -36,7 +37,7 @@ public sealed class LlmQueryAnalyzer : IQueryAnalyzer
         {{QUERY}}
         """;
 
-    private readonly IChatCompletionClient _client;
+    private readonly IChatClient _client;
     private readonly string _promptTemplate;
 
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -45,7 +46,7 @@ public sealed class LlmQueryAnalyzer : IQueryAnalyzer
         Converters = { new JsonStringEnumConverter(allowIntegerValues: false) },
     };
 
-    public LlmQueryAnalyzer(IChatCompletionClient client, string? promptTemplate = null)
+    public LlmQueryAnalyzer(IChatClient client, string? promptTemplate = null)
     {
         ArgumentNullException.ThrowIfNull(client);
         _client = client;
@@ -70,7 +71,8 @@ public sealed class LlmQueryAnalyzer : IQueryAnalyzer
         var prompt = _promptTemplate.Replace("{{QUERY}}", query, StringComparison.Ordinal);
 
         // Envoyer le prompt à l’API LLM et récupérer la réponse brute.
-        var raw = await _client.CompleteAsync(prompt, cancellationToken).ConfigureAwait(false);
+        var response = await _client.GetResponseAsync(prompt, cancellationToken: cancellationToken).ConfigureAwait(false);
+        var raw = response.Text ?? string.Empty;
 
         // Extraire le bloc JSON de la réponse brute.
         var payload = ExtractJson(raw);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.NLP.Models
+namespace GraphRag.NLP.Corpuses
 {
     // Don't start by asking “what information can I extract?” Start with a constrained ontology
     // of ITSM terms and relations. Then ask “what information can I extract that fits into this ontology?”

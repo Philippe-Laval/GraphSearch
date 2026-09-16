@@ -29,6 +29,7 @@
       <ProjectReference Include="..\..\ChromaDBTest\ChromaDB.Library\ChromaDB.Library.csproj" />
       <ProjectReference Include="..\GraphRag.Core\GraphRag.Core.csproj" />
       <ProjectReference Include="..\GraphRag.EFCore\GraphRag.EFCore.csproj" />
+      <ProjectReference Include="..\GraphRag.NLP\GraphRag.NLP.csproj" />
     </ItemGroup>
 
 </Project>

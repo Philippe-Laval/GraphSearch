@@ -2,7 +2,7 @@
 using GraphRag.AI.Extensions;
 using GraphRag.AI.KnowledgeExtraction;
 using GraphRag.Core.Configuration;
-using GraphRag.Core.Models;
+using GraphRag.Core.KnowledgeExtraction;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

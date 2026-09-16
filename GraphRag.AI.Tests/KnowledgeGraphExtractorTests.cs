@@ -4,8 +4,8 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.Logging;
-using GraphRag.Core.Models;
 using GraphRag.AI.KnowledgeExtraction;
+using GraphRag.Core.KnowledgeExtraction;
 
 namespace GraphRag.AI.Tests
 {

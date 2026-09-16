@@ -1,5 +1,8 @@
 namespace GraphRag.Core.Configuration;
 
+/// <summary>
+/// AO providers
+/// </summary>
 public static class AiProviders
 {
     public const string OpenAI = "OpenAI";

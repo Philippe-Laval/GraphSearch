@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace GraphRag.Core.Models;
+namespace GraphRag.Core.KnowledgeExtraction;
 
 public sealed record KnowledgeGraph
 {

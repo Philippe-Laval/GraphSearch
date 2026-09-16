@@ -11,8 +11,10 @@ public sealed class AiOptionsValidator : IValidateOptions<AiOptions>
         switch (options.Provider.Trim())
         {
             case AiProviders.OpenAI:
-                Require(options.OpenAI.ApiKey, "AI:OpenAI:ApiKey is required.", errors);
+                //Require(options.OpenAI.ApiKey, "AI:OpenAI:ApiKey is required.", errors);
+                // Endpoint is optional for OpenAI, so we don't require it
                 Require(options.OpenAI.ChatModel, "AI:OpenAI:ChatModel is required.", errors);
+                Require(options.OpenAI.EmbeddingModel, "AI:OpenAI:EmbeddingModel is required.", errors);
                 break;
 
             case AiProviders.AzureOpenAI:
@@ -21,19 +23,21 @@ public sealed class AiOptionsValidator : IValidateOptions<AiOptions>
                     errors.Add("AI:AzureOpenAI:Endpoint is required.");
                 }
 
-                Require(options.AzureOpenAI.ApiKey, "AI:AzureOpenAI:ApiKey is required.", errors);
-                Require(options.AzureOpenAI.ChatDeploymentName,
-                    "AI:AzureOpenAI:ChatDeploymentName is required.", errors);
+                //Require(options.AzureOpenAI.ApiKey, "AI:AzureOpenAI:ApiKey is required.", errors);
+                Require(options.AzureOpenAI.Endpoint, "AI:AzureOpenAI:Endpoint is required.", errors);
+                Require(options.AzureOpenAI.ChatDeploymentName, "AI:AzureOpenAI:ChatDeploymentName is required.", errors);
+                Require(options.AzureOpenAI.EmbeddingDeploymentName, "AI:AzureOpenAI:EmbeddingDeploymentName is required.", errors);
                 break;
 
             case AiProviders.Ollama:
+                Require(options.Ollama.Endpoint, "AI:Ollama:Endpoint is required.", errors);
                 Require(options.Ollama.ChatModel, "AI:Ollama:ChatModel is required.", errors);
+                Require(options.Ollama.EmbeddingModel, "AI:Ollama:EmbeddingModel is required.", errors);
                 break;
 
             default:
                 errors.Add(
-                    $"AI:Provider must be one of: {AiProviders.OpenAI}, " +
-                    $"{AiProviders.AzureOpenAI}, {AiProviders.Ollama}.");
+                    $"AI:Provider must be one of: {AiProviders.OpenAI}, {AiProviders.AzureOpenAI}, {AiProviders.Ollama}.");
                 break;
         }
 
@@ -42,9 +46,24 @@ public sealed class AiOptionsValidator : IValidateOptions<AiOptions>
             : ValidateOptionsResult.Fail(errors);
     }
 
+    /// <summary>
+    /// Ajoute un message d’erreur à la collection lorsque la valeur est nulle, 
+    /// vide ou composée uniquement d’espaces blancs.
+    /// </summary>
+    /// <param name="value">Valeur à valider.</param>
+    /// <param name="message">Message d’erreur à ajouter si la validation échoue.</param>
+    /// <param name="errors">Collection qui reçoit le message d’erreur.</param>
     private static void Require(string? value, string message, ICollection<string> errors)
     {
         if (string.IsNullOrWhiteSpace(value))
+        {
+            errors.Add(message);
+        }
+    }
+
+    private static void Require(Uri? endpoint, string message, ICollection<string> errors)
+    {
+        if (endpoint is null || string.IsNullOrWhiteSpace(endpoint.ToString()))
         {
             errors.Add(message);
         }

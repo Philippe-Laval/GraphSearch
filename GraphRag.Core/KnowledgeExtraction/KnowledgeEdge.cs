@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GraphRag.Core.Models;
+namespace GraphRag.Core.KnowledgeExtraction;
 
 public sealed record KnowledgeEdge
 {

@@ -1,4 +1,4 @@
-﻿using GraphRag.Core.Models;
+﻿using GraphRag.Core.KnowledgeExtraction;
 
 namespace GraphRag.AI.KnowledgeExtraction
 {

@@ -1,4 +1,4 @@
-﻿using GraphRag.Core.Models;
+﻿using GraphRag.Core.KnowledgeExtraction;
 using GraphRag.Graph.Algorithms;
 using Microsoft.Extensions.Logging;
 using System;

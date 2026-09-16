@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.Core.Models;
+namespace GraphRag.Core.KnowledgeExtraction;
 
 public sealed record RelationshipExtraction
 {

@@ -1,4 +1,5 @@
-﻿using GraphRag.Core.Models;
+﻿using GraphRag.Core.KnowledgeExtraction;
+using GraphRag.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

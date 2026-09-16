@@ -65,6 +65,11 @@ namespace GraphRag.AI.KnowledgeExtraction
 
             if (!response.TryGetResult(out KnowledgeGraph? graph) || graph is null)
             {
+                logger.LogCritical(
+                    "The model did not return a valid knowledge graph. " +
+                    "Raw response: {ResponseText}",
+                    response.Text);
+
                 throw new InvalidOperationException(
                     $"The model did not return a valid knowledge graph. " +
                     $"Raw response: {response.Text}");

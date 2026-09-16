@@ -20,6 +20,15 @@ namespace GraphRag.AI.ChatClients
             _chatClient = (IChatClient)client;
         }
 
+        public OllamaChatClient(OllamaOptions options)
+        {
+            ArgumentNullException.ThrowIfNull(options.Endpoint);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.ChatModel);
+
+            var client = new OllamaApiClient(options.Endpoint, options.ChatModel);
+            _chatClient = (IChatClient)client;
+        }
+
         public Task<ChatResponse> GetResponseAsync(
             IEnumerable<ChatMessage> messages,
             ChatOptions? options = null,

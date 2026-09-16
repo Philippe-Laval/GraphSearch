@@ -4,6 +4,8 @@ namespace GraphRag.NLP.EntityExtraction
 {
     /// <summary>
     /// Aho-Corasick multi-pattern matcher over an entity gazetteer.
+    /// Finds case-insensitive matches and preserves source casing.
+    /// Prefers longest overlapping gazetteer match.
     /// </summary>
     public sealed class AhoCorasickGazetteerExtractor : IEntityExtractor
     {
@@ -43,6 +45,12 @@ namespace GraphRag.NLP.EntityExtraction
             return Task.FromResult(EntitySpanMerger.Finalize(accumulator));
         }
 
+        /// <summary>
+        /// Représente un automate Aho-Corasick insensible à la casse pour rechercher efficacement plusieurs noms
+        /// d’entité dans un texte et retourner toutes les correspondances avec leur position et leur longueur.
+        /// </summary>
+        /// <remarks>Construit un trie de motifs avec des liens d’échec et des sorties héritées afin
+        /// d’effectuer la recherche en un seul passage sur le texte après l’étape de construction.</remarks>
         private sealed class AhoCorasickAutomaton
         {
             private readonly List<Dictionary<char, int>> _goto = new();

@@ -15,6 +15,23 @@ namespace GraphRag.AI.ChatClients
             AzureOpenAiOptions options = aiOptions.Value;
 
             ArgumentNullException.ThrowIfNull(options.Endpoint);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.Endpoint.ToString());
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.ChatDeploymentName);
+
+            var client = new AzureOpenAIClient(
+                    options.Endpoint,
+                    new AzureKeyCredential(options.ApiKey));
+
+            _chatClient = client
+                .GetChatClient(options.ChatDeploymentName)
+                .AsIChatClient();
+        }
+
+        public AzureOpenAiChatClient(AzureOpenAiOptions options)
+        {
+            ArgumentNullException.ThrowIfNull(options.Endpoint);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.Endpoint.ToString());
             ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
             ArgumentException.ThrowIfNullOrWhiteSpace(options.ChatDeploymentName);
 

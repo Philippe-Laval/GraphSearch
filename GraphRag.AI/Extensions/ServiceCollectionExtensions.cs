@@ -1,12 +1,13 @@
 using Azure;
 using Azure.AI.OpenAI;
+using GraphRag.AI.ChatClients;
+using GraphRag.Core.Configuration;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OllamaSharp;
 using OpenAI;
-using GraphRag.Core.Configuration;
 using System.ClientModel;
 
 namespace GraphRag.AI.Extensions;
@@ -50,34 +51,16 @@ public static class ServiceCollectionExtensions
 
     private static IChatClient CreateOpenAiClient(OpenAiOptions options)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
-
-        OpenAIClient client = options.Endpoint is null
-            ? new OpenAIClient(options.ApiKey)
-            : new OpenAIClient(
-                new ApiKeyCredential(options.ApiKey),
-                new OpenAIClientOptions { Endpoint = options.Endpoint });
-
-        return client
-            .GetChatClient(options.ChatModel)
-            .AsIChatClient();
+        return new OpenAiChatClient(options);
     }
 
     private static IChatClient CreateAzureOpenAiClient(AzureOpenAiOptions options)
     {
-        ArgumentNullException.ThrowIfNull(options.Endpoint);
-        ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
-        ArgumentException.ThrowIfNullOrWhiteSpace(options.ChatDeploymentName);
-
-        return new AzureOpenAIClient(
-                options.Endpoint,
-                new AzureKeyCredential(options.ApiKey))
-            .GetChatClient(options.ChatDeploymentName)
-            .AsIChatClient();
+        return new AzureOpenAiChatClient(options);
     }
 
     private static IChatClient CreateOllamaClient(OllamaOptions options)
     {
-        return new OllamaApiClient(options.Endpoint, options.ChatModel);
+        return new OllamaChatClient(options);
     }
 }

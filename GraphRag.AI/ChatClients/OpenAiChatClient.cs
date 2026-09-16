@@ -18,6 +18,23 @@ namespace GraphRag.AI.ChatClients
             OpenAiOptions options = aiOptions.Value;
 
             ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.ChatModel);
+
+            OpenAIClient client = options.Endpoint is null
+                ? new OpenAIClient(options.ApiKey)
+                : new OpenAIClient(
+                    new ApiKeyCredential(options.ApiKey),
+                    new OpenAIClientOptions { Endpoint = options.Endpoint });
+
+            _chatClient = client
+                .GetChatClient(options.ChatModel)
+                .AsIChatClient();
+        }
+
+        public OpenAiChatClient(OpenAiOptions options)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.ApiKey);
+            ArgumentException.ThrowIfNullOrWhiteSpace(options.ChatModel);
 
             OpenAIClient client = options.Endpoint is null
                 ? new OpenAIClient(options.ApiKey)

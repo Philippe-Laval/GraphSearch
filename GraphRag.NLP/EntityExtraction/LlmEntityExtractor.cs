@@ -60,7 +60,7 @@ public sealed class LlmEntityExtractor : IEntityExtractor
         ArgumentNullException.ThrowIfNull(client);
         _client = client;
         _promptTemplate = promptTemplate ?? DefaultPromptTemplate;
-        _typeAllowList = typeAllowList is null
+        _typeAllowList = (typeAllowList is null || !typeAllowList.Any())
             ? null
             : new HashSet<string>(typeAllowList, StringComparer.OrdinalIgnoreCase);
     }
@@ -114,6 +114,7 @@ public sealed class LlmEntityExtractor : IEntityExtractor
             }
 
             // Re-locate in the original text — LLM offsets are not trustworthy.
+            // This also ensures that the entity text are present in the query, and discards any that are not found.
             var idx = query.IndexOf(e.Text, StringComparison.OrdinalIgnoreCase);
             if (idx < 0)
             {

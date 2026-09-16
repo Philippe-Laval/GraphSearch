@@ -22,8 +22,6 @@
 	
 	<ItemGroup>
 	  <ProjectReference Include="..\GraphRag.Core\GraphRag.Core.csproj" />
-	  <ProjectReference Include="..\GraphRag.Graph\GraphRag.Graph.csproj" />
-	  <ProjectReference Include="..\GraphRag.Indexing\GraphRag.Indexing.csproj" />
 	  <ProjectReference Include="..\GraphRag.NLP\GraphRag.NLP.csproj" />
 	</ItemGroup>
 	

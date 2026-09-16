@@ -1,5 +1,5 @@
 ﻿using GraphRag.Core.KnowledgeExtraction;
-using GraphRag.Graph.Algorithms;
+using GraphRag.NLP.Algorithms;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

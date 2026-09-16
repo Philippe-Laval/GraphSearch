@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-namespace GraphRag.Graph.Algorithms;
+namespace GraphRag.NLP.Algorithms;
 
 /// <summary>
 /// Level 1: deterministic normalization

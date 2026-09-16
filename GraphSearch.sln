@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.NLP", "GraphRag.NL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.NLP.Tests", "GraphRag.NLP.Tests\GraphRag.NLP.Tests.csproj", "{74E06C40-84BB-4225-B1E2-0C0399741A34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphRag.Indexing.Tests", "GraphRag.Indexing.Tests\GraphRag.Indexing.Tests.csproj", "{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -323,6 +325,18 @@ Global
 		{74E06C40-84BB-4225-B1E2-0C0399741A34}.Release|x64.Build.0 = Release|Any CPU
 		{74E06C40-84BB-4225-B1E2-0C0399741A34}.Release|x86.ActiveCfg = Release|Any CPU
 		{74E06C40-84BB-4225-B1E2-0C0399741A34}.Release|x86.Build.0 = Release|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Debug|x64.Build.0 = Debug|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Debug|x86.Build.0 = Debug|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Release|x64.ActiveCfg = Release|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Release|x64.Build.0 = Release|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Release|x86.ActiveCfg = Release|Any CPU
+		{DAFB520D-1ADA-41EE-B9DE-9F44BBA67F53}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-namespace GraphSearch.Library.Query.Analysis.Ner;
+namespace GraphRag.NLP.Ner;
 
 /// <summary>
 /// Char span in the original source string.

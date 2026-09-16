@@ -1,7 +1,9 @@
+using GraphRag.NLP.Language;
+using GraphRag.NLP.Models;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
-namespace GraphSearch.Library.Query.Analysis.Ner;
+namespace GraphRag.NLP.Ner;
 
 /// <summary>
 /// <see cref="INerService"/> implementation backed by the Python spaCy

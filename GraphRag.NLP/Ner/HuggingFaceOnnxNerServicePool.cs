@@ -1,4 +1,6 @@
-namespace GraphSearch.Library.Query.Analysis.Ner;
+using GraphRag.NLP.Language;
+
+namespace GraphRag.NLP.Ner;
 
 /// <summary>
 /// Language-routing pool for <see cref="HuggingFaceOnnxNerService"/> instances.

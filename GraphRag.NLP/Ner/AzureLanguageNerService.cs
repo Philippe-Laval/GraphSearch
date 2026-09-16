@@ -1,6 +1,9 @@
 using Azure.AI.TextAnalytics;
+using GraphRag.NLP.Language;
+using GraphRag.NLP.Lexicons;
+using GraphRag.NLP.Models;
 
-namespace GraphSearch.Library.Query.Analysis.Ner;
+namespace GraphRag.NLP.Ner;
 
 /// <summary>
 /// <see cref="INerService"/> implementation backed by Azure AI Language

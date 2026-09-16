@@ -10,5 +10,4 @@ global using Microsoft.Extensions.AI;
 global using GraphSearch.Library.Query.Analysis.Analyzers;
 global using GraphSearch.Library.Query.Analysis.EntityExtraction;
 global using GraphSearch.Library.Query.Analysis.Model;
-global using GraphSearch.Library.Query.Analysis.Ner;
 global using GraphSearch.Library.Query.Analysis.Rewriting;

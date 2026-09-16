@@ -1,7 +1,9 @@
+using GraphRag.NLP.Lexicons;
+using GraphRag.NLP.Models;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 
-namespace GraphSearch.Library.Query.Analysis.Ner;
+namespace GraphRag.NLP.Ner;
 
 /// <summary>
 /// <see cref="INerService"/> backed by a HuggingFace token-classification model

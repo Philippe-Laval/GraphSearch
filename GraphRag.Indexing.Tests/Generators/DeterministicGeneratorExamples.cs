@@ -1,7 +1,7 @@
 using GraphRag.Core.Models;
 using GraphRag.Indexing.Generators;
 
-namespace GraphRag.AI.Tests;
+namespace GraphRag.Indexing.Tests;
 
 /// <summary>
 /// Exemples d'utilisation des générateurs de texte déterministes.

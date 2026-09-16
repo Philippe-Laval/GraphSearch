@@ -9,7 +9,7 @@ using System.Text;
 
 namespace GraphRag.AI.ChatClients
 {
-    internal class OpenAiChatClient
+    public class OpenAiChatClient : IChatClient, IDisposable
     {
         private readonly IChatClient _chatClient;
 

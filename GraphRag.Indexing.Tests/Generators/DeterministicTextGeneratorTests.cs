@@ -1,7 +1,7 @@
 using GraphRag.Core.Models;
 using GraphRag.Indexing.Generators;
 
-namespace GraphRag.AI.Tests;
+namespace GraphRag.Indexing.Tests;
 
 [TestClass]
 public sealed class DeterministicTextGeneratorTests

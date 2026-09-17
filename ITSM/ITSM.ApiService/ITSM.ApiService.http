@@ -1,6 +1,419 @@
-@ApiService_HostAddress = http://localhost:5385
+@baseUrl = http://localhost:5385
+@guid = 11111111-1111-1111-1111-111111111111
+@guid2 = 22222222-2222-2222-2222-222222222222
 
-GET {{ApiService_HostAddress}}/weatherforecast/
+### People CRUD
+GET {{baseUrl}}/api/people
 Accept: application/json
 
 ###
+GET {{baseUrl}}/api/people/{{guid}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/people
+Content-Type: application/json
+
+{
+  "fullName": "Ada Lovelace",
+  "email": "ada@example.com",
+  "department": "Engineering",
+  "location": "Paris",
+  "isActive": true,
+  "organizationId": null,
+  "externalId": "USR0001",
+  "createdBy": "api"
+}
+
+###
+PUT {{baseUrl}}/api/people/{{guid}}
+Content-Type: application/json
+
+{
+  "fullName": "Ada Byron",
+  "email": "ada@example.com",
+  "department": "Engineering",
+  "location": "Paris",
+  "isActive": true,
+  "organizationId": null,
+  "externalId": "USR0001",
+  "createdBy": "api"
+}
+
+###
+DELETE {{baseUrl}}/api/people/{{guid}}
+
+### Agent group membership CRUD
+GET {{baseUrl}}/api/agent-group-memberships
+Accept: application/json
+
+###
+GET {{baseUrl}}/api/agent-group-memberships/{{guid}}/{{guid2}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/agent-group-memberships
+Content-Type: application/json
+
+{
+  "agentId": "{{guid}}",
+  "assignmentGroupId": "{{guid2}}",
+  "assignedAt": "2026-09-17T08:00:00+00:00",
+  "roleInGroup": "Primary"
+}
+
+###
+PUT {{baseUrl}}/api/agent-group-memberships/{{guid}}/{{guid2}}
+Content-Type: application/json
+
+{
+  "agentId": "{{guid}}",
+  "assignmentGroupId": "{{guid2}}",
+  "assignedAt": "2026-09-17T08:00:00+00:00",
+  "removedAt": null,
+  "roleInGroup": "Escalation"
+}
+
+###
+DELETE {{baseUrl}}/api/agent-group-memberships/{{guid}}/{{guid2}}
+
+### Representative entity CRUD
+GET {{baseUrl}}/api/business-services
+Accept: application/json
+
+###
+GET {{baseUrl}}/api/business-services/{{guid}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/business-services
+Content-Type: application/json
+
+{
+  "name": "Payments",
+  "description": "Handles customer payment journeys.",
+  "isActive": true,
+  "ownerId": null,
+  "businessCriticality": "Tier-1",
+  "externalId": "SVC0001",
+  "createdBy": "api"
+}
+
+###
+PUT {{baseUrl}}/api/business-services/{{guid}}
+Content-Type: application/json
+
+{
+  "name": "Payments",
+  "description": "Handles payment journeys.",
+  "isActive": true,
+  "ownerId": null,
+  "businessCriticality": "Tier-1",
+  "externalId": "SVC0001",
+  "createdBy": "api"
+}
+
+###
+DELETE {{baseUrl}}/api/business-services/{{guid}}
+
+### Configuration item dependency CRUD
+GET {{baseUrl}}/api/configuration-item-dependencies
+Accept: application/json
+
+###
+GET {{baseUrl}}/api/configuration-item-dependencies/{{guid}}/{{guid2}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/configuration-item-dependencies
+Content-Type: application/json
+
+{
+  "sourceId": "{{guid}}",
+  "targetId": "{{guid2}}",
+  "dependencyType": "DependsOn"
+}
+
+###
+PUT {{baseUrl}}/api/configuration-item-dependencies/{{guid}}/{{guid2}}
+Content-Type: application/json
+
+{
+  "sourceId": "{{guid}}",
+  "targetId": "{{guid2}}",
+  "dependencyType": "HostedOn"
+}
+
+###
+DELETE {{baseUrl}}/api/configuration-item-dependencies/{{guid}}/{{guid2}}
+
+### Incident CRUD
+GET {{baseUrl}}/api/incidents
+Accept: application/json
+
+###
+GET {{baseUrl}}/api/incidents/{{guid}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/incidents
+Content-Type: application/json
+
+{
+  "number": "INC0001",
+  "shortDescription": "Payments unavailable",
+  "description": "Customers cannot submit payments.",
+  "currentStatusId": "{{guid2}}",
+  "priorityId": null,
+  "impactId": null,
+  "urgencyId": null,
+  "severityId": null,
+  "categoryId": null,
+  "subcategoryId": null,
+  "openedAt": "2026-09-17T08:00:00+00:00",
+  "reopenCount": 0,
+  "wasEscalated": false,
+  "externalId": "INC0001",
+  "createdBy": "api"
+}
+
+###
+PUT {{baseUrl}}/api/incidents/{{guid}}
+Content-Type: application/json
+
+{
+  "number": "INC0001",
+  "shortDescription": "Payments unavailable",
+  "description": "Customers cannot submit payments.",
+  "currentStatusId": "{{guid2}}",
+  "priorityId": null,
+  "impactId": null,
+  "urgencyId": null,
+  "severityId": null,
+  "categoryId": null,
+  "subcategoryId": null,
+  "openedAt": "2026-09-17T08:00:00+00:00",
+  "reopenCount": 0,
+  "wasEscalated": true,
+  "externalId": "INC0001",
+  "createdBy": "api"
+}
+
+###
+DELETE {{baseUrl}}/api/incidents/{{guid}}
+
+### Ticket relation CRUD
+GET {{baseUrl}}/api/ticket-relations
+Accept: application/json
+
+###
+GET {{baseUrl}}/api/ticket-relations/{{guid}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/ticket-relations
+Content-Type: application/json
+
+{
+  "sourceTicketId": "{{guid}}",
+  "targetTicketId": "{{guid2}}",
+  "relationKind": "Blocks",
+  "createdAt": "2026-09-17T08:00:00+00:00"
+}
+
+###
+PUT {{baseUrl}}/api/ticket-relations/{{guid}}
+Content-Type: application/json
+
+{
+  "sourceTicketId": "{{guid}}",
+  "targetTicketId": "{{guid2}}",
+  "relationKind": "RelatedTo",
+  "createdAt": "2026-09-17T08:00:00+00:00"
+}
+
+###
+DELETE {{baseUrl}}/api/ticket-relations/{{guid}}
+
+### Calendar holiday CRUD
+GET {{baseUrl}}/api/calendar-holidays
+Accept: application/json
+
+###
+GET {{baseUrl}}/api/calendar-holidays/{{guid}}
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/calendar-holidays
+Content-Type: application/json
+
+{
+  "businessCalendarId": "{{guid2}}",
+  "date": "2026-12-25",
+  "name": "Christmas Day"
+}
+
+###
+PUT {{baseUrl}}/api/calendar-holidays/{{guid}}
+Content-Type: application/json
+
+{
+  "businessCalendarId": "{{guid2}}",
+  "date": "2026-12-26",
+  "name": "Boxing Day"
+}
+
+###
+DELETE {{baseUrl}}/api/calendar-holidays/{{guid}}
+
+### Agents
+GET {{baseUrl}}/api/agents
+Accept: application/json
+
+### Organizations
+GET {{baseUrl}}/api/organizations
+Accept: application/json
+
+### Assignment groups
+GET {{baseUrl}}/api/assignment-groups
+Accept: application/json
+
+### Vendors
+GET {{baseUrl}}/api/vendors
+Accept: application/json
+
+### Technical services
+GET {{baseUrl}}/api/technical-services
+Accept: application/json
+
+### Service offerings
+GET {{baseUrl}}/api/service-offerings
+Accept: application/json
+
+### Service catalog items
+GET {{baseUrl}}/api/service-catalog-items
+Accept: application/json
+
+### Service support groups
+GET {{baseUrl}}/api/service-support-groups
+Accept: application/json
+
+### Technical service enablements
+GET {{baseUrl}}/api/technical-service-enablements
+Accept: application/json
+
+### Business service consumers
+GET {{baseUrl}}/api/business-service-consumers
+Accept: application/json
+
+### Applications
+GET {{baseUrl}}/api/applications
+Accept: application/json
+
+### Servers
+GET {{baseUrl}}/api/servers
+Accept: application/json
+
+### Database CIs
+GET {{baseUrl}}/api/database-cis
+Accept: application/json
+
+### Network devices
+GET {{baseUrl}}/api/network-devices
+Accept: application/json
+
+### Cloud resources
+GET {{baseUrl}}/api/cloud-resources
+Accept: application/json
+
+### Configuration item supports
+GET {{baseUrl}}/api/configuration-item-supports
+Accept: application/json
+
+### Categories
+GET {{baseUrl}}/api/categories
+Accept: application/json
+
+### Statuses
+GET {{baseUrl}}/api/statuses
+Accept: application/json
+
+### Impacts
+GET {{baseUrl}}/api/impacts
+Accept: application/json
+
+### Urgencies
+GET {{baseUrl}}/api/urgencies
+Accept: application/json
+
+### Priorities
+GET {{baseUrl}}/api/priorities
+Accept: application/json
+
+### Severities
+GET {{baseUrl}}/api/severities
+Accept: application/json
+
+### Service requests
+GET {{baseUrl}}/api/service-requests
+Accept: application/json
+
+### Problems
+GET {{baseUrl}}/api/problems
+Accept: application/json
+
+### Change requests
+GET {{baseUrl}}/api/change-requests
+Accept: application/json
+
+### Ticket tasks
+GET {{baseUrl}}/api/ticket-tasks
+Accept: application/json
+
+### Ticket affected CIs
+GET {{baseUrl}}/api/ticket-affected-cis
+Accept: application/json
+
+### Ticket affected services
+GET {{baseUrl}}/api/ticket-affected-services
+Accept: application/json
+
+### Status transitions
+GET {{baseUrl}}/api/status-transitions
+Accept: application/json
+
+### Assignment events
+GET {{baseUrl}}/api/assignment-events
+Accept: application/json
+
+### Escalation events
+GET {{baseUrl}}/api/escalation-events
+Accept: application/json
+
+### Reassignment events
+GET {{baseUrl}}/api/reassignment-events
+Accept: application/json
+
+### Resolution events
+GET {{baseUrl}}/api/resolution-events
+Accept: application/json
+
+### Reopen events
+GET {{baseUrl}}/api/reopen-events
+Accept: application/json
+
+### Closure events
+GET {{baseUrl}}/api/closure-events
+Accept: application/json
+
+### Service level agreements
+GET {{baseUrl}}/api/service-level-agreements
+Accept: application/json
+
+### SLA measurements
+GET {{baseUrl}}/api/sla-measurements
+Accept: application/json
+
+### Business calendars
+GET {{baseUrl}}/api/business-calendars
+Accept: application/json

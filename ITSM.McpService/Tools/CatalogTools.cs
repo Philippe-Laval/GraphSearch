@@ -1,7 +1,13 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using ModelContextProtocol.Server;
 
-// test : Do we sell keyboards?
+// register as "http" with url (includes "mcp") : "https://localhost:54740/mcp"
+// tests
+// Do we sell keyboards?
+// Are all products in stock
+// What is the price of a monitor
+// list all products in the catalog
 
 namespace ITSM.McpService.Tools
 {

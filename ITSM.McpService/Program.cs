@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using ITSM.McpService.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,18 @@ builder.Services.AddOpenApi(options =>
     // Specify the OpenAPI version to use
     options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_1;
 });
+
+// MCP
+builder.Services
+    // Adds the Model Context Protocol (MCP) server to the service collection with default options.
+    .AddMcpServer()
+    // Adds the services necessary for McpEndpointRouteBuilderExtensions.MapMcp to handle MCP requests and sessions using the MCP Streamable HTTP transport.
+    .WithHttpTransport()
+    // Manually register your MCP tools.
+    .WithTools<CatalogTools>();
+    // Adds types marked with the ModelContextProtocol.Server.McpServerToolTypeAttribute attribute from the given assembly as tools to the server.
+    //.WithToolsFromAssembly();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -41,6 +54,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.MapMcp("mcp");
 app.MapControllers();
 app.MapDefaultEndpoints();
 

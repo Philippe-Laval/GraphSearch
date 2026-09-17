@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITSM.ApiService\ITSM.ApiService.csproj" />
+    <ProjectReference Include="..\ITSM.McpService\ITSM.McpService.csproj" />
     <ProjectReference Include="..\ITSM.Web\ITSM.Web.csproj" />
   </ItemGroup>
 

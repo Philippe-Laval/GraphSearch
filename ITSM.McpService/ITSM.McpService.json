@@ -1,0 +1,26 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "ITSM.McpService | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/Mcp/health": {
+      "get": {
+        "tags": [
+          "Mcp"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Mcp"
+    }
+  ]
+}

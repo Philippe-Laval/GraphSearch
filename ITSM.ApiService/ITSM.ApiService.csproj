@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GraphRag.ITSM\GraphRag.ITSM.csproj" />
+    <ProjectReference Include="..\GraphRag.ITSM\GraphRag.ITSM.csproj" />
     <ProjectReference Include="..\ITSM.ServiceDefaults\ITSM.ServiceDefaults.csproj" />
   </ItemGroup>
 

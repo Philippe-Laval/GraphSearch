@@ -1,5 +1,5 @@
-﻿using GraphRag.AI.Algorithms;
-using GraphRag.Core.Configuration;
+﻿using GraphRag.Core.Algorithms;
+using GraphRag.AI.Configuration;
 using GraphRag.AI.Extensions;
 using GraphRag.AI.Services;
 using GraphRag.Core.Interfaces;
@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
+using GraphRag.Core.Services;
 
 namespace GraphRag.AI.Tests
 {

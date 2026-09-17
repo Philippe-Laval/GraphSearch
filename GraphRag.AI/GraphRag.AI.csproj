@@ -20,9 +20,4 @@
 		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 	</ItemGroup>
 	
-	<ItemGroup>
-	  <ProjectReference Include="..\GraphRag.Core\GraphRag.Core.csproj" />
-	  <ProjectReference Include="..\GraphRag.NLP\GraphRag.NLP.csproj" />
-	</ItemGroup>
-	
 </Project>

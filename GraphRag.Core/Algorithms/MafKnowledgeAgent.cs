@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.AI.Algorithms;
+namespace GraphRag.Core.Algorithms;
 
 /// <summary>
 /// MafKnowledgeAgent is an implementation of IKnowledgeTextGenerationAgent that uses an IChatClient to generate text based on a given prompt. It provides an asynchronous method to generate text responses, making it suitable for scenarios where knowledge extraction and text generation are required.

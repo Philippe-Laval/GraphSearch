@@ -1,13 +1,13 @@
 ﻿using GraphRag.AI.Extensions;
-using GraphRag.AI.KnowledgeExtraction;
-using GraphRag.Core.Configuration;
 using GraphRag.Core.KnowledgeExtraction;
+using GraphRag.AI.Configuration;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using GrapRag.Core.KnowledgeExtraction;
 
 // Test execution and control in MSTest
 // https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-writing-tests-controlling-execution

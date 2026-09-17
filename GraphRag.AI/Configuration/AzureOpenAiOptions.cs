@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GraphRag.Core.Configuration;
+namespace GraphRag.AI.Configuration;
 
-public sealed class OpenAiOptions
+public sealed class AzureOpenAiOptions
 {
     /// <summary>
-    /// Optional OpenAI-compatible endpoint.
+    /// Endpoint for the service.
     /// </summary>
+    [Required]
     public Uri? Endpoint { get; init; }
 
     /// <summary>
@@ -17,12 +18,12 @@ public sealed class OpenAiOptions
     /// <summary>
     /// Model used for chat
     /// </summary>
-    [Required]
-    public string ChatModel { get; init; } = "gpt-4.1-mini";
+    [Required] 
+    public string? ChatDeploymentName { get; init; } = "gpt-4o-mini";
 
     /// <summary>
     /// Model used for creating embedding
     /// </summary>
     [Required]
-    public string EmbeddingModel { get; init; } = "text-embedding-3-small";
+    public string EmbeddingDeploymentName { get; init; } = "text-embedding-ada-002";
 }

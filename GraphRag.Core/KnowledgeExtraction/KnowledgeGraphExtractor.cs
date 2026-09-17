@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.AI.KnowledgeExtraction;
+namespace GraphRag.Core.KnowledgeExtraction;
 
 /// <summary>
 /// LLM-based extractor.

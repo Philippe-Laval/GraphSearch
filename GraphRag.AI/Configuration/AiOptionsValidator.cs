@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 
-namespace GraphRag.Core.Configuration;
+namespace GraphRag.AI.Configuration;
 
 public sealed class AiOptionsValidator : IValidateOptions<AiOptions>
 {

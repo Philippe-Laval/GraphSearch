@@ -1,5 +1,4 @@
-﻿using GraphRag.AI.KnowledgeExtraction;
-using GraphRag.Core.KnowledgeExtraction;
+﻿using GraphRag.Core.KnowledgeExtraction;
 using Microsoft.Extensions.AI;
 using System;
 using System.Collections.Generic;

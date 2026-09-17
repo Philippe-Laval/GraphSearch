@@ -1,11 +1,12 @@
-﻿using GraphRag.Core.KnowledgeExtraction;
+﻿using GrapRag.Core.KnowledgeExtraction;
+using GraphRag.Core.KnowledgeExtraction;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.AI.KnowledgeExtraction
+namespace GraphRag.Core.KnowledgeExtraction
 {
 
     /// <summary>

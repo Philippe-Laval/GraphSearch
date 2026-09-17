@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GraphRag.Core.Configuration;
+namespace GraphRag.AI.Configuration;
 
 // Embedding model reference: https://ollama.com/search?c=embedding
 

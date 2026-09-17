@@ -1,5 +1,5 @@
 ﻿using Azure;
-using GraphRag.Core.Configuration;
+using GraphRag.AI.Configuration;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using OpenAI;

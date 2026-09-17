@@ -3,7 +3,7 @@ using Microsoft.Extensions.AI;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GraphRag.AI.DocumentEnhancers;
+namespace GraphRag.Core.DocumentEnhancers;
 
 /// <summary>
 /// Enhances a YAML representation of a community by reformulating it in natural language, 

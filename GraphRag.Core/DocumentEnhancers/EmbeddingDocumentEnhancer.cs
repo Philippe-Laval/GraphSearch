@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GraphRag.AI.DocumentEnhancers;
+namespace GraphRag.Core.DocumentEnhancers;
 
 /// <summary>
 /// Enhances a YAML representation of a subgraph by reformulating it in natural language, 

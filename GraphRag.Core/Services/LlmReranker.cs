@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using GraphRag.Core.Models;
 using GraphRag.Core.Interfaces;
 
-namespace GraphRag.AI.Services;
+namespace GraphRag.Core.Services;
 
 public sealed class LlmReranker : ILlmReranker
 {

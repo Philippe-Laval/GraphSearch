@@ -3,7 +3,7 @@ using GraphRag.Core.Models;
 using Microsoft.Extensions.AI;
 using System.Text;
 
-namespace GraphRag.AI.Generators;
+namespace GraphRag.Core.Generators;
 
 /*
 Éviter les hallucinations

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GraphRag.Core.Configuration;
+namespace GraphRag.AI.Configuration;
 
 public sealed class AiOptions
 {

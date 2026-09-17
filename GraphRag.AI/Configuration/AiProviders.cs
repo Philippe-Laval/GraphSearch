@@ -1,4 +1,4 @@
-namespace GraphRag.Core.Configuration;
+namespace GraphRag.AI.Configuration;
 
 /// <summary>
 /// AO providers

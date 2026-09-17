@@ -1,6 +1,6 @@
 ﻿using GraphRag.Core.KnowledgeExtraction;
 
-namespace GraphRag.AI.KnowledgeExtraction
+namespace GrapRag.Core.KnowledgeExtraction
 {
     public interface IKnowledgeGraphSimpleExtractor
     {

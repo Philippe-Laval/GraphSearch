@@ -2,7 +2,7 @@
 using GraphRag.Core.Models;
 using Microsoft.Extensions.AI;
 
-namespace GraphRag.AI.Generators;
+namespace GraphRag.Core.Generators;
 
 /*
 Éviter les hallucinations

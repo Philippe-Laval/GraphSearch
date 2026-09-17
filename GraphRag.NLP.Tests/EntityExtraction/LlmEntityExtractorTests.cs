@@ -1,5 +1,4 @@
 ﻿using GraphRag.AI.Extensions;
-using GraphRag.AI.KnowledgeExtraction;
 using GraphRag.NLP.EntityExtraction;
 using GraphRag.NLP.Models;
 using Microsoft.Extensions.AI;

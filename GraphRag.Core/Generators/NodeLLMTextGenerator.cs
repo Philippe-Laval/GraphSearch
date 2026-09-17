@@ -4,7 +4,7 @@ using Microsoft.Extensions.AI;
 using System;
 using System.Collections.Generic;
 
-namespace GraphRag.AI.Generators;
+namespace GraphRag.Core.Generators;
 
 /*
 Éviter les hallucinations

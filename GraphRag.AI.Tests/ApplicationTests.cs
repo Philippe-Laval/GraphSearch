@@ -1,4 +1,4 @@
-﻿using GraphRag.AI.KnowledgeExtraction;
+﻿using GraphRag.Core.KnowledgeExtraction;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

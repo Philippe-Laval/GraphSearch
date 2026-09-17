@@ -1,8 +1,8 @@
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using GraphRag.Core.Configuration;
 using System.Text;
+using GraphRag.AI.Configuration;
 
 namespace GraphRag.AI.Services;
 

@@ -1,0 +1,17 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.5.4">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
+    <UserSecretsId>3aa3227f-b39e-445c-b02a-e3e5f0275c6e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ITSM.ApiService\ITSM.ApiService.csproj" />
+    <ProjectReference Include="..\ITSM.Web\ITSM.Web.csproj" />
+  </ItemGroup>
+
+</Project>

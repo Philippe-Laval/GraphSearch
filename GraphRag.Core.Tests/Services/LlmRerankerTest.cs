@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using GraphRag.Core.Services;
 
-namespace GraphRag.AI.Tests
+namespace GraphRag.AI.Tests.Services
 {
     [TestClass]
     public sealed class LlmRerankerTest

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace GraphRag.AI.Tests;
+namespace GraphRag.Core.Tests;
 
 public sealed class Application(
     KnowledgeGraphExtractor extractor)

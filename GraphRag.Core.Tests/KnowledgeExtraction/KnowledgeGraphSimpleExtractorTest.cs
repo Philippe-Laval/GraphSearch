@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using GrapRag.Core.KnowledgeExtraction;
+using GraphRag.AI.Tests;
 
 // Test execution and control in MSTest
 // https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-writing-tests-controlling-execution
@@ -15,7 +16,7 @@ using GrapRag.Core.KnowledgeExtraction;
 // Test organization and metadata in MSTest
 // https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-writing-tests-organizing
 
-namespace GraphRag.AI.Tests.KnowledgeExtraction
+namespace GraphRag.Core.Tests.KnowledgeExtraction
 {
     [TestClass]
     public sealed class KnowledgeGraphSimpleExtractorTest

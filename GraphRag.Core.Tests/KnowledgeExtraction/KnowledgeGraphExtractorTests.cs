@@ -5,8 +5,9 @@ using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.Logging;
 using GraphRag.Core.KnowledgeExtraction;
+using GraphRag.AI.Tests;
 
-namespace GraphRag.AI.Tests
+namespace GraphRag.Core.Tests.KnowledgeExtraction
 {
     [TestClass]
     public sealed class KnowledgeGraphExtractorTests

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
-namespace GraphRag.AI.Tests;
+namespace GraphRag.Core.Tests;
 
 [TestClass]
 public sealed class ApplicationTests

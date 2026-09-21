@@ -1,0 +1,9 @@
+﻿global using ITSM.Web.Client;
+global using ITSM.Web.Client.Components;
+global using ITSM.Web.Client.Services;
+global using ITSM.Web.Client.Services.DataProviders;
+global using ITSM.Web.Client.Authorization;
+global using ITSM.Web.Client.Models;
+global using ITSM.Web.Client.Services;
+global using ITSM.Web.Client.Utils;
+global using ITSM.Web.Client.Tools;

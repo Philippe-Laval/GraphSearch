@@ -1,0 +1,50 @@
+@page "/devexpress-demo"
+@rendermode InteractiveServer
+
+<PageTitle>DevExpress Blazor Demo</PageTitle>
+
+<h1>DevExpress Blazor Components Demo</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Calendar Component</h3>
+            <DxCalendar @bind-SelectedDate="@SelectedDate" />
+            <p class="mt-3"><strong>Selected Date:</strong> @SelectedDate.ToLongDateString()</p>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Date Picker Component</h3>
+            <DxDateEdit @bind-Date="@PickedDate" />
+            <p class="mt-3"><strong>Picked Date:</strong> @PickedDate?.ToLongDateString()</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h3>DevExpress Blazor Integration Status</h3>
+            <div class="alert alert-success">
+                ✅ DevExpress Blazor components are successfully integrated into ITSM.Web!
+            </div>
+            <p>
+                DevExpress UI Controls for Blazor have been added to your project. You can now use 
+                advanced components like:
+            </p>
+            <ul>
+                <li><strong>Data Management:</strong> Grid, TreeList, Filter Builder, Pivot Table</li>
+                <li><strong>Data Visualization:</strong> Chart, Map, Dashboard, Sparkline</li>
+                <li><strong>Data Editors:</strong> Calendar, DateEdit, ComboBox, CheckBox, and more</li>
+                <li><strong>Scheduling:</strong> Scheduler component for calendar events</li>
+                <li><strong>Layouts:</strong> Splitter, Tabs, Popup, and other layout controls</li>
+            </ul>
+            <p>
+                For more information, visit the <a href="https://www.devexpress.com/blazor/" target="_blank">DevExpress Blazor components page</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+@code {
+    DateTime SelectedDate { get; set; } = DateTime.Now;
+    DateTime? PickedDate { get; set; }
+}

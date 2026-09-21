@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using ITSM.McpService.Tools;
+using ITSM.McpService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,18 +21,33 @@ builder.Services
     .AddMcpServer()
     // Adds the services necessary for McpEndpointRouteBuilderExtensions.MapMcp to handle MCP requests and sessions using the MCP Streamable HTTP transport.
     .WithHttpTransport()
+    //  Enables authorization filters (crucial)
+    .AddAuthorizationFilters()   
     // Manually register your MCP tools.
-    .WithTools<CatalogTools>();
+    //.WithTools<CatalogTools>();
     // Adds types marked with the ModelContextProtocol.Server.McpServerToolTypeAttribute attribute from the given assembly as tools to the server.
-    //.WithToolsFromAssembly();
+    .WithToolsFromAssembly()
+    // Adds types marked with the ModelContextProtocol.Server.McpServerPromptTypeAttribute attribute from the given assembly as prompts to the server.
+    .WithPromptsFromAssembly(typeof(Program).Assembly);
 
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+// AddAuthentication and AddAuthorization are required for the MCP server
+// to handle authentication and authorization of incoming requests.
+// The ConfigureMcpSecurity method is a custom extension method that configures
+// the necessary authentication schemes and parameters for the MCP server,
+// including JWT Bearer authentication and MCP authentication.
+builder.Services.ConfigureMcpSecurity(builder.Configuration);
+builder.Services.AddAuthorization();
+
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 app.UseExceptionHandler();
+app.UseRouting();
 
 if (app.Environment.IsDevelopment())
 {
@@ -54,7 +70,14 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapMcp("mcp");
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapGet("/", () => "MCP server is running!");
+
+
+// This creates an MCP endpoint at /mcp
+app.MapMcp("mcp").RequireAuthorization();
 app.MapControllers();
 app.MapDefaultEndpoints();
 

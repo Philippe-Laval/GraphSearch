@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ITSM.ServiceDefaults\ITSM.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Blazor" Version="26.1.5" />
+  </ItemGroup>
+
 </Project>

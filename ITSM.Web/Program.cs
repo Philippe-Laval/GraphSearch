@@ -1,5 +1,6 @@
 using ITSM.Web;
 using ITSM.Web.Components;
+using DevExpress.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Add DevExpress Blazor services
+builder.Services.AddDevExpressBlazor();
 
 builder.Services.AddOutputCache();
 

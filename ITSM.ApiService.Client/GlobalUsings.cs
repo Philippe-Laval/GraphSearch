@@ -1,0 +1,1 @@
+﻿global using ITSM.ApiService.Contracts;

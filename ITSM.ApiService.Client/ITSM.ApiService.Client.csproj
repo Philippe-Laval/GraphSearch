@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFramework>net10.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<!-- Référence aux DTO/contrats partagés -->
+	<ProjectReference Include="..\ITSM.ApiService.Contracts\ITSM.ApiService.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<!-- Permet d'utiliser NSwag MSBuild si vous préférez la génération pendant la build -->
+	<PackageReference Include="NSwag.MSBuild" Version="13.19.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <Target Name="GenerateOpenApiClient" AfterTargets="Build">
+	<!-- Tentative d'exécution de NSwag via l'outil dotnet (doit être installé) -->
+	<MakeDir Directories="$(ProjectDir)Generated" />
+	<Exec Command="nswag openapi2csclient /input:&quot;C:\CodeGithubPerso\GraphSearch\ITSM.ApiService\ITSM.ApiService.json&quot; /output:&quot;$(ProjectDir)Generated\ITSM_ApiService_Client.cs&quot; /namespace:ITSM.ApiService.Client /GenerateClientInterfaces:true /GenerateDtoTypes:false /UseHttpRequestMessageCreationMethod:false /JsonLibrary:SystemTextJson" ContinueOnError="false" />
+  </Target>
+</Project>

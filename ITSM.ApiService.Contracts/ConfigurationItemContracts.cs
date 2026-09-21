@@ -186,7 +186,7 @@ public sealed record ConfigurationItemDependencyRequest
 /// <summary>Represents a configuration-item dependency returned by the API.</summary>
 public sealed record ConfigurationItemDependencyResponse(Guid SourceId, Guid TargetId, string? DependencyType);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static Application ToEntity(ApplicationRequest request) => new()
     {

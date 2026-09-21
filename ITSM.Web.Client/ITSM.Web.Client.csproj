@@ -36,4 +36,8 @@
 		<Content Include="Components\**\*.css" />
 	</ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ITSM.ApiService.Client\ITSM.ApiService.Client.csproj" />
+  </ItemGroup>
+
 </Project>

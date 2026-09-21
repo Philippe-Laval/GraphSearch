@@ -124,7 +124,7 @@ public sealed record CalendarHolidayRequest
 /// <summary>Represents a calendar holiday returned by the API.</summary>
 public sealed record CalendarHolidayResponse(Guid Id, Guid BusinessCalendarId, DateOnly Date, string? Name);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static ServiceLevelAgreement ToEntity(ServiceLevelAgreementRequest request) => new()
     {

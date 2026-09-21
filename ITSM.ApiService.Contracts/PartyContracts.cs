@@ -174,7 +174,7 @@ public sealed record AgentGroupMembershipResponse(
     DateTimeOffset? RemovedAt,
     string? RoleInGroup);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static Person ToEntity(PersonRequest request) => new()
     {

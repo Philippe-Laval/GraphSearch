@@ -194,7 +194,7 @@ public sealed record ClosureEventResponse(
     string? ClosureCode)
     : OperationalEventResponseBase(Id, ExternalId, CreatedAt, UpdatedAt, CreatedBy, UpdatedBy, TicketId, EventTimestamp, PerformedById, Comment);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static StatusTransition ToEntity(StatusTransitionRequest request) => new()
     {

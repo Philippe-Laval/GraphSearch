@@ -164,7 +164,7 @@ public sealed record SeverityResponse(
     SeverityLevel Level)
     : ClassificationResponseBase(Id, ExternalId, CreatedAt, UpdatedAt, CreatedBy, UpdatedBy, Code, Name, SortOrder, IsActive);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static Category ToEntity(CategoryRequest request) => new()
     {

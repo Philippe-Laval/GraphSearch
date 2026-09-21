@@ -19,4 +19,4 @@ public abstract record EntityResponseBase(
     string? CreatedBy,
     string? UpdatedBy);
 
-internal static partial class ItsmContractMapper;
+public static partial class ItsmContractMapper;

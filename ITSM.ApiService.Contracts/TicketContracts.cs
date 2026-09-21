@@ -396,7 +396,7 @@ public sealed record TicketRelationResponse(
     TicketRelationKind RelationKind,
     DateTimeOffset CreatedAt);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static Incident ToEntity(IncidentRequest request) => new()
     {

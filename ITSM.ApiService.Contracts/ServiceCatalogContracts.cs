@@ -153,7 +153,7 @@ public sealed record BusinessServiceConsumerRequest
 /// <summary>Represents a business-service consumer link returned by the API.</summary>
 public sealed record BusinessServiceConsumerResponse(Guid BusinessServiceId, Guid OrganizationId);
 
-internal static partial class ItsmContractMapper
+public static partial class ItsmContractMapper
 {
     public static BusinessService ToEntity(BusinessServiceRequest request) => new()
     {

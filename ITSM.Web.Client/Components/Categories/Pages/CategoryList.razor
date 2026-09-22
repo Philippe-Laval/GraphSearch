@@ -1,7 +1,121 @@
 ﻿@page "/CategoryList"
 
-<h3>CategoryList</h3>
+@using System.Text.RegularExpressions
+@using ITSM.Web.Client.Models
+@using Microsoft.AspNetCore.Authorization
+@using ITSM.ApiService.Contracts
+
+@implements IDisposable
+
+@attribute [Authorize]
+
+@inject ITSM.ApiService.Client.IClient Client
+
+<div class="content-root">
+    <div class="card toolbar">
+        <DxToolbar Title="Categories" ItemRenderStyleMode="ToolbarRenderStyleMode.Plain">
+            <DxToolbarItem Text="Add Category" Click="OnAddCategoryClick" Alignment="ToolbarItemAlignment.Right" IconCssClass="add-icon icon medium-icon" />
+            <DxToolbarItem Tooltip="Column Chooser" Alignment="ToolbarItemAlignment.Right" Click="OnColumnChooserItemClick" IconCssClass="column-chooser-icon icon medium-icon" />
+ 
+            <DxToolbarItem Tooltip="Refresh" BeginGroup="true" Click="@LoadGridDataAsync" Alignment="ToolbarItemAlignment.Right" IconCssClass="refresh-icon icon medium-icon" />
+        </DxToolbar>
+    </div>
+    <div class="contact-list-root">
+        <DxDrawer CssClass="contact-list-drawer"
+                  @bind-IsOpen="IsContactPanelOpen"
+                  Position="DrawerPosition.Right"
+                  Mode="@DrawerMode"
+                  CloseOnEscape="true"
+                  ApplyBackgroundShading="false"
+                  PanelWidth="@GetContactPanelWidth()">
+            <HeaderTemplate>
+                <div class="contact-details-header contact-details">
+                    
+                </div>
+            </HeaderTemplate>
+            <BodyTemplate>
+                
+            </BodyTemplate>
+            <TargetContent>
+                <div class="h-100">
+                    <DxLoadingPanel Visible="@(!IsDataLoaded)"
+                                    IsContentBlocked="true"
+                                    IsContentVisible="false"
+                                    IndicatorVisible="true"
+                                    IndicatorAreaVisible="true"
+                                    ZIndex="101"
+                                    Text="Loading..."
+                                    CssClass="contact-list-loading-panel">
+                        <DxGrid @ref="Grid"
+                                Data="Data"
+                                KeyFieldName="Id"
+                                CssClass="contact-list"
+                                EditMode="GridEditMode.PopupEditForm"
+                                PopupEditFormCssClass="pw-800"
+                                SkeletonRowsEnabled="true"
+                                ColumnResizeMode="GridColumnResizeMode.NextColumn"
+                                FilterMenuButtonDisplayMode="GridFilterMenuButtonDisplayMode.Always"
+                                TextWrapEnabled="false"
+                                FocusedRowEnabled="true"
+                                ShowAllRows="true"
+                                VirtualScrollingEnabled="true"
+                                HighlightRowOnHover="true">
+                            <Columns>
+                                <DxGridSelectionColumn Width="1.5em" />
+                                <DxGridDataColumn FieldName="Name" MinWidth="50" SortIndex="0" />
+                            </Columns>
+                            
+                        </DxGrid>
+                    </DxLoadingPanel>
+                </div>
+            </TargetContent>
+        </DxDrawer>
+    </div>
+</div>
 
 @code {
+    CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
+
+    [CascadingParameter(Name = "ParentSizeMode")]
+    SizeMode SizeMode { get; set; }
+    List<CategoryResponse>? Data { get; set; }
+    bool IsDataLoaded { get; set; }
+
+    bool IsContactPanelOpen { get; set; }
+    bool IsContactPanelPinned { get; set; }
+    bool IsActiveContactLoading { get; set; }
+    DrawerMode DrawerMode => IsContactPanelPinned ? DrawerMode.Shrink : DrawerMode.Overlap;
+
+    IGrid? Grid { get; set; }
+    string? SearchText { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        await LoadGridDataAsync();
+        await base.OnInitializedAsync();
+    }
+
+    async Task LoadGridDataAsync() {
+        IsDataLoaded = false;
+        var result = await Client.CategoriesAllAsync(disposalTokenSource.Token);
+        Data = new List<CategoryResponse>(result);
+
+        IsDataLoaded = true;
+    }
+
+
+    Task OnAddCategoryClick() => Grid!.StartEditNewRowAsync();
+
+    void OnColumnChooserItemClick(ToolbarItemClickEventArgs e) => Grid!.ShowColumnChooser();
+
+    string GetContactPanelWidth() => SizeMode switch {
+        SizeMode.Small => "20.25rem",
+        SizeMode.Large => "27rem",
+        _ => "23.625rem",
+    };
+
+    void IDisposable.Dispose() {
+        disposalTokenSource.Cancel();
+        disposalTokenSource.Dispose();
+    }
 
 }

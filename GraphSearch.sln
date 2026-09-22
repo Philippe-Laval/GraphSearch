@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITSM.ApiService.Contracts",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITSM.ApiService.Client", "ITSM.ApiService.Client\ITSM.ApiService.Client.csproj", "{60BB0D4D-2171-3094-4F23-79AB6DE8A70D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITSM.ApiService.Client.Tests", "ITSM.ApiService.Client.Tests\ITSM.ApiService.Client.Tests.csproj", "{77670192-4DEF-4B03-8047-8D4491F2BE2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -491,6 +493,18 @@ Global
 		{60BB0D4D-2171-3094-4F23-79AB6DE8A70D}.Release|x64.Build.0 = Release|Any CPU
 		{60BB0D4D-2171-3094-4F23-79AB6DE8A70D}.Release|x86.ActiveCfg = Release|Any CPU
 		{60BB0D4D-2171-3094-4F23-79AB6DE8A70D}.Release|x86.Build.0 = Release|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Debug|x64.Build.0 = Debug|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Debug|x86.Build.0 = Debug|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Release|x64.ActiveCfg = Release|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Release|x64.Build.0 = Release|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Release|x86.ActiveCfg = Release|Any CPU
+		{77670192-4DEF-4B03-8047-8D4491F2BE2E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
